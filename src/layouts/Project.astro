@@ -1,0 +1,44 @@
+---
+import Layout from "./Layout.astro";
+import { Tweet } from "@astro-community/astro-embed-twitter";
+import Tags from "../components/Tags.astro";
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter.title} backUrl="/projects/">
+  <slot />
+
+  {
+    frontmatter.tweet && (
+      <div class="twitter-post">
+        <Tweet id={frontmatter.tweet} />
+      </div>
+    )
+  }
+
+  <Tags tags={frontmatter.tags} />
+</Layout>
+<style>
+  :global(.twitter-post .tweet-card) {
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+  }
+
+  :global(.twitter-post .tweet-header),
+  :global(.twitter-post .tweet-footer) {
+    display: none;
+  }
+
+  @media (max-width: 540px) {
+    :global(.twitter-post .tweet-img-grid-3) {
+      grid-template: none;
+      gap: 1em;
+      border-radius: 0;
+    }
+
+    :global(.twitter-post .tweet-media-img) {
+      border-radius: 1em;
+    }
+  }
+</style>

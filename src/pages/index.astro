@@ -1,0 +1,32 @@
+---
+import Layout from "../layouts/Layout.astro";
+const name = "Thilina Gunasekara";
+---
+
+<Layout title={name}>
+  <div class="hello">
+    <h1><span>Hi!👋 I'm</span> {name.split(" ")[0]}.</h1>
+  </div>
+  <p>
+    🧑🏾‍💻 Software Engineer <a href="https://twitter.com/aligent" target="_blank"
+      >@ Aligent</a
+    >. 🧰 Maker <a href="https://twitter.com/makerspaceadl" target="_blank"
+      >@ Makerspace Adelaide</a
+    >. 🎙️ Podcaster <a href="https://twitter.com/techkatha" target="_blank"
+      >@ TechKatha</a
+    >. 🥾🏞️🏕 Hiker.
+  </p>
+  <section>
+    <h2>Ongoing Projects</h2>
+  </section>
+</Layout>
+<style>
+  section {
+    margin-top: 5rem;
+  }
+
+  p a {
+    color: #999;
+    text-decoration: none;
+  }
+</style>

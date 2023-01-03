@@ -1,0 +1,25 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const allProjects = await Astro.glob("../pages/projects/*.mdx");
+const name = "Thilina Gunasekara";
+---
+
+<Layout title={`Projects | ${name}`}>
+  <h1>Projects</h1>
+  <ul class="projects">
+    {
+      allProjects.map((project) => (
+        <li>
+          <a href={project.url}>{project.frontmatter.title}</a>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>
+<style>
+  .projects {
+    padding: 0;
+    list-style: none;
+  }
+</style>
