@@ -1,0 +1,63 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const allProjects = await Astro.glob("../../pages/projects/*.mdx");
+  const allWriting = await Astro.glob("../../pages/writing/*.mdx");
+  const allPosts = [...allProjects, ...allWriting];
+  const uniqueTags = [
+    ...new Set(allPosts.map((post) => post.frontmatter.tags).flat()),
+  ];
+
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts
+      .filter((post) => post.frontmatter.tags.includes(tag))
+      .sort(
+        (a, b) =>
+          Date.parse(b.frontmatter.pubDate) - Date.parse(a.frontmatter.pubDate)
+      );
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<Layout title={tag || ""}>
+  <p>Posts tagged with <span class="tag">{tag}</span></p>
+  <ul class="posts">
+    {
+      posts.map((post: any) => (
+        <li>
+          <h4>
+            <a href={post.url}>{post.frontmatter.title}</a>
+          </h4>
+          <span>{post.frontmatter.description}</span>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>
+<style>
+  .posts {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .tag {
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+
+  h4 {
+    margin: 0;
+  }
+</style>
