@@ -17,6 +17,7 @@ const pathname = new URL(Astro.request.url).pathname;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="manifest" href="./manifest.json" />
     <meta name="generator" content={Astro.generator} />
 
     <title>{title ? `${title} | ${name}` : name}</title>
