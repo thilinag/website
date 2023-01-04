@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import FeaturedProjects from "../components/FeaturedProjects.astro";
 const name = "Thilina Gunasekara";
 ---
 
@@ -16,15 +17,9 @@ const name = "Thilina Gunasekara";
       >@ TechKatha</a
     >. 🥾🏞️🏕 Hiker.
   </p>
-  <section>
-    <h2>Ongoing Projects</h2>
-  </section>
+  <FeaturedProjects />
 </Layout>
 <style>
-  section {
-    margin-top: 5rem;
-  }
-
   p a {
     color: #999;
     text-decoration: none;
