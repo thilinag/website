@@ -1,0 +1,52 @@
+---
+import { Tweet } from "@astro-community/astro-embed-twitter";
+
+export interface Props {
+  tweets: string[];
+}
+
+const { tweets = [] } = Astro.props;
+---
+
+{
+  tweets.map((tweet) => (
+    <div class="twitter-post">
+      <Tweet id={tweet} />
+    </div>
+  ))
+}
+<style>
+  :global(.twitter-post .tweet-card) {
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+  }
+
+  :global(.twitter-post .tweet-header),
+  :global(.twitter-post .tweet-footer) {
+    display: none;
+  }
+
+  :global(.twitter-post .tweet-img-grid-2),
+  :global(.twitter-post .tweet-img-grid-3),
+  :global(.twitter-post .tweet-img-grid-4) {
+    grid-template: none;
+    gap: 1em;
+    border-radius: 0;
+  }
+
+  :global(.twitter-post .tweet-media-img) {
+    border-radius: 1em;
+    aspect-ratio: initial;
+  }
+
+  :global(.tweet-img-grid-3 :nth-child(1) .tweet-media-img) {
+    aspect-ratio: initial;
+  }
+
+  :global(.twitter-post .tweet-media-video) {
+    max-height: 100vh;
+    background: black;
+    object-fit: contain;
+  }
+</style>
