@@ -5,7 +5,7 @@ import Tweets from "../components/Tweets.astro";
 const { frontmatter } = Astro.props;
 ---
 
-<Layout title={frontmatter.title} backUrl="/hiking/">
+<Layout title={frontmatter.title} backLabel="All Hiking" backURL="/hiking/">
   <h1>{frontmatter.title}</h1>
   <Tweets tweets={frontmatter.tweets} />
   <slot />
