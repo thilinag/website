@@ -1,0 +1,61 @@
+---
+layout: ../../layouts/Writing.astro
+title: "Improve Ubuntu default Sinhala rendering"
+pubDate: 2022-10-03
+description: "Improve Sinhala rendering in Ubuntu "
+author: "Thilina Gunasekara"
+tags: ["linux"]
+---
+
+Ubuntu default Sinhala font LKLUG's rendering is broken for some reason. Got it fixed by setting Noto Sans Sinhala as the default si font👌
+
+Before:
+
+<img
+  src="https://pbs.twimg.com/media/Fi-_TAZVUAAGYh8?format=png&name=small"
+  alt="Before the change letters don't render correctly"
+/>
+
+After:
+
+<img
+  src="https://pbs.twimg.com/media/Fi-_TAXUUAAVei5?format=png&name=small"
+  alt="After the change letters render correctly"
+/>
+
+1. Download your favourite sinhala font and add it to /usr/share/fonts/ eg: https://fonts.google.com/noto/specimen/Noto+Sans+Sinhala
+
+2. Create ~/.config/fontconfig/conf.d/50-custom-si.conf and add below content. (Replace Noto Sans Sinhala with your downloaded font family)
+
+   ```
+   <?xml version="1.0"?>
+   <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+   <fontconfig>
+   <match target="font">
+       <test name="lang" compare="contains">
+           <string>si</string>
+       </test>
+       <alias>
+           <family>sans-serif</family>
+           <prefer>
+               <family>Noto Sans Sinhala</family>
+           </prefer>
+       </alias>
+   </match>
+
+   <match target="font">
+       <test name="lang" compare="contains">
+           <string>si</string>
+       </test>
+       <alias>
+           <family>serif</family>
+           <prefer>
+               <family>Noto Sans Sinhala</family>
+           </prefer>
+       </alias>
+   </match>
+   </fontconfig>
+   ```
+
+3. Re-build font cache by running fc-cache
+4. Can confirm the change by running LANG=si fc-match, you will have to restart most apps to see the change.

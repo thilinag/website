@@ -1,5 +1,6 @@
 ---
 import Navigation from "../components/Navigation.astro";
+import Social from "../components/Social.astro";
 export interface Props {
   title: string;
   backUrl?: string;
@@ -28,6 +29,10 @@ const pathname = new URL(Astro.request.url).pathname;
     <main>
       <slot />
     </main>
+    <footer>
+      <span>Thilina Gunasekara &copy; {new Date().getFullYear()}</span>
+      <Social />
+    </footer>
   </body>
 </html>
 <style is:global>
@@ -39,6 +44,7 @@ const pathname = new URL(Astro.request.url).pathname;
       #da62c4 30%,
       white 60%
     );
+    --width: 1024px;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -56,24 +62,33 @@ const pathname = new URL(Astro.request.url).pathname;
   }
 
   html {
-    font-family: monospace;
+    font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
+      DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+    box-sizing: border-box;
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
   }
 
   body {
     margin: 0;
     background: var(--bg);
-    font-size: 0.75rem;
-  }
-
-  @media (min-width: 540px) {
-    body {
-      font-size: 1rem;
-    }
+    color: var(--color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
 
   code {
-    font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-      DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+    font-size: 1rem;
+  }
+
+  .astro-code {
+    border-radius: 1rem;
+    padding: 2rem;
   }
 
   blockquote {
@@ -81,14 +96,18 @@ const pathname = new URL(Astro.request.url).pathname;
   }
 
   main {
-    margin: 2rem;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    width: 100%;
+    max-width: var(--width);
     font-size: 1.25rem;
-    color: var(--color);
     line-height: 1.5;
+    word-break: break-word;
+    flex: 1;
   }
 
   @media (min-width: 540px) {
-    h1 {
+    main {
       font-size: 1.5rem;
     }
   }
@@ -97,7 +116,13 @@ const pathname = new URL(Astro.request.url).pathname;
     display: flex;
     justify-content: space-between;
     text-transform: uppercase;
-    margin: 2rem;
+    margin: 0 auto;
+    padding: 2rem;
+    width: 100%;
+    max-width: var(--width);
+    position: sticky;
+    top: 0;
+    background: var(--bg);
   }
 
   header a {
@@ -123,5 +148,18 @@ const pathname = new URL(Astro.request.url).pathname;
 
   a {
     color: var(--color);
+  }
+
+  footer {
+    margin: 2rem auto;
+    padding: 0 2rem;
+    width: 100%;
+    max-width: var(--width);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  img {
+    max-width: 100%;
   }
 </style>
