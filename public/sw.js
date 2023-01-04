@@ -27,3 +27,5 @@ self.addEventListener("fetch", function (event) {
     })
   );
 });
+
+self.caches.delete("v3.1:static");
