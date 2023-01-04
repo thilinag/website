@@ -4,28 +4,94 @@ const currentPath = pathname.slice(1);
 ---
 
 <nav>
-  <ul>
-    <li><a class={currentPath === "" ? "active" : ""} href="/">home</a></li>
-    <li>
-      <a class={currentPath === "projects/" ? "active" : ""} href="/projects/"
-        >projects</a
-      >
-    </li>
-  </ul>
+  <details>
+    <summary
+      ><svg
+        viewBox="0 0 16 15"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+        ><rect y="2" width="16" height="1"></rect><rect
+          y="7"
+          width="16"
+          height="1"></rect><rect y="12" width="8" height="1"></rect>
+      </svg>
+    </summary>
+    <ul>
+      <li><a class={currentPath === "" ? "active" : ""} href="/">Home</a></li>
+      <li>
+        <a class={currentPath === "projects/" ? "active" : ""} href="/projects/"
+          >Projects</a
+        >
+      </li>
+      <li>
+        <a class={currentPath === "writing/" ? "active" : ""} href="/writing/"
+          >Writing</a
+        >
+      </li>
+      <li>
+        <a class={currentPath === "hiking/" ? "active" : ""} href="/hiking/"
+          >Hiking</a
+        >
+      </li>
+    </ul>
+  </details>
 </nav>
 <style>
   nav {
-    /* border: 1px solid; */
     margin-left: auto;
     border-radius: 3rem;
-    /* padding: 0.5rem; */
+  }
+
+  @media (min-width: 540px) {
+    details {
+      position: relative;
+    }
+  }
+
+  details > summary {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.5em 1rem;
+  }
+
+  summary svg {
+    height: 15px;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::after {
+    content: " Menu";
+  }
+
+  details[open] summary:after {
+    content: " Menu";
   }
 
   ul {
     list-style: none;
     display: flex;
+    flex-direction: column;
     padding: 0;
     margin: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    padding: 0 2rem 2rem;
+    background: var(--bg);
+  }
+
+  @media (min-width: 540px) {
+    ul {
+      flex-direction: row;
+      left: auto;
+      top: 0;
+      padding: 0;
+    }
   }
 
   a {
