@@ -6,11 +6,11 @@ allWriting.sort(
   (a, b) =>
     Date.parse(b.frontmatter.pubDate) - Date.parse(a.frontmatter.pubDate)
 );
-const name = "Thilina Gunasekara";
+const title = "Writing";
 ---
 
-<Layout title={`Writing | ${name}`}>
-  <h1>Writing</h1>
+<Layout title={title}>
+  <h1>{title}</h1>
   <ul class="writing">
     {
       allWriting.map((post) => (

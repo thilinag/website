@@ -7,11 +7,11 @@ allHiking.sort(
     Date.parse(b.frontmatter.pubDate) - Date.parse(a.frontmatter.pubDate)
 );
 
-const name = "Thilina Gunasekara";
+const title = "Hiking";
 ---
 
-<Layout title={`Hiking | ${name}`}>
-  <h1>Hiking</h1>
+<Layout title={title}>
+  <h1>{title}</h1>
   <ul class="hiking">
     {
       allHiking.map((post) => (

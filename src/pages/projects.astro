@@ -6,11 +6,11 @@ allProjects.sort(
   (a, b) =>
     Date.parse(b.frontmatter.pubDate) - Date.parse(a.frontmatter.pubDate)
 );
-const name = "Thilina Gunasekara";
+const title = "Projects";
 ---
 
-<Layout title={`Projects | ${name}`}>
-  <h1>Projects</h1>
+<Layout title={title}>
+  <h1>{title}</h1>
   <ul class="projects">
     {
       allProjects.map((project) => (
