@@ -1,4 +1,5 @@
 ---
+import Post from "../components/Post.astro";
 import Layout from "../layouts/Layout.astro";
 
 const allProjects = await Astro.glob("../pages/projects/*.mdx");
@@ -12,13 +13,7 @@ const title = "Projects";
 <Layout title={title}>
   <h1>{title}</h1>
   <ul class="projects">
-    {
-      allProjects.map((project) => (
-        <li>
-          <a href={project.url}>{project.frontmatter.title}</a>
-        </li>
-      ))
-    }
+    {allProjects.map((project) => <Post post={project} />)}
   </ul>
 </Layout>
 <style>

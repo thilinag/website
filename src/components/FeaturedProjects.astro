@@ -1,4 +1,5 @@
 ---
+import Post from "./Post.astro";
 const allProjects = await Astro.glob("../pages/projects/*.mdx");
 const featuredProjects = allProjects.filter(
   (project) => project.frontmatter.featured
@@ -8,23 +9,13 @@ const featuredProjects = allProjects.filter(
 <section>
   <h3>Recent Projects</h3>
   <ul class="featured">
-    {
-      featuredProjects.map((project) => (
-        <li>
-          <h4>
-            <a href={project.url}>{project.frontmatter.title}</a>
-          </h4>
-          <span>{project.frontmatter.description}</span>
-        </li>
-      ))
-    }
+    {featuredProjects.map((project) => <Post post={project} />)}
   </ul>
 </section>
 <style>
   section {
     margin: 5rem 0 0;
   }
-
   .featured {
     display: flex;
     flex-direction: column;
@@ -32,9 +23,5 @@ const featuredProjects = allProjects.filter(
     list-style: none;
     margin: 0;
     padding: 0;
-  }
-
-  h4 {
-    margin: 0;
   }
 </style>
