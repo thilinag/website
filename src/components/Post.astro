@@ -3,13 +3,14 @@ const { post } = Astro.props;
 ---
 
 <li>
-  <h4>
+  <h3>
     <a href={post.url}>{post.frontmatter.title}</a>
-  </h4>
+  </h3>
   <span>{post.frontmatter.description}</span>
 </li>
 <style>
-  h4 {
+  h3 {
     margin: 0;
+    font-size: 1.25rem;
   }
 </style>
