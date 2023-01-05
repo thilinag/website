@@ -1,16 +1,28 @@
 ---
-const { post } = Astro.props;
+const { post, showDate = false } = Astro.props;
 ---
 
 <li>
   <h3>
     <a href={post.url}>{post.frontmatter.title}</a>
   </h3>
-  <span>{post.frontmatter.description}</span>
+  {post.frontmatter.description && <span>{post.frontmatter.description}</span>}
+  {
+    showDate && (
+      <time datetime={post.frontmatter.pubDate}>
+        {new Date(post.frontmatter.pubDate).toLocaleDateString("en-au")}
+      </time>
+    )
+  }
 </li>
 <style>
   h3 {
     margin: 0;
     font-size: 1.25rem;
+  }
+
+  time {
+    display: block;
+    font-size: 1rem;
   }
 </style>
