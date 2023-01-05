@@ -17,7 +17,7 @@ const pathname = new URL(Astro.request.url).pathname;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="manifest" href="/manifest.json" />
     <meta name="generator" content={Astro.generator} />
     <meta
@@ -72,7 +72,6 @@ const pathname = new URL(Astro.request.url).pathname;
       white 60%
     );
     --width: 1000px;
-    --mobile: 768px;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -134,7 +133,7 @@ const pathname = new URL(Astro.request.url).pathname;
     flex: 1;
   }
 
-  @media (min-width: var(--mobile)) {
+  @media (min-width: 768px) {
     main {
       font-size: 1.5rem;
     }
@@ -164,7 +163,7 @@ const pathname = new URL(Astro.request.url).pathname;
     font-size: 2rem;
   }
 
-  @media (min-width: var(--mobile)) {
+  @media (min-width: 768px) {
     h1 {
       font-size: 4rem;
     }

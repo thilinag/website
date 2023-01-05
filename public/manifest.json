@@ -1,5 +1,5 @@
 {
-  "short_name": "ThilinaG",
+  "short_name": "Thilina",
   "name": "Thilina Gunasekara",
   "description": "Personal website of Thilina Gunasekara, Adelaide based Software Engineer",
   "icons": [
@@ -37,6 +37,6 @@
   "start_url": "./?utm_source=web_app_manifest",
   "display": "standalone",
   "orientation": "portrait",
-  "theme_color": "#2727A4",
-  "background_color": "#2727A4"
+  "theme_color": "#202124",
+  "background_color": "#202124"
 }
