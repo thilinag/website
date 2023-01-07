@@ -29,18 +29,21 @@ const pathname = new URL(Astro.request.url).pathname;
       content="Personal website of Thilina Gunasekara, Adelaide based Software Engineer"
     />
     <script>
-      if (import.meta.env.MODE !== "development") {
-        if ("serviceWorker" in navigator) {
-          navigator.serviceWorker
-            .register("/sw.js")
-            .then(function (reg) {
-              console.log("Successfully registered service worker", reg);
-            })
-            .catch(function (err) {
-              console.warn("Error whilst registering service worker", err);
-            });
-        }
+      // if (import.meta.env.MODE !== "development") {
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .getRegistrations()
+          .then(function (registrations) {
+            for (let registration of registrations) {
+              if (
+                registration?.active?.scriptURL == "https://thilinag.com/sw.js"
+              ) {
+                registration.unregister();
+              }
+            }
+          });
       }
+      // }
     </script>
     <title>{title ? `${title} | ${name}` : name}</title>
   </head>
