@@ -36,7 +36,8 @@ const pathname = new URL(Astro.request.url).pathname;
           .then(function (registrations) {
             for (let registration of registrations) {
               if (
-                registration?.active?.scriptURL == "https://thilinag.com/sw.js"
+                registration?.active?.scriptURL ==
+                "https://www.thilinag.com/sw.js"
               ) {
                 registration.unregister();
               }
