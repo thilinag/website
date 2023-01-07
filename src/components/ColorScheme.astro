@@ -7,15 +7,12 @@
 <script is:inline>
   const getTheme = () => {
     if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-      console.log("in storage", localStorage.getItem("theme"));
       return localStorage.getItem("theme");
     }
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      console.log("prefers dark");
       return "dark";
     }
 
-    console.log("light");
     return "light";
   };
   const theme = getTheme();
