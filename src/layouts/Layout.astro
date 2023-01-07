@@ -1,6 +1,8 @@
 ---
 import Navigation from "../components/Navigation.astro";
 import Social from "../components/Social.astro";
+import ColorScheme from "../components/ColorScheme.astro";
+
 import "../styles/main.css";
 
 export interface Props {
@@ -40,11 +42,11 @@ const pathname = new URL(Astro.request.url).pathname;
         }
       }
     </script>
-
     <title>{title ? `${title} | ${name}` : name}</title>
   </head>
 
   <body>
+    <ColorScheme />
     <header>
       {backURL && backLabel && <a href={backURL}>← {backLabel}</a>}
       <Navigation />

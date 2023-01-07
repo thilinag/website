@@ -1,0 +1,156 @@
+---
+---
+
+<button id="theme" type="button" aria-label="Switch colour scheme">
+  <span><i></i></span>
+</button>
+<script is:inline>
+  const getTheme = () => {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      console.log("in storage", localStorage.getItem("theme"));
+      return localStorage.getItem("theme");
+    }
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      console.log("prefers dark");
+      return "dark";
+    }
+
+    console.log("light");
+    return "light";
+  };
+  const theme = getTheme();
+
+  if (theme === "light") {
+    document.documentElement.classList.remove("theme-dark");
+  } else {
+    document.documentElement.classList.add("theme-dark");
+  }
+
+  document.getElementById("theme").addEventListener("click", (e) => {
+    const theme = getTheme();
+    if (theme === "light") {
+      localStorage.setItem("theme", "dark");
+      document.documentElement.classList.remove("theme-light");
+      document.documentElement.classList.add("theme-dark");
+    } else {
+      localStorage.setItem("theme", "light");
+      document.documentElement.classList.remove("theme-dark");
+      document.documentElement.classList.add("theme-light");
+    }
+  });
+</script>
+<style is:global>
+  :root {
+    --icon-transition: 0.6s cubic-bezier(0.63, -0.32, 0.32, 1.6);
+  }
+
+  .theme-dark {
+    --color: #f5f5f5;
+    --bg: #202124;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root.theme-dark {
+      --color: #f5f5f5;
+      --bg: #202124;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root.theme-light {
+      --color: #202124;
+      --bg: #f5f5f5;
+    }
+  }
+</style>
+<style>
+  span {
+    cursor: pointer;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+  span::before,
+  span::after {
+    content: "";
+    width: 1rem;
+    aspect-ratio: 1/1;
+    display: block;
+    background: var(--color);
+    position: absolute;
+    transition: transform var(--icon-transition);
+  }
+
+  span::after {
+    transform: rotate(45deg);
+  }
+
+  span i {
+    border-radius: 50%;
+    background: var(--bg);
+    width: 0.6rem;
+    height: 0.6rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  :global(.theme-dark) span i {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  span i::after {
+    content: "";
+    background: var(--color);
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    position: absolute;
+    inset: 0.05rem;
+    left: -0.2rem;
+    transition: left 0.1s ease-in-out;
+  }
+
+  :global(.theme-dark) span i::after {
+    left: 0;
+    inset: 0.1rem;
+  }
+
+  #theme {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 1;
+    border: 0;
+    padding: 0;
+    background: none;
+  }
+
+  #theme:focus span {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  #theme:active span::before {
+    transition: 0s;
+    transform: rotate(135deg);
+  }
+
+  #theme:active span::after {
+    transition: 0s;
+    transform: rotate(180deg);
+  }
+
+  :global(.theme-dark) #theme:active span::before {
+    transition: 0s;
+    transform: rotate(-135deg);
+  }
+
+  :global(.theme-dark) #theme:active span::after {
+    transition: 0s;
+    transform: rotate(-180deg);
+  }
+</style>
