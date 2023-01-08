@@ -1,4 +1,6 @@
 ---
+import ColorScheme from "../components/ColorScheme.astro";
+
 const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1);
 ---
@@ -15,6 +17,7 @@ const currentPath = pathname.slice(1);
           width="16"
           height="1"></rect><rect y="12" width="8" height="1"></rect>
       </svg>
+      <span class="menu-toggle">Menu</span>
     </summary>
     <ul>
       <li><a class={currentPath === "" ? "active" : ""} href="/">Home</a></li>
@@ -35,10 +38,12 @@ const currentPath = pathname.slice(1);
       </li>
     </ul>
   </details>
+  <ColorScheme />
 </nav>
 <style>
   nav {
     margin-left: auto;
+    display: flex;
   }
 
   @media (min-width: 540px) {
@@ -52,24 +57,32 @@ const currentPath = pathname.slice(1);
     display: flex;
     gap: 1rem;
     align-items: center;
-    padding: 0.5em 1rem;
+    padding: 0.6em 0 0.4rem;
+    font-size: 1rem;
+    cursor: pointer;
   }
-
-  summary svg {
-    height: 15px;
-  }
+  /* 
+  @media (min-width: 768px) {
+    details > summary {
+      font-s
+    }
+  } */
 
   summary::-webkit-details-marker {
     display: none;
   }
 
-  summary::after {
-    content: " Menu";
+  summary svg,
+  .menu-toggle {
+    height: 15px;
   }
 
-  details[open] summary:after {
-    content: " Menu";
-  }
+  /* @media (min-width: 768px) {
+    summary svg,
+    .menu-toggle {
+      height: 20px;
+    }
+  } */
 
   ul {
     list-style: none;
@@ -80,7 +93,7 @@ const currentPath = pathname.slice(1);
     position: absolute;
     left: 0;
     right: 0;
-    padding: 0 2rem 2rem;
+    padding: 1rem;
     background: var(--bg);
   }
 
@@ -94,10 +107,6 @@ const currentPath = pathname.slice(1);
   }
 
   a {
-    color: var(--color);
-    text-decoration: none;
-    display: block;
-    padding: 0.5em 1rem;
     font-size: 1rem;
   }
 

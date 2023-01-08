@@ -42,6 +42,13 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 1.25rem;
+  }
 }
 
 code {
@@ -58,11 +65,10 @@ blockquote {
 }
 
 main {
-  margin: 2rem auto;
-  padding: 0 2rem;
+  margin: 1rem auto;
+  padding: 0 1rem;
   width: 100%;
   max-width: var(--width);
-  font-size: 1.25rem;
   line-height: 1.5;
   word-break: break-word;
   flex: 1;
@@ -70,7 +76,8 @@ main {
 
 @media (min-width: 768px) {
   main {
-    font-size: 1.5rem;
+    margin: 2rem auto;
+    padding: 0 2rem;
   }
 }
 
@@ -79,7 +86,7 @@ header {
   justify-content: space-between;
   text-transform: uppercase;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   width: 100%;
   max-width: var(--width);
   position: sticky;
@@ -87,18 +94,31 @@ header {
   background: var(--bg);
 }
 
-@media (max-width: calc(1000px + 5rem)) {
+/* @media (max-width: calc(1000px + 5rem)) {
   header {
     padding-right: 5rem;
+  }
+} */
+
+@media (min-width: 768px) {
+  header {
+    padding: 2rem;
   }
 }
 
 header a {
   text-decoration: none;
   display: block;
-  padding: 0.5em 1rem;
+  padding: 0.6em 1rem 0.4rem;
   font-size: 1rem;
 }
+
+/* @media (min-width: 768px) {
+  header a {
+    font-size: 1.5rem;
+    padding: 0.5em 1rem;
+  }
+} */
 
 h1 {
   font-size: 2rem;
@@ -106,7 +126,7 @@ h1 {
 
 @media (min-width: 768px) {
   h1 {
-    font-size: 4rem;
+    font-size: 3rem;
   }
 }
 
@@ -119,14 +139,21 @@ a {
 }
 
 footer {
-  margin: 2rem auto;
-  padding: 0 2rem;
+  margin: 1rem auto;
+  padding: 0 1rem;
   width: 100%;
   max-width: var(--width);
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   font-size: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  footer {
+    padding: 0 2rem;
+    margin: 2rem auto;
+  }
 }
 
 img {

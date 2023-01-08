@@ -1,10 +1,8 @@
----
----
-
 <button id="theme" type="button" aria-label="Switch colour scheme">
   <span><i></i></span>
 </button>
 <script is:inline>
+  const toggleButton = document.getElementById("theme");
   const getTheme = () => {
     if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
       return localStorage.getItem("theme");
@@ -19,20 +17,30 @@
 
   if (theme === "light") {
     document.documentElement.classList.remove("theme-dark");
+    document.documentElement.classList.add("theme-light");
+    toggleButton.setAttribute("aria-label", "Switch to Dark Theme");
+    toggleButton.setAttribute("title", "Switch to Dark Theme");
   } else {
     document.documentElement.classList.add("theme-dark");
+    document.documentElement.classList.remove("theme-light");
+    toggleButton.setAttribute("aria-label", "Switch to Light Theme");
+    toggleButton.setAttribute("title", "Switch to Light Theme");
   }
 
-  document.getElementById("theme").addEventListener("click", (e) => {
+  toggleButton.addEventListener("click", (e) => {
     const theme = getTheme();
     if (theme === "light") {
       localStorage.setItem("theme", "dark");
       document.documentElement.classList.remove("theme-light");
       document.documentElement.classList.add("theme-dark");
+      toggleButton.setAttribute("aria-label", "Switch to Light Theme");
+      toggleButton.setAttribute("title", "Switch to Light Theme");
     } else {
       localStorage.setItem("theme", "light");
       document.documentElement.classList.remove("theme-dark");
       document.documentElement.classList.add("theme-light");
+      toggleButton.setAttribute("aria-label", "Switch to Dark Theme");
+      toggleButton.setAttribute("title", "Switch to Dark Theme");
     }
   });
 </script>
@@ -61,70 +69,33 @@
   }
 </style>
 <style>
-  span {
-    cursor: pointer;
-    width: 2rem;
-    height: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-  }
-
-  span::before,
-  span::after {
-    content: "";
-    width: 1rem;
-    aspect-ratio: 1/1;
-    display: block;
-    background: var(--color);
-    position: absolute;
-    transition: transform var(--icon-transition);
-  }
-
-  span::after {
-    transform: rotate(45deg);
-  }
-
-  span i {
-    border-radius: 50%;
-    background: var(--bg);
-    width: 0.6rem;
-    height: 0.6rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  :global(.theme-dark) span i {
-    width: 0.75rem;
-    height: 0.75rem;
-  }
-
-  span i::after {
-    content: "";
-    background: var(--color);
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 50%;
-    position: absolute;
-    inset: 0.05rem;
-    left: -0.2rem;
-    transition: left 0.1s ease-in-out;
-  }
-
-  :global(.theme-dark) span i::after {
-    left: 0;
-    inset: 0.1rem;
-  }
-
   #theme {
-    position: fixed;
-    top: 2rem;
-    right: 2rem;
-    z-index: 1;
+    --size: 32px;
     border: 0;
     padding: 0;
     background: none;
+    width: 26px;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    #theme {
+      /* width: 43px;
+      height: 43px; */
+    }
+  }
+
+  @media (min-width: calc(1000px + 5rem)) {
+    #theme {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      z-index: 1;
+    }
   }
 
   #theme:focus span {
@@ -139,6 +110,61 @@
   #theme:active span::after {
     transition: 0s;
     transform: rotate(180deg);
+  }
+  span {
+    cursor: pointer;
+    width: var(--size);
+    height: var(--size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+  span::before,
+  span::after {
+    content: "";
+    width: calc(var(--size) / 2);
+    aspect-ratio: 1/1;
+    display: block;
+    background: var(--color);
+    position: absolute;
+    transition: transform var(--icon-transition);
+  }
+
+  span::after {
+    transform: rotate(45deg);
+  }
+
+  span i {
+    border-radius: 50%;
+    background: var(--bg);
+    width: calc(var(--size) / 2 - 4px);
+    height: calc(var(--size) / 2 - 4px);
+    position: relative;
+    z-index: 1;
+  }
+
+  :global(.theme-dark) span i {
+    width: calc(var(--size) / 2 - 4px);
+    height: calc(var(--size) / 2 - 4px);
+  }
+
+  span i::after {
+    content: "";
+    background: var(--color);
+    width: calc(var(--size) / 4);
+    height: calc(var(--size) / 4);
+    border-radius: 50%;
+    position: absolute;
+    inset: 2px;
+    left: -2px;
+    transition: left 0.1s ease-in-out;
+  }
+
+  :global(.theme-dark) span i::after {
+    left: 0;
+    inset: 2px;
   }
 
   :global(.theme-dark) #theme:active span::before {

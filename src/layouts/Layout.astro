@@ -1,7 +1,6 @@
 ---
 import Navigation from "../components/Navigation.astro";
 import Social from "../components/Social.astro";
-import ColorScheme from "../components/ColorScheme.astro";
 
 import "../styles/main.css";
 
@@ -29,7 +28,6 @@ const pathname = new URL(Astro.request.url).pathname;
       content="Personal website of Thilina Gunasekara, Adelaide based Software Engineer"
     />
     <script>
-      // if (import.meta.env.MODE !== "development") {
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker
           .getRegistrations()
@@ -44,15 +42,19 @@ const pathname = new URL(Astro.request.url).pathname;
             }
           });
       }
-      // }
     </script>
     <title>{title ? `${title} | ${name}` : name}</title>
   </head>
 
   <body>
-    <ColorScheme />
     <header>
-      {backURL && backLabel && <a href={backURL}>← {backLabel}</a>}
+      {
+        backURL && backLabel && (
+          <a class="back" href={backURL}>
+            <i>←</i> <span>{backLabel}</span>
+          </a>
+        )
+      }
       <Navigation />
     </header>
     <main>
@@ -64,6 +66,13 @@ const pathname = new URL(Astro.request.url).pathname;
     </footer>
   </body>
 </html>
+<style>
+  .back {
+    padding-left: 0;
+    display: flex;
+    gap: 0.5rem;
+  }
+</style>
 <!--
  ________   _ ___             _____                       __                
 /_  __/ /  (_) (_)__  ___ _  / ___/_ _____  ___ ____ ___ / /_____ ________ _
