@@ -1,6 +1,6 @@
 ---
 import Navigation from "../components/Navigation.astro";
-import Social from "../components/Social.astro";
+import Footer from "../components/Footer.astro";
 
 import "../styles/main.css";
 
@@ -60,10 +60,7 @@ const pathname = new URL(Astro.request.url).pathname;
     <main>
       <slot />
     </main>
-    <footer>
-      <span>Thilina Gunasekara &copy; {new Date().getFullYear()}</span>
-      <Social />
-    </footer>
+    <Footer />
   </body>
 </html>
 <style>

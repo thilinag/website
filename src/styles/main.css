@@ -125,24 +125,6 @@ a {
   color: var(--color);
 }
 
-footer {
-  margin: 1rem auto;
-  padding: 0 1rem;
-  width: 100%;
-  max-width: var(--width);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.75rem;
-}
-
-@media (min-width: 768px) {
-  footer {
-    padding: 0 2rem;
-    margin: 2rem auto;
-  }
-}
-
 img {
   max-width: 100%;
 }

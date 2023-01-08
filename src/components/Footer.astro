@@ -1,0 +1,32 @@
+---
+import Social from "./Social.astro";
+---
+
+<footer>
+  <span>Thilina Gunasekara &copy; {new Date().getFullYear()}</span>
+  <Social />
+</footer>
+<style>
+  footer {
+    margin: 1rem auto;
+    padding: 0 1rem;
+    width: 100%;
+    max-width: var(--width);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.75rem;
+  }
+
+  span {
+    flex: 1;
+  }
+
+  @media (min-width: 768px) {
+    footer {
+      padding: 0 2rem;
+      margin: 2rem auto;
+    }
+  }
+</style>
