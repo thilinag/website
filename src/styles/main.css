@@ -94,12 +94,6 @@ header {
   background: var(--bg);
 }
 
-/* @media (max-width: calc(1000px + 5rem)) {
-  header {
-    padding-right: 5rem;
-  }
-} */
-
 @media (min-width: 768px) {
   header {
     padding: 2rem;
@@ -112,13 +106,6 @@ header a {
   padding: 0.6em 1rem 0.4rem;
   font-size: 1rem;
 }
-
-/* @media (min-width: 768px) {
-  header a {
-    font-size: 1.5rem;
-    padding: 0.5em 1rem;
-  }
-} */
 
 h1 {
   font-size: 2rem;
