@@ -73,12 +73,12 @@
 </style>
 <style>
   #theme {
-    --size: 32px;
+    --size: 26px;
     border: 0;
     padding: 0;
     background: none;
-    width: 26px;
-    height: 34px;
+    width: var(--size);
+    height: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -107,6 +107,7 @@
     transition: 0s;
     transform: rotate(180deg);
   }
+
   span {
     cursor: pointer;
     width: var(--size);
@@ -120,7 +121,7 @@
   span::before,
   span::after {
     content: "";
-    width: calc(var(--size) / 2);
+    width: 16px;
     aspect-ratio: 1/1;
     display: block;
     background: var(--color);
@@ -135,22 +136,17 @@
   span i {
     border-radius: 50%;
     background: var(--bg);
-    width: calc(var(--size) / 2 - 4px);
-    height: calc(var(--size) / 2 - 4px);
+    width: 12px;
+    height: 12px;
     position: relative;
     z-index: 1;
-  }
-
-  :global(.theme-dark) span i {
-    width: calc(var(--size) / 2 - 4px);
-    height: calc(var(--size) / 2 - 4px);
   }
 
   span i::after {
     content: "";
     background: var(--color);
-    width: calc(var(--size) / 4);
-    height: calc(var(--size) / 4);
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     position: absolute;
     inset: 2px;

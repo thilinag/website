@@ -90,6 +90,7 @@ header {
   width: 100%;
   max-width: var(--width);
   position: sticky;
+  z-index: 2;
   top: 0;
   background: var(--bg);
 }
@@ -103,7 +104,7 @@ header {
 header a {
   text-decoration: none;
   display: block;
-  padding: 0.6em 1rem 0.4rem;
+  padding: 0.5em 1rem;
   font-size: 1rem;
 }
 
