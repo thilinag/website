@@ -4,11 +4,11 @@ export const prerender = true;
 import Post from "../components/Post.astro";
 import Layout from "../layouts/Layout.astro";
 
-const allProjects = await Astro.glob("../pages/projects/*.mdx");
-allProjects.sort(
+import { getCollection } from 'astro:content';
+const allProjects = await getCollection("projects").then(collection => collection.sort(
   (a, b) =>
-    Date.parse(b.frontmatter.pubDate) - Date.parse(a.frontmatter.pubDate)
-);
+    b.data.pubDate.getTime() - a.data.pubDate.getTime()
+))
 const title = "Projects";
 ---
 

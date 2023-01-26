@@ -1,9 +1,7 @@
 ---
 import Post from "./Post.astro";
-const allProjects = await Astro.glob("../pages/projects/*.mdx");
-const featuredProjects = allProjects.filter(
-  (project) => project.frontmatter.featured
-);
+import { getCollection } from 'astro:content';
+const featuredProjects = await getCollection("projects").then(collection => collection.filter(project => project.data.featured))
 ---
 
 <section>
