@@ -1,16 +1,22 @@
 ---
+import type { CollectionEntry } from 'astro:content';
+interface Props {
+  post: CollectionEntry<'writing'> | CollectionEntry<'projects'> | CollectionEntry<'hiking'>,
+  showDate?: boolean
+}
+
 const { post, showDate = false } = Astro.props;
 ---
 
 <li>
   <h3>
-    <a href={post.url}>{post.frontmatter.title}</a>
+    <a href={`/${post.collection}/${post.slug}`}>{post.data.title}</a>
   </h3>
-  {post.frontmatter.description && <span>{post.frontmatter.description}</span>}
+  {post.data.description && <span>{post.data.description}</span>}
   {
     showDate && (
-      <time datetime={post.frontmatter.pubDate}>
-        {new Date(post.frontmatter.pubDate).toLocaleDateString("en-au")}
+      <time datetime={post.data.pubDate.toISOString()}>
+        {post.data.pubDate.toLocaleDateString("en-au")}
       </time>
     )
   }
