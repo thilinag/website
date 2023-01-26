@@ -1,11 +1,13 @@
 ---
+export const prerender = true;
+
 import Layout from "../layouts/Layout.astro";
 
-const allHiking = await Astro.glob("../pages/hiking/*.mdx");
-allHiking.sort(
+import { getCollection } from 'astro:content';
+const allHiking = await getCollection("hiking").then(collection => collection.sort(
   (a, b) =>
-    Date.parse(b.frontmatter.pubDate) - Date.parse(a.frontmatter.pubDate)
-);
+    b.data.pubDate.getTime() - a.data.pubDate.getTime()
+))
 
 const title = "Hiking";
 ---
@@ -28,7 +30,7 @@ const title = "Hiking";
     {
       allHiking.map((post) => (
         <li>
-          <a href={post.url}>{post.frontmatter.title}</a>
+          <a href={post.slug}>{post.data.title}</a>
         </li>
       ))
     }
