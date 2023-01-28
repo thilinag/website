@@ -1,4 +1,6 @@
 ---
+import { Icon } from "astro-icon";
+
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 
@@ -16,16 +18,16 @@ const pathname = new URL(Astro.request.url).pathname;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="generator" content={Astro.generator} />
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width' />
+    <link rel='shortcut icon' type='image/svg+xml' href='/favicon.svg' />
+    <link rel='manifest' href='/manifest.json' />
+    <meta name='generator' content={Astro.generator} />
     <meta
-      name="description"
-      content="Personal website of Thilina Gunasekara, Adelaide based Software Engineer"
+      name='description'
+      content='Personal website of Thilina Gunasekara, Adelaide based Software Engineer'
     />
     <script>
       if ("serviceWorker" in navigator) {
@@ -47,11 +49,11 @@ const pathname = new URL(Astro.request.url).pathname;
   </head>
 
   <body>
-    <header>
+    <header class='header'>
       {
         backURL && backLabel && (
-          <a class="back" href={backURL}>
-            <i>←</i> <span>{backLabel}</span>
+          <a class='back' href={backURL}>
+            <Icon name='mdi:arrow-back' size='18' /> <span>{backLabel}</span>
           </a>
         )
       }
@@ -67,7 +69,29 @@ const pathname = new URL(Astro.request.url).pathname;
   .back {
     padding-left: 0;
     display: flex;
+    align-items: center;
     gap: 0.5rem;
+    text-decoration: none;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    text-transform: uppercase;
+    margin: 0 auto;
+    padding: 1rem;
+    width: 100%;
+    max-width: var(--width);
+    position: sticky;
+    z-index: 2;
+    top: 0;
+    background: var(--bg);
+  }
+
+  @media (min-width: 768px) {
+    header {
+      padding: 2rem;
+    }
   }
 </style>
 <!--

@@ -1,12 +1,13 @@
 ---
 import Post from "./Post.astro";
-import { getCollection } from 'astro:content';
-const featuredProjects = await getCollection("projects").then(collection => collection.filter(project => project.data.featured))
+import { getCollection } from "astro:content";
+const featuredProjects = await getCollection("projects").then((collection) =>
+  collection.filter((project) => project.data.featured)
+);
 ---
 
 <section>
-  <h2>Recent Projects</h2>
-  <ul class="featured">
+  <ul class='featured'>
     {featuredProjects.map((project) => <Post post={project} />)}
   </ul>
 </section>
@@ -23,7 +24,6 @@ const featuredProjects = await getCollection("projects").then(collection => coll
   .featured {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
     list-style: none;
     margin: 0;
     padding: 0;

@@ -4,17 +4,16 @@ export const prerender = true;
 import Post from "../components/Post.astro";
 import Layout from "../layouts/Layout.astro";
 
-import { getCollection } from 'astro:content';
-const allWriting = await getCollection("writing").then(collection => collection.sort(
-  (a, b) =>
-    b.data.pubDate.getTime() - a.data.pubDate.getTime()
-))
+import { getCollection } from "astro:content";
+const allWriting = await getCollection("writing").then((collection) =>
+  collection.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+);
 const title = "Writing";
 ---
 
 <Layout title={title}>
   <h1>{title}</h1>
-  <ul class="writing">
+  <ul class='writing'>
     {allWriting.map((post) => <Post post={post} />)}
   </ul>
 </Layout>

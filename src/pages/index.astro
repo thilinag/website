@@ -6,21 +6,24 @@ import FeaturedProjects from "../components/FeaturedProjects.astro";
 ---
 
 <Layout title={""}>
-  <div class="hello">
+  <div class='hello'>
     <h1><span>Hi!👋 I'm</span> Thilina.</h1>
   </div>
   <p>
-    🧑🏾‍💻 Software Engineer <a href="https://twitter.com/aligent" target="_blank"
+    🧑🏾‍💻 Software Engineer <a href='https://twitter.com/aligent' target='_blank'
       >@ Aligent</a
-    >. 🧰 Maker <a href="https://twitter.com/makerspaceadl" target="_blank"
+    >. 🧰 Maker <a href='https://twitter.com/makerspaceadl' target='_blank'
       >@ Makerspace Adelaide</a
-    >. 🎙️ Podcaster <a href="https://twitter.com/techkatha" target="_blank"
+    >. 🎙️ Podcaster <a href='https://twitter.com/techkatha' target='_blank'
       >@ TechKatha</a
     >. 🥾🏞️ Hiker.
   </p>
   <FeaturedProjects />
 </Layout>
 <style>
+  p {
+    line-height: 2;
+  }
   p a {
     text-decoration: none;
     opacity: 0.7;
