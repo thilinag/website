@@ -10,7 +10,7 @@ const currentPath = pathname.slice(1);
   <details>
     <summary>
       <Icon name='mdi:menu-open' size='18' />
-      <span class='menu-toggle'>Menu</span>
+      <span class='menuToggle'>Menu</span>
     </summary>
     <ul>
       <li><a class={currentPath === "" ? "active" : ""} href='/'>Home</a></li>
@@ -68,16 +68,20 @@ const currentPath = pathname.slice(1);
     display: none;
   }
 
+  .menuToggle {
+    padding: 0.5rem 0;
+  }
+
+  details[open] summary {
+    display: none;
+  }
+
   ul {
     list-style: none;
     display: flex;
     flex-direction: column;
     margin: 0;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    padding: 1rem;
+    padding: 0;
     background: var(--bg);
     align-items: flex-end;
     z-index: 3;
@@ -87,9 +91,18 @@ const currentPath = pathname.slice(1);
     ul {
       flex-direction: row;
       left: auto;
-      bottom: 0;
-      padding: 0;
       align-items: center;
+    }
+  }
+
+  @media (max-width: 540px) {
+    ul {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      gap: 0.5rem;
+      padding: 1rem;
     }
   }
 
