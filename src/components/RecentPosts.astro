@@ -1,0 +1,54 @@
+---
+import Post from "./Post.astro";
+import { getCollection } from "astro:content";
+import { collections } from "../content/config";
+const writing = await getCollection("writing")
+  .then((collection) =>
+    collection.sort(
+      (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+    )
+  )
+  .then((collection) => collection.slice(0, 1));
+const projects = await getCollection("projects")
+  .then((collection) =>
+    collection.sort(
+      (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+    )
+  )
+  .then((collection) => collection.slice(0, 1));
+const hiking = await getCollection("hiking")
+  .then((collection) =>
+    collection.sort(
+      (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+    )
+  )
+  .then((collection) => collection.slice(0, 1));
+---
+
+<section>
+  <ul class='recent'>
+    {
+      [...writing, ...projects, ...hiking]
+        .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+        .map((project) => <Post post={project} />)
+    }
+  </ul>
+</section>
+<style>
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  section {
+    margin: 5rem 0 0;
+  }
+
+  .recent {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+</style>
