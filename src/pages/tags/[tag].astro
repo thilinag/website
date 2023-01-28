@@ -6,9 +6,9 @@ import Post from "../../components/Post.astro";
 import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
-  const allProjects = await getCollection("projects")
-  const allWriting = await getCollection("writing")
-  const allHiking = await getCollection("hiking")
+  const allProjects = await getCollection("projects");
+  const allWriting = await getCollection("writing");
+  const allHiking = await getCollection("hiking");
   const allPosts = [...allProjects, ...allWriting, ...allHiking];
   const uniqueTags = [
     ...new Set(allPosts.map((post) => post.data.tags).flat()),
@@ -17,10 +17,7 @@ export async function getStaticPaths() {
   return uniqueTags.map((tag) => {
     const filteredPosts = allPosts
       .filter((post) => post.data.tags.includes(tag))
-      .sort(
-        (a, b) =>
-          b.data.pubDate.getDate() - a.data.pubDate.getDate()
-      );
+      .sort((a, b) => b.data.pubDate.getDate() - a.data.pubDate.getDate());
     return {
       params: { tag },
       props: { posts: filteredPosts },
@@ -33,8 +30,8 @@ const { posts } = Astro.props;
 ---
 
 <Layout title={tag || ""}>
-  <p>Posts tagged with <span class="tag">{tag}</span></p>
-  <ul class="posts">
+  <p>Posts tagged with <span class='tag'>#{tag}</span></p>
+  <ul class='posts'>
     {posts.map((post: any) => <Post post={post} />)}
   </ul>
 </Layout>
@@ -50,7 +47,7 @@ const { posts } = Astro.props;
 
   .tag {
     font-weight: bold;
-    text-transform: capitalize;
+    text-transform: uppercase;
   }
 
   h4 {

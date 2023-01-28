@@ -6,12 +6,12 @@ export interface Props {
 const { tags } = Astro.props;
 ---
 
-<ul class="tags">
+<ul class='tags'>
   {
     tags.map((tag) => (
       <li>
-        <a class="tag" href={`/tags/${tag}`}>
-          {tag}
+        <a class='tag' href={`/tags/${tag}`}>
+          #{tag}
         </a>
       </li>
     ))
@@ -30,9 +30,6 @@ const { tags } = Astro.props;
   .tag {
     color: var(--color);
     text-decoration: none;
-    border: 1px solid;
-    border-radius: 2rem;
-    padding: 0.5em 1rem;
     display: inline-block;
     text-transform: uppercase;
     font-size: 1rem;
