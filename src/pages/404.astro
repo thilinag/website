@@ -1,0 +1,22 @@
+---
+export const prerender = true;
+
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title='Page not found!' backLabel='Home' backURL='/'>
+  <h1 class='page-404'>
+    404 <br />
+    <span>Page not found!</span>
+  </h1>
+</Layout>
+<style>
+  .page-404 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 0;
+  }
+</style>
