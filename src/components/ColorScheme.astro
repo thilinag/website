@@ -1,4 +1,4 @@
-<button id="theme" type="button" aria-label="Switch colour scheme">
+<button id='theme' type='button' aria-label='Switch colour scheme'>
   <span><i></i></span>
 </button>
 <script is:inline>
@@ -78,7 +78,6 @@
     padding: 0;
     background: none;
     width: var(--size);
-    height: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,9 +87,10 @@
   @media (min-width: calc(1000px + 5rem)) {
     #theme {
       position: fixed;
-      top: 2rem;
+      top: 0;
       right: 2rem;
       z-index: 1;
+      height: 44px;
     }
   }
 
@@ -121,7 +121,7 @@
   span::before,
   span::after {
     content: "";
-    width: 16px;
+    width: 12px;
     aspect-ratio: 1/1;
     display: block;
     background: var(--color);
@@ -136,8 +136,8 @@
   span i {
     border-radius: 50%;
     background: var(--bg);
-    width: 12px;
-    height: 12px;
+    width: 8px;
+    height: 8px;
     position: relative;
     z-index: 1;
   }
@@ -145,13 +145,18 @@
   span i::after {
     content: "";
     background: var(--color);
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     position: absolute;
     inset: 2px;
     left: -2px;
     transition: left 0.1s ease-in-out;
+  }
+
+  :global(.theme-dark) span i {
+    width: 10px;
+    height: 10px;
   }
 
   :global(.theme-dark) span i::after {
