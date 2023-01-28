@@ -1,34 +1,98 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from "astro:content";
+import { getRelativeTime } from "../utils";
 interface Props {
-  post: CollectionEntry<'writing'> | CollectionEntry<'projects'> | CollectionEntry<'hiking'>,
-  showDate?: boolean
+  post:
+    | CollectionEntry<"writing">
+    | CollectionEntry<"projects">
+    | CollectionEntry<"hiking">;
+  showDate?: boolean;
 }
 
-const { post, showDate = false } = Astro.props;
+const { post, showDate = true } = Astro.props;
 ---
 
-<li>
-  <h3>
-    <a href={`/${post.collection}/${post.slug}`}>{post.data.title}</a>
-  </h3>
-  {post.data.description && <span>{post.data.description}</span>}
-  {
-    showDate && (
-      <time datetime={post.data.pubDate.toISOString()}>
-        {post.data.pubDate.toLocaleDateString("en-au")}
-      </time>
-    )
-  }
+<li class='post'>
+  <a class='postLink' href={`/${post.collection}/${post.slug}`}>
+    <header class='postHeader'>
+      <h3>
+        {post.data.title}
+      </h3>
+      {
+        showDate && (
+          <time datetime={post.data.pubDate.toISOString()}>
+            {getRelativeTime(post.data.pubDate.getTime())}
+          </time>
+        )
+      }
+    </header>
+    {post.data.description && <span>{post.data.description}</span>}
+    <ul class='tags'>
+      {post.data.tags.map((tag) => <li>#{tag}</li>)}
+    </ul>
+  </a>
 </li>
 <style>
+  .post {
+    margin-bottom: 1.5rem;
+    container: post / inline-size;
+  }
+
+  .postHeader {
+    margin: 0 0 1rem;
+  }
+
+  @container post (min-width: 540px) {
+    .postHeader {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+    }
+  }
+  .postLink {
+    text-decoration: none;
+    display: block;
+    padding: 1rem;
+    border-radius: 1rem;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  @container post (min-width: 540px) {
+    .postLink {
+      padding: 2rem;
+    }
+  }
+
+  :global(.theme-dark) .postLink {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
   h3 {
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+  }
+
+  @container post (min-width: 540px) {
+    h3 {
+      font-size: 1.5rem;
+    }
   }
 
   time {
     display: block;
-    font-size: 1rem;
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: 0.5rem 1rem;
+    padding: 0;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    opacity: 0.7;
   }
 </style>
