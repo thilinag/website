@@ -1,7 +1,8 @@
 ---
 export const prerender = true;
 
-import { getCollection } from "astro:content";
+import { CollectionEntry, getCollection } from "astro:content";
+import Layout from "../../layouts/Hiking.astro";
 export async function getStaticPaths() {
   const hikingEntries = await getCollection("hiking");
   return hikingEntries.map((entry) => ({
@@ -9,8 +10,15 @@ export async function getStaticPaths() {
     props: { entry },
   }));
 }
+
+interface Props {
+  entry: CollectionEntry<"hiking">;
+}
+
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<Content />
+<Layout data={entry.data}>
+  <Content />
+</Layout>

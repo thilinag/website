@@ -1,13 +1,20 @@
 ---
+import type { CollectionEntry } from "astro:content";
+
 import Layout from "./Layout.astro";
 import Tags from "../components/Tags.astro";
 import Tweets from "../components/Tweets.astro";
-const { frontmatter } = Astro.props;
+
+interface Props {
+  data: CollectionEntry<"projects">["data"];
+}
+
+const { data } = Astro.props;
 ---
 
-<Layout title={frontmatter.title} backLabel='All Projects' backURL='/projects/'>
-  <h1>{frontmatter.title}</h1>
-  <Tweets tweets={frontmatter.tweets} />
+<Layout title={""} backLabel='All Projects' backURL='/projects/'>
+  <h1>{data.title}</h1>
+  {data.tweets?.length && <Tweets tweets={data.tweets} />}
   <slot />
-  <Tags tags={frontmatter.tags} />
+  {data.tags?.length && <Tags tags={data.tags} />}
 </Layout>
