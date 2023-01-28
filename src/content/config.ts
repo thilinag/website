@@ -1,42 +1,37 @@
 import { defineCollection, z } from "astro:content";
 
-const writingCollection = defineCollection({
+const PostSchema = {
+  title: z.string(),
+  pubDate: z.date().transform((date) => new Date(date)),
+  description: z.string(),
+  author: z.enum(["Thilina Gunasekara"]),
+  tags: z.array(z.string()),
+  tweets: z.array(z.string()).optional(),
+  featured: z.boolean().optional().default(false),
+  draft: z.boolean().optional().default(true),
+};
+
+const writing = defineCollection({
   schema: z.object({
-    title: z.string(),
-    pubDate: z.date().transform((date) => new Date(date)),
-    description: z.string(),
-    author: z.enum(["Thilina Gunasekara"]),
-    tags: z.array(z.string()),
-    tweets: z.array(z.string()).optional(),
+    ...PostSchema,
   }),
 });
 
-const projectsCollection = defineCollection({
+const projects = defineCollection({
   schema: z.object({
-    title: z.string(),
-    pubDate: z.date().transform((date) => new Date(date)),
-    description: z.string(),
-    author: z.enum(["Thilina Gunasekara"]),
-    tags: z.array(z.string()),
-    tweets: z.array(z.string()).optional(),
-    featured: z.boolean().optional().default(false),
+    ...PostSchema,
   }),
 });
 
-const hikingCollection = defineCollection({
+const hiking = defineCollection({
   schema: z.object({
-    title: z.string(),
-    pubDate: z.date().transform((date) => new Date(date)),
+    ...PostSchema,
     description: z.string().optional(),
-    author: z.enum(["Thilina Gunasekara"]),
-    tags: z.array(z.string()),
-    tweets: z.array(z.string()).optional(),
-    featured: z.boolean().optional().default(false),
   }),
 });
 
 export const collections = {
-  writing: writingCollection,
-  projects: projectsCollection,
-  hiking: hikingCollection,
+  writing,
+  projects,
+  hiking,
 };
