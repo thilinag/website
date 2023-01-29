@@ -1,0 +1,55 @@
+---
+import SvgMap from "./SvgMap.astro";
+
+interface Props {
+  geoJson: object;
+  name: string;
+  completed: number;
+  total: number;
+  url: string;
+}
+
+const { geoJson, name, completed, total, url } = Astro.props;
+---
+
+<div class='hike-card'>
+  <div class='info'>
+    <h2>{name}</h2>
+    <p>{completed}/{total} complete</p>
+    <a href={url}>View hikes</a>
+  </div>
+  <div class='map'>
+    {geoJson && <SvgMap geoJson={geoJson} />}
+  </div>
+</div>
+
+<style>
+  .hike-card {
+    position: relative;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    aspect-ratio: 1;
+    padding: 2rem;
+  }
+
+  :global(.theme-dark) .post {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .info {
+    position: relative;
+    z-index: 1;
+  }
+
+  h2 {
+    font-size: 3rem;
+    margin-top: 0;
+    text-transform: uppercase;
+  }
+
+  .map {
+    position: absolute;
+    inset: 2rem;
+    z-index: -1;
+  }
+</style>

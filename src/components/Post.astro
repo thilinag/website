@@ -47,6 +47,8 @@ const { post, showDate = true } = Astro.props;
     position: relative;
     background: rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   :global(.theme-dark) .post {
@@ -58,20 +60,20 @@ const { post, showDate = true } = Astro.props;
   }
 
   @container post (min-width: 540px) {
-    .postHeader {
+    /* .postHeader {
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
       justify-content: space-between;
-    }
+    } */
   }
   .postLink {
     text-decoration: none;
     display: block;
     padding: 1rem;
-    border-radius: 1rem;
     position: relative;
     z-index: 1;
+    flex: 1;
   }
 
   @container post (min-width: 540px) {
@@ -81,7 +83,7 @@ const { post, showDate = true } = Astro.props;
   }
 
   h3 {
-    margin: 0;
+    margin: 0 0 1rem;
     font-size: 1.25rem;
   }
 
@@ -109,16 +111,14 @@ const { post, showDate = true } = Astro.props;
   }
 
   .map {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    opacity: 0.5;
-    aspect-ratio: 1;
+    width: 20rem;
     padding: 2rem;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    max-width: 100%;
+  }
+
+  @container post (max-width: 540px) {
+    .map {
+      width: 100%;
+      max-height: 15rem;
+    }
   }
 </style>
