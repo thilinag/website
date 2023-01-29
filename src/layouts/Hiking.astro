@@ -4,6 +4,7 @@ import type { CollectionEntry } from "astro:content";
 import Layout from "./Layout.astro";
 import Tags from "../components/Tags.astro";
 import Tweets from "../components/Tweets.astro";
+import SvgMap from "../components/SvgMap.astro";
 
 interface Props {
   data: CollectionEntry<"hiking">["data"];
@@ -14,7 +15,94 @@ const { data } = Astro.props;
 
 <Layout title={""} backLabel='All Hiking' backURL='/hiking/'>
   <h1>{data.title}</h1>
+  <div class='hikeStatsWrapper'>
+    <div class='hikeStats'>
+      {
+        data.geoJson && (
+          <div class='map'>
+            <SvgMap geoJson={data.geoJson} />
+          </div>
+        )
+      }
+      {
+        data.distance && (
+          <div class='distance stat'>
+            <span>Distance</span>
+            <b>{data.distance}km</b>
+          </div>
+        )
+      }
+      {
+        data.elevation && (
+          <div class='elevation stat'>
+            <span>Elevation</span>
+            <b>{data.elevation}m</b>
+          </div>
+        )
+      }
+      {
+        data.steps && (
+          <div class='steps stat'>
+            <span>Steps</span>
+            <b>{data.steps}</b>
+          </div>
+        )
+      }
+    </div>
+  </div>
   {data.tweets?.length && <Tweets tweets={data.tweets} />}
   <slot />
   {data.tags?.length && <Tags tags={data.tags} />}
 </Layout>
+<style>
+  .hikeStatsWrapper {
+    container: stats / inline-size;
+  }
+  .hikeStats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    grid-template-areas: "map distance elevation steps";
+  }
+
+  @container stats (max-width: 540px) {
+    .hikeStats {
+      grid-template-columns: 1fr 2fr;
+      grid-template-areas: "distance map" "elevation map" "steps map";
+    }
+  }
+
+  .distance {
+    grid-area: distance;
+  }
+
+  .distance :global(svg) {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .map {
+    grid-area: map;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .elevation {
+    grid-area: elevation;
+  }
+
+  .steps {
+    grid-area: steps;
+  }
+
+  .stat span {
+    display: block;
+  }
+
+  .stat b {
+    font-size: 2rem;
+    display: block;
+  }
+</style>

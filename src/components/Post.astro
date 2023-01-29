@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { getRelativeTime } from "../utils";
+import SvgMap from "./SvgMap.astro";
 interface Props {
   post:
     | CollectionEntry<"writing">
@@ -31,11 +32,24 @@ const { post, showDate = true } = Astro.props;
       {post.data.tags.map((tag) => <li>#{tag}</li>)}
     </ul>
   </a>
+  {
+    post.data.geoJson && (
+      <div class='map'>
+        <SvgMap geoJson={post.data.geoJson} />
+      </div>
+    )
+  }
 </li>
 <style>
   .post {
     margin-bottom: 1.5rem;
     container: post / inline-size;
+    position: relative;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  :global(.theme-dark) .post {
+    background: rgba(0, 0, 0, 0.2);
   }
 
   .postHeader {
@@ -55,17 +69,14 @@ const { post, showDate = true } = Astro.props;
     display: block;
     padding: 1rem;
     border-radius: 1rem;
-    background: rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
   }
 
   @container post (min-width: 540px) {
     .postLink {
       padding: 2rem;
     }
-  }
-
-  :global(.theme-dark) .postLink {
-    background: rgba(0, 0, 0, 0.2);
   }
 
   h3 {
@@ -94,5 +105,19 @@ const { post, showDate = true } = Astro.props;
     margin-top: 1rem;
     font-size: 0.9rem;
     opacity: 0.7;
+  }
+
+  .map {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    opacity: 0.5;
+    aspect-ratio: 1;
+    padding: 2rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    max-width: 100%;
   }
 </style>

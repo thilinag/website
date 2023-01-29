@@ -27,6 +27,10 @@ const hiking = defineCollection({
   schema: z.object({
     ...PostSchema,
     description: z.string().optional(),
+    geoJson: z.any().optional(),
+    distance: z.number().optional().describe("distance in km"),
+    elevation: z.number().optional().describe("distance in m"),
+    steps: z.number().optional(),
   }),
 });
 
