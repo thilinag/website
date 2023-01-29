@@ -1,0 +1,42 @@
+---
+import geojson2svg from "geojson-to-svg";
+
+export interface Props {
+  geoJson: string[];
+}
+
+const { geoJson } = Astro.props;
+const svgData = geojson2svg(
+  geoJson,
+  () => {
+    return {
+      weight: 0.002,
+      color: "#666",
+    };
+  },
+  null,
+  function (coord: number[]) {
+    // flip vertically
+    return [coord[0], -coord[1]];
+  }
+);
+---
+
+<div class='map' set:html={svgData.render()} />
+<style>
+  .map {
+    width: 100%;
+  }
+
+  .map :global(svg) {
+    display: block;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+
+  .map :global(path) {
+    vector-effect: non-scaling-stroke;
+    stroke-width: 3px;
+  }
+</style>
