@@ -5,6 +5,8 @@ import Layout from "../layouts/Layout.astro";
 
 import { getCollection } from "astro:content";
 import Post from "../components/Post.astro";
+import Trail from "../components/Trail.astro";
+import { HEYSEN_GEOJSON, ADELAIDE100_GEOJSON } from "../utils";
 const allHiking = await getCollection("hiking").then((collection) =>
   collection.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
 );
@@ -16,14 +18,20 @@ const title = "Hiking";
   <h1>{title}</h1>
   <h4>Currenly Hiking</h4>
   <div class='current-hikes'>
-    <a href='/tags/heysentrail' class='hike-card'>
-      <h2>Heysen trail</h2>
-      <p>6/65 complete</p>
-    </a>
-    <a href='/tags/adelaide100' class='hike-card'>
-      <h2>Adelaide 100</h2>
-      <p>1/4 complete</p>
-    </a>
+    <Trail
+      completed={6}
+      total={65}
+      name='Heysen Trail'
+      geoJson={HEYSEN_GEOJSON}
+      url='/tags/heysentrail'
+    />
+    <Trail
+      completed={1}
+      total={4}
+      name='Adelaide 100'
+      geoJson={ADELAIDE100_GEOJSON}
+      url='/tags/adelaide100'
+    />
   </div>
   <h4>Recent Hikes</h4>
   <ul class='hiking'>
@@ -39,19 +47,13 @@ const title = "Hiking";
   }
 
   .current-hikes {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     gap: 2rem;
   }
 
   @media (min-width: 768px) {
     .current-hikes {
-      flex-direction: row;
+      grid-template-columns: repeat(2, 1fr);
     }
-  }
-
-  .hike-card {
-    flex: 1;
-    text-decoration: none;
   }
 </style>
