@@ -26,9 +26,9 @@
 }
 
 html {
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
-  font-family: monospace;
+  font-family: Menlo, Monaco, "Lucida Console", "DejaVu Sans Mono",
+    "Courier New", monospace;
+  font-size: 14px;
   box-sizing: border-box;
 }
 

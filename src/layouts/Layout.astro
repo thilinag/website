@@ -76,23 +76,11 @@ const pathname = new URL(Astro.request.url).pathname;
   }
 
   .header {
-    display: flex;
-    justify-content: space-between;
     text-transform: uppercase;
-    margin: 0 auto;
-    padding: 1rem;
-    width: 100%;
-    max-width: var(--width);
     position: sticky;
     z-index: 2;
     top: 0;
     background: var(--bg);
-  }
-
-  @media (min-width: 768px) {
-    .header {
-      padding: 2rem;
-    }
   }
 </style>
 <!--
