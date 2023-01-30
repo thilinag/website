@@ -7,6 +7,9 @@ const currentPath = pathname.slice(1);
 ---
 
 <nav>
+  <div class='backLinkContainer'>
+    <slot />
+  </div>
   <details>
     <summary>
       <Icon class='menuOpen' name='mdi:menu-open' size='18' />
@@ -49,8 +52,9 @@ const currentPath = pathname.slice(1);
   nav {
     margin-left: auto;
     display: flex;
-    padding: 1rem;
     justify-content: end;
+    align-items: center;
+    padding: 1rem;
   }
 
   @media (min-width: 768px) {
@@ -150,6 +154,7 @@ const currentPath = pathname.slice(1);
       top: 0;
       gap: 0.5rem;
       padding: 1rem;
+      background-color: #333;
     }
   }
 
@@ -192,6 +197,17 @@ const currentPath = pathname.slice(1);
     .colorSchemeSwitcher {
       grid-area: right-gutter;
       justify-self: end;
+    }
+  }
+
+  .backLinkContainer {
+    margin-right: auto;
+  }
+
+  @media (min-width: calc(1000px + 5rem)) {
+    .backLinkContainer {
+      grid-area: nav;
+      margin-left: 2rem;
     }
   }
 </style>

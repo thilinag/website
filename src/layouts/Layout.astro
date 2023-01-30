@@ -50,14 +50,15 @@ const pathname = new URL(Astro.request.url).pathname;
 
   <body>
     <header class='header'>
-      {
-        backURL && backLabel && (
-          <a class='back' href={backURL}>
-            <Icon name='mdi:arrow-back' size='18' /> <span>{backLabel}</span>
-          </a>
-        )
-      }
-      <Navigation />
+      <Navigation>
+        {
+          backURL && backLabel && (
+            <a class='back' href={backURL}>
+              <Icon name='mdi:arrow-back' size='18' /> <span>{backLabel}</span>
+            </a>
+          )
+        }
+      </Navigation>
     </header>
     <main>
       <slot />
