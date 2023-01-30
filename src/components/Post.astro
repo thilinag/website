@@ -3,10 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import { getRelativeTime } from "../utils";
 import SvgMap from "./SvgMap.astro";
 interface Props {
-  post:
-    | CollectionEntry<"writing">
-    | CollectionEntry<"projects">
-    | CollectionEntry<"hiking">;
+  post: CollectionEntry<"hiking">;
   showDate?: boolean;
 }
 
