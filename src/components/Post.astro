@@ -15,30 +15,32 @@ const { post, showDate = true } = Astro.props;
 
 <li class='post'>
   <a class='postLink' href={`/${post.collection}/${post.slug}`}>
-    <header class='postHeader'>
-      <h3>
-        {post.data.title}
-      </h3>
-      {
-        showDate && (
-          <time datetime={post.data.pubDate.toISOString()}>
-            {getRelativeTime(post.data.pubDate.getTime())}
-          </time>
-        )
-      }
-    </header>
-    {post.data.description && <span>{post.data.description}</span>}
-    <ul class='tags'>
-      {post.data.tags.map((tag) => <li>#{tag}</li>)}
-    </ul>
+    <article>
+      <header class='postHeader'>
+        <h3>
+          {post.data.title}
+        </h3>
+        {
+          showDate && (
+            <time datetime={post.data.pubDate.toISOString()}>
+              {getRelativeTime(post.data.pubDate.getTime())}
+            </time>
+          )
+        }
+      </header>
+      {post.data.description && <span>{post.data.description}</span>}
+      <ul class='tags'>
+        {post.data.tags.map((tag) => <li>#{tag}</li>)}
+      </ul>
+    </article>
+    {
+      post.data.geoJson && (
+        <div class='map'>
+          <SvgMap geoJson={post.data.geoJson} />
+        </div>
+      )
+    }
   </a>
-  {
-    post.data.geoJson && (
-      <div class='map'>
-        <SvgMap geoJson={post.data.geoJson} />
-      </div>
-    )
-  }
 </li>
 <style>
   .post {
@@ -47,8 +49,6 @@ const { post, showDate = true } = Astro.props;
     position: relative;
     background: rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
-    display: flex;
-    flex-wrap: wrap;
   }
 
   :global(.theme-dark) .post {
@@ -69,17 +69,22 @@ const { post, showDate = true } = Astro.props;
   }
   .postLink {
     text-decoration: none;
-    display: block;
     padding: 1rem;
     position: relative;
     z-index: 1;
-    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
   }
 
   @container post (min-width: 540px) {
     .postLink {
       padding: 2rem;
     }
+  }
+
+  article {
+    flex: 1;
   }
 
   h3 {
@@ -112,13 +117,12 @@ const { post, showDate = true } = Astro.props;
 
   .map {
     width: 20rem;
-    padding: 2rem;
   }
 
   @container post (max-width: 540px) {
     .map {
       width: 100%;
-      max-height: 15rem;
+      max-height: 12rem;
     }
   }
 </style>
