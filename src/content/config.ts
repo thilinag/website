@@ -1,6 +1,6 @@
 import { defineCollection, z } from "astro:content";
 
-const PostSchema = {
+const PostSchema = z.object({
   title: z.string(),
   pubDate: z.date().transform((date) => new Date(date)),
   description: z.string(),
@@ -9,25 +9,25 @@ const PostSchema = {
   tweets: z.array(z.string()).optional(),
   featured: z.boolean().optional().default(false),
   draft: z.boolean().optional().default(true),
-};
+});
 
 const writing = defineCollection({
-  schema: z.object({
-    ...PostSchema,
-  }),
+  schema: PostSchema,
 });
 
 const projects = defineCollection({
-  schema: z.object({
-    ...PostSchema,
-  }),
+  schema: PostSchema,
 });
 
 const hiking = defineCollection({
-  schema: z.object({
-    ...PostSchema,
+  schema: PostSchema.extend({
     description: z.string().optional(),
-    geoJson: z.any().optional(),
+    geoJson: z
+      .object({
+        type: z.string(),
+        features: z.array(z.any()),
+      })
+      .optional(),
     distance: z.number().optional().describe("distance in km"),
     elevation: z.number().optional().describe("distance in m"),
     steps: z.number().optional(),

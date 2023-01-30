@@ -40,4 +40,35 @@ const svgData = geojson2svg(
     vector-effect: non-scaling-stroke;
     stroke-width: 3px;
   }
+
+  .map :global(.mylocation) {
+    fill: rgb(255 79 129);
+    stroke-width: 0;
+    /* vector-effect: non-scaling-stroke; */
+  }
+
+  .map :global(.mylocationRadar) {
+    /* vector-effect: non-scaling-stroke; */
+    animation: pulse 1.5s ease-in-out infinite;
+    fill: rgba(255 79 129/ 0.5);
+    transform-origin: 50% 50%;
+    transform-box: fill-box;
+    stroke-width: 0;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1, 1);
+      opacity: 0;
+    }
+
+    50% {
+      opacity: 1;
+    }
+
+    100% {
+      transform: scale(3, 3);
+      opacity: 0;
+    }
+  }
 </style>

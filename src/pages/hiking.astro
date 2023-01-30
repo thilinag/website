@@ -10,6 +10,47 @@ import { HEYSEN_GEOJSON, ADELAIDE100_GEOJSON } from "../utils";
 const allHiking = await getCollection("hiking").then((collection) =>
   collection.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
 );
+const lastHeysenPoint = allHiking
+  .filter((hike) => hike.data.tags.includes("heysentrail"))[0]
+  .data.geoJson?.features[0].geometry.coordinates.at(-1);
+const lastHeysenPointFeatures = [
+  {
+    type: "Feature",
+    properties: {
+      radius: 0.06,
+      className: "mylocation",
+    },
+    geometry: { type: "Point", coordinates: lastHeysenPoint },
+  },
+  {
+    type: "Feature",
+    properties: {
+      radius: 0.06,
+      className: "mylocationRadar",
+    },
+    geometry: { type: "Point", coordinates: lastHeysenPoint },
+  },
+];
+
+const lastAdelaide100Point = [138.72485, -34.91856];
+const lastAdealide100Features = [
+  {
+    type: "Feature",
+    properties: {
+      radius: 0.004,
+      className: "mylocation",
+    },
+    geometry: { type: "Point", coordinates: lastAdelaide100Point },
+  },
+  {
+    type: "Feature",
+    properties: {
+      radius: 0.004,
+      className: "mylocationRadar",
+    },
+    geometry: { type: "Point", coordinates: lastAdelaide100Point },
+  },
+];
 
 const title = "Hiking";
 ---
@@ -22,14 +63,20 @@ const title = "Hiking";
       completed={6}
       total={65}
       name='Heysen Trail'
-      geoJson={HEYSEN_GEOJSON}
+      geoJson={{
+        ...HEYSEN_GEOJSON,
+        features: [...HEYSEN_GEOJSON.features, ...lastHeysenPointFeatures],
+      }}
       url='/tags/heysentrail'
     />
     <Trail
       completed={1}
       total={4}
       name='Adelaide 100'
-      geoJson={ADELAIDE100_GEOJSON}
+      geoJson={{
+        ...ADELAIDE100_GEOJSON,
+        features: [...ADELAIDE100_GEOJSON.features, ...lastAdealide100Features],
+      }}
       url='/tags/adelaide100'
     />
   </div>
