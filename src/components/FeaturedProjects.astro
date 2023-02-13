@@ -7,7 +7,7 @@ const featuredProjects = await getCollection("projects").then((collection) =>
 ---
 
 <section>
-  <ul class='featured'>
+  <ul class="featured">
     {featuredProjects.map((project) => <Post post={project} />)}
   </ul>
 </section>

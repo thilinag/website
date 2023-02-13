@@ -27,7 +27,7 @@ const hiking = await getCollection("hiking")
 
 <section>
   <h2>Recent</h2>
-  <ul class='recent'>
+  <ul class="recent">
     {
       [...writing, ...projects, ...hiking]
         .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())

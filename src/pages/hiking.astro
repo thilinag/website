@@ -58,30 +58,30 @@ const title = "Hiking";
 <Layout title={title}>
   <h1>{title}</h1>
   <h4>Currenly Hiking</h4>
-  <div class='current-hikes'>
+  <div class="current-hikes">
     <Trail
       completed={6}
       total={65}
-      name='Heysen Trail'
+      name="Heysen Trail"
       geoJson={{
         ...HEYSEN_GEOJSON,
         features: [...HEYSEN_GEOJSON.features, ...lastHeysenPointFeatures],
       }}
-      url='/tags/heysentrail'
+      url="/tags/heysentrail"
     />
     <Trail
       completed={1}
       total={4}
-      name='Adelaide 100'
+      name="Adelaide 100"
       geoJson={{
         ...ADELAIDE100_GEOJSON,
         features: [...ADELAIDE100_GEOJSON.features, ...lastAdealide100Features],
       }}
-      url='/tags/adelaide100'
+      url="/tags/adelaide100"
     />
   </div>
   <h4>Recent Hikes</h4>
-  <ul class='hiking'>
+  <ul class="hiking">
     {allHiking.map((post) => <Post post={post} />)}
   </ul>
 </Layout>

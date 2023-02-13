@@ -13,7 +13,7 @@ const title = "Writing";
 
 <Layout title={title}>
   <h1>{title}</h1>
-  <ul class='writing'>
+  <ul class="writing">
     {allWriting.map((post) => <Post post={post} />)}
   </ul>
 </Layout>
@@ -23,6 +23,5 @@ const title = "Writing";
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
   }
 </style>

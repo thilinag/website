@@ -13,20 +13,20 @@ interface Props {
 const { data } = Astro.props;
 ---
 
-<Layout title={""} backLabel='All Hiking' backURL='/hiking/'>
+<Layout title={""} backLabel="All Hiking" backURL="/hiking/">
   <h1>{data.title}</h1>
-  <div class='hikeStatsWrapper'>
-    <div class='hikeStats'>
+  <div class="hikeStatsWrapper">
+    <div class="hikeStats">
       {
         data.geoJson && (
-          <div class='map'>
+          <div class="map">
             <SvgMap geoJson={data.geoJson} />
           </div>
         )
       }
       {
         data.distance && (
-          <div class='distance stat'>
+          <div class="distance stat">
             <span>Distance</span>
             <b>{data.distance}km</b>
           </div>
@@ -34,7 +34,7 @@ const { data } = Astro.props;
       }
       {
         data.elevation && (
-          <div class='elevation stat'>
+          <div class="elevation stat">
             <span>Elevation</span>
             <b>{data.elevation}m</b>
           </div>
@@ -42,7 +42,7 @@ const { data } = Astro.props;
       }
       {
         data.steps && (
-          <div class='steps stat'>
+          <div class="steps stat">
             <span>Steps</span>
             <b>{data.steps}</b>
           </div>

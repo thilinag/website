@@ -18,16 +18,16 @@ const pathname = new URL(Astro.request.url).pathname;
 ---
 
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="en">
   <head>
-    <meta charset='UTF-8' />
-    <meta name='viewport' content='width=device-width' />
-    <link rel='shortcut icon' type='image/svg+xml' href='/favicon.svg' />
-    <link rel='manifest' href='/manifest.json' />
-    <meta name='generator' content={Astro.generator} />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="generator" content={Astro.generator} />
     <meta
-      name='description'
-      content='Personal website of Thilina Gunasekara, Adelaide based Software Engineer'
+      name="description"
+      content="Personal website of Thilina Gunasekara, Adelaide based Software Engineer"
     />
     <script>
       if ("serviceWorker" in navigator) {
@@ -49,12 +49,12 @@ const pathname = new URL(Astro.request.url).pathname;
   </head>
 
   <body>
-    <header class='header'>
+    <header class="header">
       <Navigation>
         {
           backURL && backLabel && (
-            <a class='back' href={backURL}>
-              <Icon name='mdi:arrow-back' size='18' /> <span>{backLabel}</span>
+            <a class="back" href={backURL}>
+              <Icon name="mdi:arrow-back" size="18" /> <span>{backLabel}</span>
             </a>
           )
         }

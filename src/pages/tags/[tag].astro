@@ -30,8 +30,8 @@ const { posts } = Astro.props;
 ---
 
 <Layout title={tag || ""}>
-  <p>Posts tagged with <span class='tag'>#{tag}</span></p>
-  <ul class='posts'>
+  <p>Posts tagged with <span class="tag">#{tag}</span></p>
+  <ul class="posts">
     {posts.map((post: any) => <Post post={post} />)}
   </ul>
 </Layout>

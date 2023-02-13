@@ -7,44 +7,44 @@ const currentPath = pathname.slice(1);
 ---
 
 <nav>
-  <div class='backLinkContainer'>
+  <div class="backLinkContainer">
     <slot />
   </div>
   <details>
     <summary>
-      <Icon class='menuOpen' name='mdi:menu-open' size='18' />
-      <Icon class='menuClose' name='mdi:close' size='18' />
-      <span class='menuToggle'>Menu</span>
+      <Icon class="menuOpen" name="mdi:menu-open" size="18" />
+      <Icon class="menuClose" name="mdi:close" size="18" />
+      <span class="menuToggle">Menu</span>
     </summary>
     <ul>
-      <li><a class={currentPath === "" ? "active" : ""} href='/'>Home</a></li>
+      <li><a class={currentPath === "" ? "active" : ""} href="/">Home</a></li>
       <li>
-        <a class={currentPath === "projects/" ? "active" : ""} href='/projects/'
+        <a class={currentPath === "projects/" ? "active" : ""} href="/projects/"
           >Projects</a
         >
       </li>
       <li>
-        <a class={currentPath === "writing/" ? "active" : ""} href='/writing/'
+        <a class={currentPath === "writing/" ? "active" : ""} href="/writing/"
           >Writing</a
         >
       </li>
       <li>
-        <a class={currentPath === "hiking/" ? "active" : ""} href='/hiking/'
+        <a class={currentPath === "hiking/" ? "active" : ""} href="/hiking/"
           >Hiking</a
         >
       </li>
       <li>
         <a
-          class='contact'
-          href='mailto:hi@thilinag.com'
-          title='Send an email to contact me'
+          class="contact"
+          href="mailto:hi@thilinag.com"
+          title="Send an email to contact me"
         >
-          <Icon name='mdi:email' />
+          <Icon name="mdi:email" />
         </a>
       </li>
     </ul>
   </details>
-  <div class='colorSchemeSwitcher'>
+  <div class="colorSchemeSwitcher">
     <ColorScheme />
   </div>
 </nav>
