@@ -1,5 +1,6 @@
 ---
 import geojson2svg from "geojson-to-svg";
+import { routeFillColor } from "../utils";
 
 export interface Props {
   geoJson: object;
@@ -8,7 +9,7 @@ export interface Props {
 const { geoJson } = Astro.props;
 const svgData = geojson2svg(
   geoJson,
-  (a) => {
+  (a: any) => {
     return {
       weight: 0.002,
       color: a.properties.color || "#666",
@@ -22,8 +23,8 @@ const svgData = geojson2svg(
 );
 ---
 
-<div class='map' set:html={svgData.render()} />
-<style>
+<div class="map" set:html={svgData.render()} />
+<style define:vars={{ routeFillColor }}>
   .map {
     width: 100%;
     height: 100%;
@@ -42,23 +43,22 @@ const svgData = geojson2svg(
   }
 
   .map :global(.mylocation) {
-    fill: rgb(255 79 129);
-    stroke-width: 0;
-    /* vector-effect: non-scaling-stroke; */
+    vector-effect: non-scaling-stroke;
+    stroke: var(--routeFillColor);
+    fill: var(--routeFillColor);
+    stroke-width: 4px;
   }
 
   .map :global(.mylocationRadar) {
-    /* vector-effect: non-scaling-stroke; */
-    animation: pulse 1.5s ease-in-out infinite;
-    fill: rgba(255 79 129/ 0.5);
-    transform-origin: 50% 50%;
-    transform-box: fill-box;
+    vector-effect: non-scaling-stroke;
+    animation: pulse 1.5s infinite;
     stroke-width: 0;
+    fill: rgba(255 79 129/ 0.5);
+    stroke: rgba(255 79 129/ 0.5);
   }
 
   @keyframes pulse {
     0% {
-      transform: scale(1, 1);
       opacity: 0;
     }
 
@@ -67,7 +67,7 @@ const svgData = geojson2svg(
     }
 
     100% {
-      transform: scale(3, 3);
+      stroke-width: 20px;
       opacity: 0;
     }
   }
