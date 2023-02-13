@@ -3,17 +3,20 @@ import type { CollectionEntry } from "astro:content";
 import { getRelativeTime } from "../utils";
 import SvgMap from "./SvgMap.astro";
 interface Props {
-  post: CollectionEntry<"hiking">;
+  post:
+    | CollectionEntry<"projects">
+    | CollectionEntry<"hiking">
+    | CollectionEntry<"writing">;
   showDate?: boolean;
 }
 
 const { post, showDate = true } = Astro.props;
 ---
 
-<li class='post'>
-  <a class='postLink' href={`/${post.collection}/${post.slug}`}>
+<li class="post">
+  <a class="postLink" href={`/${post.collection}/${post.slug}`}>
     <article>
-      <header class='postHeader'>
+      <header class="postHeader">
         <h3>
           {post.data.title}
         </h3>
@@ -26,13 +29,13 @@ const { post, showDate = true } = Astro.props;
         }
       </header>
       {post.data.description && <span>{post.data.description}</span>}
-      <ul class='tags'>
+      <ul class="tags">
         {post.data.tags.map((tag) => <li>#{tag}</li>)}
       </ul>
     </article>
     {
-      post.data.geoJson && (
-        <div class='map'>
+      "geoJson" in post.data && post.data.geoJson && (
+        <div class="map">
           <SvgMap geoJson={post.data.geoJson} />
         </div>
       )
