@@ -7,8 +7,12 @@ import mdx from "@astrojs/mdx";
 import netlify from "@astrojs/netlify/functions";
 
 // https://astro.build/config
+import sitemap from "@astrojs/sitemap";
+
+// https://astro.build/config
 export default defineConfig({
-  integrations: [mdx()],
+  site: "https://www.thilinag.com",
+  integrations: [mdx(), sitemap()],
   output: "server",
   adapter: netlify(),
 });
