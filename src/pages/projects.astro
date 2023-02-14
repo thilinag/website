@@ -13,9 +13,9 @@ const title = "Projects";
 
 <Layout title={title}>
   <h1>{title}</h1>
-  <ul class="projects">
+  <ol class="projects">
     {allProjects.map((project) => <Post post={project} />)}
-  </ul>
+  </ol>
 </Layout>
 <style>
   .projects {
