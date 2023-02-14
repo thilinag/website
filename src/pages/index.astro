@@ -22,7 +22,14 @@ import RecentPosts from "../components/RecentPosts.astro";
 </Layout>
 <style>
   p {
-    line-height: 2;
+    line-height: 1.75;
+    font-size: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    p {
+      font-size: 1.5rem;
+    }
   }
   p a {
     text-decoration: none;
