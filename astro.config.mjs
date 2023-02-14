@@ -7,8 +7,12 @@ import mdx from "@astrojs/mdx";
 import netlify from "@astrojs/netlify/functions";
 
 // https://astro.build/config
+import robotsTxt from "astro-robots-txt";
+
+// https://astro.build/config
 export default defineConfig({
-  integrations: [mdx()],
-  // output: "server",
-  // adapter: netlify(),
+  site: "https://www.thilinag.com",
+  integrations: [mdx(), robotsTxt()],
+  output: "server",
+  adapter: netlify(),
 });
