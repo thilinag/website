@@ -53,10 +53,6 @@ const { post, showDate = true } = Astro.props;
     border-top: var(--separator);
   }
 
-  :global(.theme-dark) .post {
-    /* background: rgba(0, 0, 0, 0.2); */
-  }
-
   .postHeader {
     margin: 0 0 1rem;
   }
@@ -97,7 +93,7 @@ const { post, showDate = true } = Astro.props;
 
   @container post (min-width: 540px) {
     h3 {
-      font-size: 1.5rem;
+      font-size: 2rem;
     }
   }
 

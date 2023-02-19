@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.thilinag.com/sitemap-index.xml

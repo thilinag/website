@@ -117,3 +117,7 @@ img {
 iframe {
   border-radius: 1rem;
 }
+
+article {
+  font-size: 1.25rem;
+}
