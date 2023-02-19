@@ -40,6 +40,8 @@ const svgData = geojson2svg(
   .map :global(path) {
     vector-effect: non-scaling-stroke;
     stroke-width: 3px;
+    stroke: var(--color-secondary);
+    opacity: 0.5;
   }
 
   .map :global(.mylocation) {

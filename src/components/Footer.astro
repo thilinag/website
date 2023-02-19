@@ -3,30 +3,34 @@ import Social from "./Social.astro";
 ---
 
 <footer>
-  <span>Thilina Gunasekara &copy; {new Date().getFullYear()}</span>
+  <hr />
   <Social />
+  <div>Thilina Gunasekara &copy; {new Date().getFullYear()}</div>
 </footer>
 <style>
   footer {
-    margin: 1rem auto;
-    padding: 0 1rem;
+    margin: 0 auto;
+    padding: 2rem 1rem;
     width: 100%;
     max-width: var(--width);
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
     gap: 1rem;
-    font-size: 0.75rem;
+    font-size: 1rem;
+    color: var(--color-secondary);
   }
 
-  span {
-    flex: 1;
+  hr {
+    border-top: var(--separator);
+    display: block;
+    width: 100%;
+    border-width: 1px 0 0;
   }
 
   @media (min-width: 768px) {
     footer {
-      padding: 0 2rem;
-      margin: 2rem auto;
+      padding: 2rem;
     }
   }
 </style>

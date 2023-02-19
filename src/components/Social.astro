@@ -1,28 +1,35 @@
 ---
 import { Icon } from "astro-icon";
+
+const links = [
+  {
+    icon: "mdi:twitter",
+    label: "@thilinag on twitter",
+    url: "https://twitter.com/thilinag",
+  },
+  {
+    icon: "mdi:linkedin",
+    label: "Thilina Gunasekara on LinkedIn",
+    url: "https://lk.linkedin.com/in/thilinagunasekara",
+  },
+  {
+    icon: "mdi:github",
+    label: "Thilina on GitHub",
+    url: "https://github.com/thilinag",
+  },
+];
 ---
 
 <ul class="social">
-  <li>
-    <a
-      aria-label="@thilinag on twitter"
-      class="link"
-      href="https://twitter.com/thilinag"
-      target="_blank"
-    >
-      <Icon name="mdi:twitter" />
-    </a>
-  </li>
-  <li>
-    <a
-      aria-label="Thilina Gunasekara on LinkedIn"
-      class="link"
-      href="https://lk.linkedin.com/in/thilinagunasekara"
-      target="_blank"
-    >
-      <Icon name="mdi:linkedin" />
-    </a>
-  </li>
+  {
+    links.map(({ icon, label, url }) => (
+      <li>
+        <a aria-label={label} class="link" href={url} target="_blank">
+          <Icon name={icon} height="1.5rem" />
+        </a>
+      </li>
+    ))
+  }
 </ul>
 <style>
   .social {
@@ -38,6 +45,7 @@ import { Icon } from "astro-icon";
   .link {
     text-decoration: none;
     display: flex;
+    color: var(--color-secondary);
   }
 
   .link svg {
