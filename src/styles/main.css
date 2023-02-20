@@ -7,10 +7,10 @@
     white 60%
   );
   --width: 1000px;
-  --color: #202124;
+  --color: #f5f5f5;
+  --bg: #202124;
+  --separator: 1px solid #48494b;
   --color-secondary: #8b949e;
-  --bg: #f5f5f5;
-  --separator: 1px solid hsla(0, 0%, 0%, 0.2);
 }
 
 @media (prefers-color-scheme: dark) {
