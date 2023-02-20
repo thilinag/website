@@ -4,17 +4,21 @@ import type { CollectionEntry } from "astro:content";
 import Layout from "./Layout.astro";
 import Tags from "../components/Tags.astro";
 import Tweets from "../components/Tweets.astro";
+import type { MarkdownHeading } from "astro";
+import TableOfContents from "../components/TableOfContents.astro";
 
 interface Props {
   data: CollectionEntry<"writing">["data"];
+  headings: MarkdownHeading[];
 }
 
-const { data } = Astro.props;
+const { data, headings } = Astro.props;
 ---
 
 <Layout title={""} backLabel="All Writing" backURL="/writing/">
   <article>
     <h1>{data.title}</h1>
+    {data.toc && <TableOfContents headings={headings} />}
     {data.tweets?.length && <Tweets tweets={data.tweets} />}
     <slot />
     <footer>

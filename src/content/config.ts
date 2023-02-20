@@ -12,7 +12,9 @@ const PostSchema = z.object({
 });
 
 const writing = defineCollection({
-  schema: PostSchema,
+  schema: PostSchema.extend({
+    toc: z.boolean().default(false).describe("Show table of contents?"),
+  }),
 });
 
 const projects = defineCollection({
