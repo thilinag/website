@@ -6,18 +6,76 @@ export interface Props {
 }
 
 const { headings } = Astro.props;
+
+const structuredHeadings: Map<
+  string,
+  MarkdownHeading & { children?: MarkdownHeading[] }
+> = new Map();
+headings.forEach((heading) => {
+  if (heading.depth === 2) {
+    structuredHeadings.set(heading.slug, heading);
+  }
+
+  if (heading.depth === 3) {
+    const [key, value] = [...structuredHeadings].at(-1)!;
+    if (key && value) {
+      structuredHeadings.set(key, {
+        ...value,
+        children: [...(value.children || []), heading],
+      });
+    }
+  }
+});
 ---
 
-<h3>Table of contents</h3>
-<ol>
-  {
-    headings
-      .filter((heading) => heading.depth === 3)
-      .map(({ slug, text }) => (
+<details class="toc" open>
+  <summary>Contents</summary>
+  <ol>
+    {
+      [...structuredHeadings.values()].map(({ slug, text, children }) => (
         <li>
-          <a href={`#${slug}`}>{text}</a>
+          <a href={`#${slug}`}>{text}</a>.
+          {children && (
+            <ol>
+              {children.map(({ slug, text }) => (
+                <li>
+                  <a href={`#${slug}`}>{text}</a>.
+                </li>
+              ))}
+            </ol>
+          )}
         </li>
       ))
+    }
+  </ol>
+</details>
+<style>
+  .toc {
+    border: var(--separator);
+    border-radius: 1rem;
+    padding: 2rem;
   }
-</ol>
-<style></style>
+
+  ol {
+    counter-reset: item;
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+
+  li {
+    display: block;
+  }
+
+  li:before {
+    content: counters(item, ".") ". ";
+    counter-increment: item;
+  }
+
+  ol ol {
+    padding-left: 2rem;
+  }
+
+  summary {
+    cursor: pointer;
+  }
+</style>

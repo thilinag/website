@@ -120,8 +120,10 @@ iframe {
 
 article {
   font-size: 1.25rem;
+  line-height: 1.75;
 }
 
+article h2::before,
 article h3::before {
   content: "";
   display: block;
@@ -129,4 +131,12 @@ article h3::before {
   width: 0;
   height: 5rem;
   margin-top: -5rem;
+}
+
+@media (min-width: 768px) {
+  article h2::before,
+  article h3::before {
+    height: 7rem;
+    margin-top: -7rem;
+  }
 }
