@@ -7,7 +7,7 @@ tags: ["making", "javascript"]
 toc: true
 ---
 
-### Getting started
+## Getting started
 
 First step is to decide which browser you want to develop the extension for. In February of 2023 over 80% of the desktop browser market share is dominated by Chromium-based browsers. Each browser has its own extension system, and the development process varies slightly between them. More on that later.
 
@@ -18,7 +18,7 @@ Next concern is the language of choice. The obvious candidate here is javascript
 - Safari extension development: https://developer.apple.com/documentation/safariservices/safari_app_extensions
 - Edge extension development: https://docs.microsoft.com/en-us/microsoft-edge/extensions/guides/creating-an-extension
 
-### CRXJS Vite Plugin
+## CRXJS Vite Plugin
 
 The [CRXJS Vite plugin](https://crxjs.dev/vite-plugin/) is a plugin for the Vite build tool that helps to streamline the development and packaging process for Chrome extensions. It allows you to use Vite's fast and efficient build system to develop your extension and package it as a CRX file.
 
@@ -26,7 +26,7 @@ The [CRXJS Vite plugin](https://crxjs.dev/vite-plugin/) is a plugin for the Vite
 
 The CRXJS Vite plugin provides a simple way to configure Vite for building Chrome extensions. It includes built-in support for TypeScript, SCSS, and other common web development technologies. It also includes features like hot module replacement and automatic reloading, which can help to speed up your development process.
 
-### Firefox support
+## Firefox support
 
 At the time of writing CRXJS Vite plugin only focuses on chrome extensions. However in most cases, extensions written for Chromium-based browsers run in Firefox with [just a few changes](https://extensionworkshop.com/documentation/develop/porting-a-google-chrome-extension/). The technology for Firefox extensions is, to a large extent, compatible with the [extension API](https://developer.chrome.com/docs/extensions/reference/) supported by Chromium-based browsers (such as Google Chrome, Microsoft Edge etc).
 
@@ -35,19 +35,19 @@ Here's what I had to change in the built manifest.json from CRXJS
 - Firefox does not allow use_dynamic_url in web_accessible_resources because the resource URLs in Firefox are always dynamic. So I removed that property from manifest.json
 - All Manifest V3 extensions need an add-on ID in their manifest.json when submitted to AMO. I had to add https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/browser_specific_settings#description to manifest.json. In order to make a consistent extension ID, I am using `uuid-by-string` package.
 
-### Testing
+## Testing
 
 We can use [puppeteer](https://developer.chrome.com/docs/puppeteer/) to test chrome extensions. It is a Node library that can be used for automating browser actions. However in order to load extensions we need to run puppeteer in non headless mode. Check [puppeteer documentation here](https://pptr.dev/guides/chrome-extensions) on how to load extensions.
 
-### Publishing extensions
+## Publishing extensions
 
-#### Chrome
+### Chrome
 
 A one-time $5.00 fee is required in order to create a developer account in chrome web store.
 
 If you are making extension for an organization, chrome extension group publishing allows organizations to publish extensions that are managed by a central administrator. Here are the steps to use chrome extension group publishing: [Follow the guide](https://developer.chrome.com/docs/webstore/group-publishers/)
 
-#### Firefox
+### Firefox
 
 Creating a developer account in AMO is free.
 
