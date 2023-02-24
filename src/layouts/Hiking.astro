@@ -5,6 +5,7 @@ import Layout from "./Layout.astro";
 import Tags from "../components/Tags.astro";
 import Tweets from "../components/Tweets.astro";
 import SvgMap from "../components/SvgMap.astro";
+import StructuredData from "../components/StructuredData.astro";
 
 interface Props {
   data: CollectionEntry<"hiking">["data"];
@@ -14,6 +15,7 @@ const { data } = Astro.props;
 ---
 
 <Layout title={""} backLabel="All Hiking" backURL="/hiking/">
+  <StructuredData data={data} />
   <article>
     <header>
       <h1>{data.title}</h1>
