@@ -6,16 +6,15 @@ const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1);
 ---
 
-<nav>
+<div class="headerContainer">
   <div class="backLinkContainer">
     <slot />
   </div>
-  <details>
-    <summary>
+  <nav>
+    <button type="button" class="menuToggle">
       <Icon class="menuOpen" name="mdi:menu-open" size="18" />
-      <Icon class="menuClose" name="mdi:close" size="18" />
-      <span class="menuToggle">Menu</span>
-    </summary>
+      <span>Menu</span>
+    </button>
     <ul>
       <li><a class={currentPath === "" ? "active" : ""} href="/">Home</a></li>
       <li>
@@ -33,23 +32,14 @@ const currentPath = pathname.slice(1);
           >Hiking</a
         >
       </li>
-      <li>
-        <a
-          class="contact"
-          href="mailto:hi@thilinag.com"
-          title="Send an email to contact me"
-        >
-          <Icon name="mdi:email" />
-        </a>
-      </li>
     </ul>
-  </details>
+  </nav>
   <div class="colorSchemeSwitcher">
     <ColorScheme />
   </div>
-</nav>
+</div>
 <style>
-  nav {
+  .headerContainer {
     margin-left: auto;
     display: flex;
     justify-content: end;
@@ -58,34 +48,34 @@ const currentPath = pathname.slice(1);
   }
 
   @media (min-width: 768px) {
-    nav {
+    .headerContainer {
       padding: 2rem;
     }
   }
 
   @media (min-width: calc(1000px + 5rem)) {
-    nav {
+    .headerContainer {
       display: grid;
       grid-template-columns: 1fr var(--width) 1fr;
       grid-template-areas: "_ nav right-gutter";
     }
   }
 
-  @media (min-width: 540px) {
-    details {
+  @media (min-width: 768px) {
+    nav {
       position: relative;
     }
   }
 
   @media (min-width: calc(1000px + 5rem)) {
-    details {
+    nav {
       grid-area: nav;
       justify-self: end;
       margin-right: 2rem;
     }
   }
 
-  summary {
+  .menuToggle {
     list-style: none;
     display: flex;
     gap: 0.5rem;
@@ -93,43 +83,27 @@ const currentPath = pathname.slice(1);
     font-size: 1rem;
     cursor: pointer;
     height: 100%;
+    background: none;
+    border: none;
   }
 
-  summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .menuToggle {
-    padding: 0.5rem 0;
-  }
-
-  details[open] summary {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 4;
-    padding: 0 1rem;
-  }
-
-  @media (min-width: 540px) {
-    details[open] summary {
+  @media (min-width: 768px) {
+    .menuToggle {
       display: none;
     }
   }
 
-  .menuClose,
-  details[open] .menuOpen {
-    display: none;
-  }
-
-  details[open] .menuClose,
   .menuOpen {
     display: block;
   }
 
+  nav:focus-within .menuOpen {
+    display: none;
+  }
+
   ul {
     list-style: none;
-    display: flex;
+    display: none;
     flex-direction: column;
     margin: 0;
     padding: 0;
@@ -138,15 +112,16 @@ const currentPath = pathname.slice(1);
     z-index: 3;
   }
 
-  @media (min-width: 540px) {
+  @media (min-width: 768px) {
     ul {
+      display: flex;
       flex-direction: row;
       left: auto;
       align-items: center;
     }
   }
 
-  @media (max-width: 540px) {
+  @media (max-width: 768px) {
     ul {
       position: absolute;
       left: 0;
@@ -156,6 +131,10 @@ const currentPath = pathname.slice(1);
       padding: 1rem;
       background-color: var(--bg);
     }
+  }
+
+  nav:focus-within ul {
+    display: flex;
   }
 
   li {
