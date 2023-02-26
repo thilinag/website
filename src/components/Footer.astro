@@ -5,6 +5,25 @@ import Social from "./Social.astro";
 <footer>
   <hr />
   <Social />
+  <ul>
+    <li>
+      <a href="/projects/">Projects</a>
+    </li>
+    <li>
+      <a href="/writing/">Writing</a>
+    </li>
+    <li>
+      <a href="/hiking/">Hiking</a>
+    </li>
+    <li>
+      <a href="/uses/">Uses</a>
+    </li>
+    <li>
+      <a href="mailto:hi@thilinag.com" title="Send an email to contact me">
+        Contact
+      </a>
+    </li>
+  </ul>
   <div>Thilina Gunasekara &copy; {new Date().getFullYear()} ෴</div>
 </footer>
 <style>
@@ -26,6 +45,24 @@ import Social from "./Social.astro";
     display: block;
     width: 100%;
     border-width: 1px 0 0;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  ul a {
+    color: var(--color-secondary);
+    text-decoration: none;
+  }
+
+  ul a:hover {
+    text-decoration: underline;
   }
 
   @media (min-width: 768px) {
