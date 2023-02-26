@@ -25,18 +25,22 @@ const shuffledChars = shuffle(chars);
   class="cover"
 >
   {
-    shuffledChars.map((char) => (
-      <text
-        x={getRandomRange(0, 1600)}
-        y={getRandomRange(0, 450)}
-        style={{
-          rotate: `${getRandomRange(-120, 120)}deg`,
-          fontSize: `${getRandomRange(3, 7)}rem`,
-        }}
-      >
-        {char}
-      </text>
-    ))
+    shuffledChars.map((char, index) => {
+      const depth = Math.ceil(index / (shuffledChars.length / 5)) * 2;
+      return (
+        <text
+          x={getRandomRange(0, 1600)}
+          y={getRandomRange(0, 450)}
+          style={{
+            rotate: `${getRandomRange(-120, 120)}deg`,
+            fontSize: `${depth}rem`,
+            filter: `blur(${depth % 5}px)`,
+          }}
+        >
+          {char}
+        </text>
+      );
+    })
   }
 </svg>
 <style>
