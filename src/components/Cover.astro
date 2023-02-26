@@ -1,0 +1,66 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getRandomRange, shuffle } from "../utils";
+
+export interface Props {
+  coverChars: CollectionEntry<"writing">["data"]["coverChars"];
+  seed: string;
+}
+
+const { coverChars = [], seed } = Astro.props;
+const chars = coverChars.flatMap((char) => {
+  const str = char.repeat(seed.length);
+  const segmenter = new Intl.Segmenter("en", { granularity: "grapheme" });
+  const segitr = segmenter.segment(str);
+  return Array.from(segitr, ({ segment }) => segment);
+});
+const shuffledChars = shuffle(chars);
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1600 450"
+  width="1600"
+  height="450"
+  class="cover"
+>
+  {
+    shuffledChars.map((char) => (
+      <text
+        x={getRandomRange(0, 1600)}
+        y={getRandomRange(0, 450)}
+        style={{
+          rotate: `${getRandomRange(-120, 120)}deg`,
+          fontSize: `${getRandomRange(3, 7)}rem`,
+        }}
+      >
+        {char}
+      </text>
+    ))
+  }
+</svg>
+<style>
+  .cover {
+    width: 100%;
+    height: auto;
+    filter: grayscale(1);
+    border-top-left-radius: 255px 5px;
+    border-top-right-radius: 5px 225px;
+    border-bottom-right-radius: 225px 5px;
+    border-bottom-left-radius: 5px 255px;
+    border: 2px solid var(--color-secondary);
+    margin-bottom: 2rem;
+    aspect-ratio: 3/2;
+  }
+
+  @media (min-width: 768px) {
+    .cover {
+      aspect-ratio: 16/5;
+    }
+  }
+
+  text {
+    transform-origin: center;
+    fill: var(--color-secondary);
+  }
+</style>

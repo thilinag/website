@@ -1,6 +1,6 @@
 import { defineCollection, z } from "astro:content";
 
-const PostSchema = z.object({
+export const PostSchema = z.object({
   title: z.string(),
   pubDate: z.date().transform((date) => new Date(date)),
   description: z.string(),
@@ -9,6 +9,7 @@ const PostSchema = z.object({
   tweets: z.array(z.string()).optional(),
   featured: z.boolean().optional().default(false),
   draft: z.boolean().optional().default(true),
+  coverChars: z.array(z.string()).optional(),
 });
 
 const writing = defineCollection({

@@ -7,6 +7,7 @@ import Tweets from "../components/Tweets.astro";
 import type { MarkdownHeading } from "astro";
 import TableOfContents from "../components/TableOfContents.astro";
 import StructuredData from "../components/StructuredData.astro";
+import Cover from "../components/Cover.astro";
 
 interface Props {
   data: CollectionEntry<"writing">["data"];
@@ -20,6 +21,11 @@ const { data, headings } = Astro.props;
   <StructuredData data={data} />
   <article>
     <h1>{data.title}</h1>
+    {
+      data.coverChars && (
+        <Cover coverChars={data.coverChars} seed={data.title} />
+      )
+    }
     {data.toc && <TableOfContents headings={headings} />}
     {data.tweets?.length && <Tweets tweets={data.tweets} />}
     <slot />
