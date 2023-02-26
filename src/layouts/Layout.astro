@@ -5,6 +5,7 @@ import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 
 import "../styles/main.css";
+import { isHomepage } from "../utils";
 
 export interface Props {
   title: string;
@@ -13,7 +14,7 @@ export interface Props {
 }
 
 const name = "Thilina Gunasekara";
-const { title, backURL = "", backLabel = "" } = Astro.props;
+const { title, backURL = "/", backLabel = "Home" } = Astro.props;
 const pathname = new URL(Astro.request.url).pathname;
 ---
 
@@ -29,22 +30,6 @@ const pathname = new URL(Astro.request.url).pathname;
       name="description"
       content="Personal website of Thilina Gunasekara, Adelaide based Software Engineer"
     />
-    <script>
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker
-          .getRegistrations()
-          .then(function (registrations) {
-            for (let registration of registrations) {
-              if (
-                registration?.active?.scriptURL ==
-                "https://www.thilinag.com/sw.js"
-              ) {
-                registration.unregister();
-              }
-            }
-          });
-      }
-    </script>
     <title>{title ? `${title} | ${name}` : name}</title>
   </head>
 
@@ -52,7 +37,7 @@ const pathname = new URL(Astro.request.url).pathname;
     <header class="header">
       <Navigation>
         {
-          backURL && backLabel && (
+          !isHomepage(Astro.request.url) && backURL && backLabel && (
             <a class="back" href={backURL}>
               <Icon name="mdi:arrow-back" size="18" /> <span>{backLabel}</span>
             </a>
