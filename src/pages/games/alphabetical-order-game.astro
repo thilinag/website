@@ -1,0 +1,731 @@
+---
+export const prerender = true;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alphabetical order game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="tsparticles"></div>
+    <header>
+      <p>
+        Swap and reorder
+        <select id="size">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
+        words in alphabetical order&hellip;
+      </p>
+      <div class="clock">
+        <span id="minutes">00</span>:<span id="seconds">00</span>
+      </div>
+    </header>
+    <ul></ul>
+    <div id="won">
+      <div>🥳</div>
+      <div>You won in <span id="winning-time"></span>!!</div>
+      <button id="new" type="button">Play Again</button>
+    </div>
+    <script
+      id="DragDropTouch"
+      src="https://bernardo-castilho.github.io/DragDropTouch/DragDropTouch.js"
+      is:inline
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/tsparticles@2.9.3/tsparticles.bundle.min.js"
+      is:inline
+    ></script>
+
+    <script>
+      const words = [
+        "free",
+        "bear",
+        "state",
+        "leave",
+        "strong",
+        "making",
+        "seventh",
+        "music",
+        "broke",
+        "become",
+        "wool",
+        "able",
+        "almost",
+        "without",
+        "space",
+        "their",
+        "wheat",
+        "soap",
+        "even",
+        "front",
+        "forgot",
+        "taken",
+        "nothing",
+        "air",
+        "sending",
+        "trip",
+        "wagon",
+        "hour",
+        "race",
+        "ready",
+        "cabin",
+        "working",
+        "dream",
+        "grew",
+        "feeling",
+        "rocket",
+        "body",
+        "win",
+        "eight",
+        "forest",
+        "rule",
+        "water",
+        "wrong",
+        "throw",
+        "himself",
+        "sugar",
+        "class",
+        "sight",
+        "dragon",
+        "paint",
+        "corner",
+        "art",
+        "short",
+        "often",
+        "drink",
+        "trick",
+        "those",
+        "list",
+        "orange",
+        "tenth",
+        "real",
+        "great",
+        "person",
+        "dishes",
+        "carry",
+        "coal",
+        "stand",
+        "walking",
+        "afraid",
+        "turn",
+        "begin",
+        "yesterday",
+        "beach",
+        "dark",
+        "hair",
+        "mind",
+        "sew",
+        "wild",
+        "word",
+        "below",
+        "sixth",
+        "watch",
+        "cave",
+        "uncle",
+        "dinner",
+        "cotton",
+        "later",
+        "stove",
+        "twelve",
+        "grandmother",
+        "south",
+        "above",
+        "song",
+        "head",
+        "learn",
+        "stood",
+        "bread",
+        "salt",
+        "pair",
+        "thinking",
+        "paper",
+        "form",
+        "never",
+        "sorry",
+        "under",
+        "alone",
+        "mail",
+        "stairs",
+        "lovely",
+        "nearly",
+        "yard",
+        "desert",
+        "inches",
+        "poor",
+        "merry",
+        "round",
+        "east",
+        "reading",
+        "given",
+        "month",
+        "west",
+        "point",
+        "belt",
+        "shall",
+        "spent",
+        "team",
+        "bright",
+        "stick",
+        "largest",
+        "reach",
+        "study",
+        "sport",
+        "better",
+        "mouse",
+        "catch",
+        "kitten",
+        "lady",
+        "hurry",
+        "busy",
+        "camp",
+        "talking",
+        "place",
+        "care",
+        "step",
+        "wait",
+        "noise",
+        "animal",
+        "news",
+        "barn",
+        "river",
+        "twenty",
+        "heat",
+        "few",
+        "done",
+        "order",
+        "mean",
+        "plane",
+        "pocket",
+        "year",
+        "born",
+        "began",
+        "cattle",
+        "basket",
+        "mouth",
+        "sled",
+        "spring",
+        "supper",
+        "ground",
+        "lunch",
+        "life",
+        "near",
+        "own",
+        "penny",
+        "large",
+        "wife",
+        "cloth",
+        "flying",
+        "third",
+        "fishing",
+        "fourth",
+        "past",
+        "knife",
+        "oil",
+        "kept",
+        "airplane",
+        "felt",
+        "number",
+        "age",
+        "picture",
+        "teeth",
+        "bones",
+        "sound",
+        "high",
+        "kids",
+        "follow",
+        "taking",
+        "cover",
+        "sitting",
+        "sister",
+        "also",
+        "hundred",
+        "such",
+        "smoke",
+        "table",
+        "early",
+        "trying",
+        "plan",
+        "does",
+        "should",
+        "street",
+        "trade",
+        "color",
+        "face",
+        "window",
+        "ever",
+        "rode",
+        "half",
+        "earth",
+        "spelling",
+        "shot",
+        "behind",
+        "winter",
+        "which",
+        "kind",
+        "eyes",
+        "says",
+        "bark",
+        "draw",
+        "living",
+        "fight",
+        "cage",
+        "won",
+        "pass",
+        "flower",
+        "rich",
+      ];
+      const options = {
+        fullScreen: {
+          zIndex: 1,
+        },
+        particles: {
+          number: {
+            value: 0,
+          },
+          color: {
+            value: ["#00FFFC", "#FC00FF", "#fffc00"],
+          },
+          shape: {
+            type: ["circle", "square"],
+            options: {},
+          },
+          opacity: {
+            value: 1,
+            animation: {
+              enable: true,
+              minimumValue: 0,
+              speed: 2,
+              startValue: "max",
+              destroy: "min",
+            },
+          },
+          size: {
+            value: 4,
+            random: {
+              enable: true,
+              minimumValue: 2,
+            },
+          },
+          links: {
+            enable: false,
+          },
+          life: {
+            duration: {
+              sync: true,
+              value: 5,
+            },
+            count: 1,
+          },
+          move: {
+            enable: true,
+            gravity: {
+              enable: true,
+              acceleration: 10,
+            },
+            speed: {
+              min: 10,
+              max: 20,
+            },
+            decay: 0.1,
+            direction: "none",
+            straight: false,
+            outModes: {
+              default: "destroy",
+              top: "none",
+            },
+          },
+          rotate: {
+            value: {
+              min: 0,
+              max: 360,
+            },
+            direction: "random",
+            move: true,
+            animation: {
+              enable: true,
+              speed: 60,
+            },
+          },
+          tilt: {
+            direction: "random",
+            enable: true,
+            move: true,
+            value: {
+              min: 0,
+              max: 360,
+            },
+            animation: {
+              enable: true,
+              speed: 60,
+            },
+          },
+          roll: {
+            darken: {
+              enable: true,
+              value: 25,
+            },
+            enable: true,
+            speed: {
+              min: 15,
+              max: 25,
+            },
+          },
+          wobble: {
+            distance: 30,
+            enable: true,
+            move: true,
+            speed: {
+              min: -15,
+              max: 15,
+            },
+          },
+        },
+        emitters: {
+          life: {
+            count: 0,
+            duration: 0.1,
+            delay: 0.4,
+          },
+          rate: {
+            delay: 0.1,
+            quantity: 150,
+          },
+          size: {
+            width: 0,
+            height: 0,
+          },
+        },
+      };
+      const colors = [
+        "#77DD77",
+        "#89cff0",
+        "#99c5c4",
+        "#9adedb",
+        "#aa9499",
+        "#aaf0d1",
+        "#b2fba5",
+        "#b39eb5",
+        "#bdb0d0",
+        "#bee7a5",
+        "#befd73",
+        "#c1c6fc",
+        "#c6a4a4",
+        "#cb99c9",
+        "#ff6961",
+        "#ff694f",
+        "#ff9899",
+        "#ffb7ce",
+        "#ca9bf7",
+      ];
+      const $size = document.querySelector("#size") as HTMLSelectElement;
+      const $won = document.querySelector("#won");
+      const $winningTime = document.querySelector("#winning-time");
+      const $tsparticles = document.querySelector("#tsparticles");
+      const $new = document.querySelector("#new");
+
+      const $list = document.querySelector("ul");
+      let answer: string;
+      let dragEl: HTMLElement | null = null;
+      let clock: ReturnType<typeof setInterval>;
+
+      const $seconds = document.getElementById("seconds");
+      const $minutes = document.getElementById("minutes");
+
+      const startClock = () => {
+        let sec = 0;
+        clock = setInterval(function () {
+          if (!$seconds || !$minutes) return;
+          $seconds.innerHTML = `${++sec % 60}`.padStart(2, "0");
+          $minutes.innerHTML = `${Math.floor(sec / 60)}`.padStart(2, "0");
+        }, 1000);
+      };
+
+      const shuffle = (array: string[]) => {
+        let currentIndex = array.length,
+          randomIndex;
+
+        while (currentIndex != 0) {
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex--;
+
+          [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex],
+            array[currentIndex],
+          ];
+        }
+
+        return array;
+      };
+
+      const onDragStart = (e: DragEvent) => {
+        const $this = e.target as HTMLElement;
+
+        if (!$this) return;
+
+        $this.classList.add("drag--moving");
+        dragEl = $this;
+
+        if (!e.dataTransfer) return;
+
+        e.dataTransfer.effectAllowed = "move";
+        e.dataTransfer.setData("text/html", $this.innerHTML);
+      };
+
+      const onDragOver = (e: DragEvent) => {
+        if (e.preventDefault) {
+          e.preventDefault();
+        }
+
+        if (!e.dataTransfer) return;
+        e.dataTransfer.dropEffect = "move";
+
+        return false;
+      };
+
+      const onDragEnter = (e: DragEvent) => {
+        (e.target as HTMLElement).classList.add("drag--hover");
+      };
+
+      const onDragLeave = (e: DragEvent) => {
+        (e.target as HTMLElement).classList.remove("drag--hover");
+      };
+
+      const onDrop = (e: DragEvent) => {
+        if (e.stopPropagation) e.stopPropagation();
+        const $this = e.target as HTMLElement;
+        const targetBg = $this.style.background;
+
+        if (!dragEl) return;
+
+        const dragBg = dragEl.style.background;
+        dragEl.innerHTML = $this.innerHTML;
+        dragEl.style.background = targetBg;
+
+        if (e.dataTransfer) {
+          $this.innerHTML = e.dataTransfer.getData("text/html");
+        }
+        $this.style.background = dragBg;
+        return false;
+      };
+
+      const onDragEnd = (e: DragEvent) => {
+        (e.target as HTMLElement).classList.remove("drag--moving");
+        document.querySelectorAll("li").forEach((item, index) => {
+          item.classList.remove("drag--hover");
+        });
+
+        if (!$list) return;
+
+        if ($list.textContent === answer) {
+          // @ts-ignore
+          tsParticles.load("tsparticles", options);
+          clearInterval(clock);
+
+          if ($winningTime && $minutes && $seconds) {
+            $winningTime.textContent = `${$minutes.textContent}:${$seconds.textContent}`;
+          }
+          if ($won) {
+            $won.classList.add("shown");
+          }
+        }
+      };
+
+      const initGame = () => {
+        if ($seconds) $seconds.innerHTML = "00";
+        if ($minutes) $minutes.innerHTML = "00";
+        if ($tsparticles) $tsparticles.innerHTML = "";
+        const gameSize = $size ? Number($size.value) : 10;
+
+        if (!$list) return;
+        $list.innerHTML = "";
+
+        const selectedWords = shuffle(words).slice(0, gameSize);
+        answer = [...selectedWords].sort().join("");
+
+        if (selectedWords.join("") === answer) {
+          initGame();
+          return;
+        }
+
+        for (const word of selectedWords) {
+          const $item = document.createElement("li");
+          $item.setAttribute("draggable", "true");
+          $item.style.background =
+            colors[Math.floor(Math.random() * colors.length)];
+          $item.textContent = word;
+          $item.addEventListener("dragstart", onDragStart, false);
+          $item.addEventListener("dragenter", onDragEnter, false);
+          $item.addEventListener("dragover", onDragOver, false);
+          $item.addEventListener("dragleave", onDragLeave, false);
+          $item.addEventListener("drop", onDrop, false);
+          $item.addEventListener("dragend", onDragEnd, false);
+          $list.appendChild($item);
+        }
+
+        if (clock) {
+          clearInterval(clock);
+        }
+        startClock();
+      };
+
+      if ($new) {
+        $new.addEventListener("click", () => {
+          if ($won) $won.classList.remove("shown");
+          initGame();
+        });
+      }
+
+      $size.addEventListener("change", () => {
+        initGame();
+      });
+
+      initGame();
+    </script>
+  </body>
+</html>
+<style is:global>
+  :root {
+    --font: "Shantell Sans", cursive;
+    --color: #111;
+    --bg: #fff;
+    --font-size: 1.5rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color: #fff;
+      --bg: #111;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --color: #111;
+      --bg: #fff;
+    }
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --font-size: 2rem;
+    }
+  }
+
+  body {
+    margin: 1rem;
+    font-family: var(--font);
+    font-size: var(--font-size);
+    background: var(--bg);
+    color: var(--color);
+  }
+
+  * {
+    -webkit-user-select: none; /* Safari */
+    user-select: none;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: 1rem;
+    margin: 0 0 1rem;
+    padding: 0;
+  }
+
+  li {
+    padding: 1rem;
+    cursor: move;
+    border-radius: 1rem;
+    border: 2px dashed transparent;
+    color: #111;
+  }
+
+  li.drag--hover:not(.drag--moving) {
+    border-color: currentColor;
+    display: flex;
+    gap: 1rem;
+  }
+
+  li.drag--moving {
+    border-style: solid;
+    border-color: currentColor;
+    opacity: 0.5;
+  }
+
+  #won {
+    position: fixed;
+    inset: 0;
+    flex-direction: column;
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    z-index: 1;
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  #won.shown {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  button {
+    font-family: var(--font);
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    box-shadow: 2px 2px 0 2px;
+    font-weight: bold;
+  }
+
+  button:active {
+    box-shadow: -2px -2px 0 2px;
+  }
+
+  select {
+    font-size: var(--font-size);
+    padding: 0 1rem;
+    border: 2px solid;
+    border-radius: 1rem;
+    font-family: var(--font);
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    header {
+      flex-direction: row;
+    }
+  }
+</style>
