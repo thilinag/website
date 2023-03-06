@@ -7,9 +7,11 @@ export interface Props {
   seed: string;
 }
 
+const REPEAT_COUNT = 20;
+
 const { coverChars = [], seed } = Astro.props;
 const chars = coverChars.flatMap((char) => {
-  const str = char.repeat(seed.length);
+  const str = char.repeat(REPEAT_COUNT);
   const segmenter = new Intl.Segmenter("en", { granularity: "grapheme" });
   const segitr = segmenter.segment(str);
   return Array.from(segitr, ({ segment }) => segment);
@@ -29,12 +31,16 @@ const shuffledChars = shuffle(chars);
       const depth = Math.ceil(index / (shuffledChars.length / 5)) * 2;
       return (
         <text
-          x={getRandomRange(0, 1600)}
-          y={getRandomRange(0, 450)}
           style={{
-            rotate: `${getRandomRange(-120, 120)}deg`,
-            fontSize: `${depth}rem`,
-            filter: `blur(${depth % 5}px)`,
+            transform: `translate(${getRandomRange(
+              0,
+              1600
+            )}px, ${getRandomRange(0, 450)}px) rotate(${getRandomRange(
+              -120,
+              120
+            )}deg)`,
+            fontSize: `${depth + 1}rem`,
+            filter: `blur(${depth % 10}px)`,
           }}
         >
           {char}
@@ -48,14 +54,13 @@ const shuffledChars = shuffle(chars);
     width: 100%;
     height: auto;
     filter: grayscale(1);
-    /* border-top-left-radius: 255px 5px;
-    border-top-right-radius: 5px 225px;
-    border-bottom-right-radius: 225px 5px;
-    border-bottom-left-radius: 5px 255px;
-    border: 2px solid var(--color-secondary); */
     border-radius: 1rem;
     margin-bottom: 2rem;
     aspect-ratio: 3/2;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  :global(.theme-dark) .cover {
     background-color: rgba(0, 0, 0, 0.2);
   }
 
@@ -66,7 +71,6 @@ const shuffledChars = shuffle(chars);
   }
 
   text {
-    transform-origin: center;
     fill: var(--color-secondary);
   }
 </style>
