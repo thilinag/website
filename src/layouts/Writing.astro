@@ -8,6 +8,7 @@ import type { MarkdownHeading } from "astro";
 import TableOfContents from "../components/TableOfContents.astro";
 import StructuredData from "../components/StructuredData.astro";
 import Cover from "../components/Cover.astro";
+import { getRelativeTime } from "../utils";
 
 interface Props {
   data: CollectionEntry<"writing">["data"];
@@ -21,6 +22,12 @@ const { data, headings } = Astro.props;
   <StructuredData data={data} />
   <article>
     <h1>{data.title}</h1>
+    <small class="meta">
+      {data.author.split(" ")[0]} wrote this
+      <time datetime={data.pubDate.toISOString()}>
+        {getRelativeTime(data.pubDate.getTime())}</time
+      >.
+    </small>
     {
       data.coverChars && (
         <Cover coverChars={data.coverChars} seed={data.title} />
@@ -34,3 +41,14 @@ const { data, headings } = Astro.props;
     </footer>
   </article>
 </Layout>
+<style>
+  h1 {
+    margin-bottom: 1rem;
+  }
+
+  .meta {
+    display: block;
+    margin-bottom: 2rem;
+    color: var(--color-secondary);
+  }
+</style>
