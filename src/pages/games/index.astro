@@ -1,6 +1,7 @@
 ---
 export const prerender = true;
 
+import { Icon } from "astro-icon";
 import Layout from "../../layouts/Layout.astro";
 ---
 
@@ -10,6 +11,18 @@ import Layout from "../../layouts/Layout.astro";
       <a target="_blank" href="/games/alphabetical-order-game">
         <h2>Alphabetical Order Game</h2>
         <p>Swap and reorder words in alphabetical order to win.</p>
+        <ul class="tech">
+          <li>Made with</li>
+          <li aria-label="HTML">
+            <Icon name="mdi:language-html5" size="18" />
+          </li>
+          <li aria-label="CSS">
+            <Icon name="mdi:language-css3" size="18" />
+          </li>
+          <li aria-label="Javascript">
+            <Icon name="mdi:language-javascript" size="18" />
+          </li>
+        </ul>
       </a>
     </li>
   </ul>
@@ -25,6 +38,9 @@ import Layout from "../../layouts/Layout.astro";
 
   .games a {
     text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
   h2 {
@@ -37,5 +53,16 @@ import Layout from "../../layouts/Layout.astro";
 
   .games a:hover h2 {
     text-decoration: underline;
+  }
+
+  .tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    font-size: 0.7rem;
+    align-items: center;
+    text-transform: uppercase;
   }
 </style>
