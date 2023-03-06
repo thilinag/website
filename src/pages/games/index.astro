@@ -1,0 +1,41 @@
+---
+export const prerender = true;
+
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Games" backLabel="Home" backURL="/">
+  <ul class="games">
+    <li>
+      <a target="_blank" href="/games/alphabetical-order-game">
+        <h2>Alphabetical Order Game</h2>
+        <p>Swap and reorder words in alphabetical order to win.</p>
+      </a>
+    </li>
+  </ul>
+</Layout>
+<style>
+  .games {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .games a {
+    text-decoration: none;
+  }
+
+  h2 {
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .games a:hover h2 {
+    text-decoration: underline;
+  }
+</style>
