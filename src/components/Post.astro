@@ -48,8 +48,6 @@ const { post, showDate = true } = Astro.props;
     padding-top: 2rem;
     container: post / inline-size;
     position: relative;
-    /* background: rgba(0, 0, 0, 0.1); */
-    /* border-radius: 1rem; */
     border-top: var(--separator);
   }
 
@@ -57,14 +55,6 @@ const { post, showDate = true } = Astro.props;
     margin: 0 0 1rem;
   }
 
-  @container post (min-width: 540px) {
-    /* .postHeader {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: space-between;
-    } */
-  }
   .postLink {
     text-decoration: none;
     /* padding: 1rem; */
@@ -75,10 +65,8 @@ const { post, showDate = true } = Astro.props;
     gap: 2rem;
   }
 
-  @container post (min-width: 540px) {
-    .postLink {
-      /* padding: 2rem; */
-    }
+  .postLink:hover h3 {
+    text-decoration: underline;
   }
 
   article {
