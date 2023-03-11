@@ -21,24 +21,34 @@ const { data, headings } = Astro.props;
 <Layout title={""} backLabel="All Writing" backURL="/writing/">
   <StructuredData data={data} />
   <article>
-    <h1>{data.title}</h1>
-    <small class="meta">
-      {data.author.split(" ")[0]} wrote this
-      <time datetime={data.pubDate.toISOString()}>
-        {getRelativeTime(data.pubDate.getTime())}</time
-      >.
-    </small>
+    <header>
+      <h1>{data.title}</h1>
+      <small class="meta">
+        {data.author.split(" ")[0]} wrote this
+        <time datetime={data.pubDate.toISOString()}>
+          {getRelativeTime(data.pubDate.getTime())}</time
+        >.
+      </small>
+      {
+        data.coverChars && (
+          <Cover coverChars={data.coverChars} seed={data.title} />
+        )
+      }
+    </header>
     {
-      data.coverChars && (
-        <Cover coverChars={data.coverChars} seed={data.title} />
+      data.toc && (
+        <aside>
+          <TableOfContents headings={headings} />
+        </aside>
       )
     }
-    {data.toc && <TableOfContents headings={headings} />}
-    {data.tweets?.length && <Tweets tweets={data.tweets} />}
-    <slot />
-    <footer>
-      {data.tags?.length && <Tags tags={data.tags} />}
-    </footer>
+    <section class={!data.toc ? "full-width" : ""}>
+      {data.tweets?.length && <Tweets tweets={data.tweets} />}
+      <slot />
+      <footer>
+        {data.tags?.length && <Tags tags={data.tags} />}
+      </footer>
+    </section>
   </article>
 </Layout>
 <style>
@@ -50,5 +60,40 @@ const { data, headings } = Astro.props;
     display: block;
     margin-bottom: 2rem;
     color: var(--color-secondary);
+  }
+
+  article {
+    /* display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 0 2rem;
+    grid-auto-flow: dense; */
+  }
+
+  @media (min-width: 768px) {
+    article {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 0 2rem;
+      grid-auto-flow: dense;
+    }
+  }
+
+  header {
+    grid-column: 1/3;
+  }
+
+  aside {
+    display: contents;
+  }
+
+  @media (min-width: 768px) {
+    aside {
+      grid-column: 2;
+      display: block;
+    }
+  }
+
+  .full-width {
+    grid-column: 1/3;
   }
 </style>

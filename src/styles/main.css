@@ -39,6 +39,7 @@ html {
 
   font-size: 14px;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 *,
@@ -62,6 +63,11 @@ body {
     font-size: 1.5rem;
   }
 } */
+
+button {
+  font-family: Menlo, Monaco, "Lucida Console", "DejaVu Sans Mono",
+    "Courier New", monospace;
+}
 
 code {
   font-size: 1rem;
@@ -127,20 +133,19 @@ article {
   line-height: 1.75;
 }
 
-article h2::before,
-article h3::before {
-  content: "";
-  display: block;
-  position: relative;
-  width: 0;
-  height: 5rem;
-  margin-top: -5rem;
+article h2,
+article h3 {
+  scroll-margin-top: 5rem;
 }
 
 @media (min-width: 768px) {
-  article h2::before,
-  article h3::before {
-    height: 7rem;
-    margin-top: -7rem;
+  article h2,
+  article h3 {
+    scroll-margin-top: 7rem;
   }
+}
+
+article h2:first-child,
+article h3:first-child {
+  margin-top: 0;
 }
