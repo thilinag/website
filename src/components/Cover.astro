@@ -13,8 +13,7 @@ const { coverChars = [], seed } = Astro.props;
 const chars = coverChars.flatMap((char) => {
   const str = char.repeat(REPEAT_COUNT);
   const segmenter = new Intl.Segmenter("en", { granularity: "grapheme" });
-  const segitr = segmenter.segment(str);
-  return Array.from(segitr, ({ segment }) => segment);
+  return [...segmenter.segment(str)].map(({ segment }) => segment);
 });
 const shuffledChars = shuffle(chars);
 ---
@@ -26,6 +25,7 @@ const shuffledChars = shuffle(chars);
   height="450"
   class="cover"
   preserveAspectRatio="xMidYMid slice"
+  role="presentation"
 >
   {
     shuffledChars.map((char, index) => {
