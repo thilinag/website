@@ -35,7 +35,7 @@ headings.forEach((heading) => {
       <Icon name="mdi:table-of-contents" size="18" />
       <span>Contents</span>
     </button>
-    <h3>Contents</h3>
+    <h2>Contents</h2>
     <ol class="index">
       {
         [...structuredHeadings.values()].map(({ slug, text, children }) => (
@@ -94,7 +94,7 @@ headings.forEach((heading) => {
     pointer-events: none;
   }
 
-  h3 {
+  h2 {
     margin-top: 0;
     line-height: normal;
   }
@@ -137,7 +137,7 @@ headings.forEach((heading) => {
     pointer-events: none;
   }
 
-  .is-sticky h3 {
+  .is-sticky h2 {
     display: none;
   }
   .is-sticky button {
