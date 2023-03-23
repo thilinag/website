@@ -6,6 +6,7 @@ import Tags from "../components/Tags.astro";
 import Tweets from "../components/Tweets.astro";
 import SvgMap from "../components/SvgMap.astro";
 import StructuredData from "../components/StructuredData.astro";
+import { getRelativeTime } from "../utils";
 
 interface Props {
   data: CollectionEntry<"hiking">["data"];
@@ -19,6 +20,16 @@ const { data } = Astro.props;
   <article>
     <header>
       <h1>{data.title}</h1>
+      {
+        data.tags?.includes("hike") && (
+          <small class="meta">
+            {data.author.split(" ")[0]} hiked this{" "}
+            <time datetime={data.pubDate.toISOString()}>
+              {getRelativeTime(data.pubDate.getTime())}.
+            </time>
+          </small>
+        )
+      }
       <div class="hikeStatsWrapper">
         <div class="hikeStats">
           {
@@ -78,6 +89,16 @@ const { data } = Astro.props;
       grid-template-columns: 1fr 2fr;
       grid-template-areas: "distance map" "elevation map" "steps map";
     }
+  }
+
+  h1 {
+    margin-bottom: 1rem;
+  }
+
+  .meta {
+    display: block;
+    margin-bottom: 2rem;
+    color: var(--color-secondary);
   }
 
   .distance {
