@@ -1,11 +1,14 @@
 ---
 export const prerender = true;
 
+import { getCollection } from "astro:content";
+
 import Post from "../components/Post.astro";
 import Layout from "../layouts/Layout.astro";
 
-import { getCollection } from "astro:content";
-const allProjects = await getCollection("projects").then((collection) =>
+const allProjects = await getCollection("projects", (entry) =>
+  import.meta.env.PROD ? entry.data.draft !== true : true
+).then((collection) =>
   collection.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
 );
 const title = "Projects";

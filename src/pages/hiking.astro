@@ -1,13 +1,16 @@
 ---
 export const prerender = true;
 
-import Layout from "../layouts/Layout.astro";
-
 import { getCollection } from "astro:content";
+
+import Layout from "../layouts/Layout.astro";
 import Post from "../components/Post.astro";
 import Trail from "../components/Trail.astro";
 import { HEYSEN_GEOJSON, ADELAIDE100_GEOJSON } from "../utils";
-const allHiking = await getCollection("hiking").then((collection) =>
+
+const allHiking = await getCollection("hiking", (entry) =>
+  import.meta.env.PROD ? entry.data.draft !== true : true
+).then((collection) =>
   collection.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
 );
 const lastHeysenPoint = allHiking

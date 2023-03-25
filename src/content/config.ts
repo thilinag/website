@@ -8,7 +8,7 @@ export const PostSchema = z.object({
   tags: z.array(z.string()),
   tweets: z.array(z.string()).optional(),
   featured: z.boolean().optional().default(false),
-  draft: z.boolean().optional().default(true),
+  draft: z.boolean().optional().default(false),
   coverChars: z.array(z.string()).optional(),
 });
 
