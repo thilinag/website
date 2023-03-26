@@ -79,28 +79,28 @@
   }
 </style>
 <style>
-  #theme {
+  button {
     --size: 26px;
     border: 0;
     padding: 0;
     background: none;
     width: var(--size);
-    display: flex;
+    display: flex;button
     justify-content: center;
     align-items: center;
     margin-left: 1rem;
   }
 
-  #theme:focus span {
+  button:focus span {
     background: rgba(255, 255, 255, 0.1);
   }
 
-  #theme:active span::before {
+  button:active span::before {
     transition: 0s;
     transform: rotate(135deg);
   }
 
-  #theme:active span::after {
+  button:active span::after {
     transition: 0s;
     transform: rotate(180deg);
   }
