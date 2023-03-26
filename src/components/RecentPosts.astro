@@ -1,22 +1,29 @@
 ---
-import Post from "./Post.astro";
 import { getCollection } from "astro:content";
-import { collections } from "../content/config";
-const writing = await getCollection("writing")
+
+import Post from "./Post.astro";
+
+const writing = await getCollection("writing", (entry) =>
+  import.meta.env.PROD ? entry.data.draft !== true : true
+)
   .then((collection) =>
     collection.sort(
       (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
     )
   )
   .then((collection) => collection.slice(0, 1));
-const projects = await getCollection("projects")
+const projects = await getCollection("projects", (entry) =>
+  import.meta.env.PROD ? entry.data.draft !== true : true
+)
   .then((collection) =>
     collection.sort(
       (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
     )
   )
   .then((collection) => collection.slice(0, 1));
-const hiking = await getCollection("hiking")
+const hiking = await getCollection("hiking", (entry) =>
+  import.meta.env.PROD ? entry.data.draft !== true : true
+)
   .then((collection) =>
     collection.sort(
       (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
