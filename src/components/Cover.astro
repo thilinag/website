@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { getRandomRange, shuffle } from "../utils";
+import { getRandomRange, getShuffledArray } from "../utils";
+import { Buffer } from "buffer";
 
 export interface Props {
   coverChars: CollectionEntry<"writing">["data"]["coverChars"];
@@ -15,7 +16,7 @@ const chars = coverChars.flatMap((char) => {
   const segmenter = new Intl.Segmenter("en", { granularity: "grapheme" });
   return [...segmenter.segment(str)].map(({ segment }) => segment);
 });
-const shuffledChars = shuffle(chars);
+const shuffledChars = getShuffledArray(chars, seed);
 ---
 
 <svg
@@ -35,10 +36,20 @@ const shuffledChars = shuffle(chars);
           style={{
             transform: `translate(${getRandomRange(
               0,
-              1600
-            )}px, ${getRandomRange(0, 450)}px) rotate(${getRandomRange(
+              1600,
+              Buffer.from(seed, "utf8")
+                .toString("base64")
+                .at(index * 0.9) || ""
+            )}px, ${getRandomRange(
+              0,
+              450,
+              Buffer.from(seed, "utf8")
+                .toString("base64")
+                .at(index * -0.9) || ""
+            )}px) rotate(${getRandomRange(
               -120,
-              120
+              120,
+              Buffer.from(seed, "utf8").toString("base64")[index]
             )}deg)`,
             fontSize: `${depth + 1}rem`,
             filter: `blur(${depth % 10}px)`,
