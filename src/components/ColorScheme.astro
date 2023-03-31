@@ -38,6 +38,12 @@
   }
 
   toggleButton.addEventListener("click", (e) => {
+    const audio = new Audio("/thilinag.mp3");
+    audio.play();
+    const audioTimer = setTimeout(() => {
+      audio.pause();
+    }, 500);
+
     const theme = getTheme();
     if (theme === "light") {
       localStorage.setItem("theme", "dark");

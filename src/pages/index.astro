@@ -1,6 +1,8 @@
 ---
 export const prerender = true;
 
+import { Icon } from "astro-icon";
+
 import Layout from "../layouts/Layout.astro";
 import RecentPosts from "../components/RecentPosts.astro";
 ---
@@ -9,7 +11,12 @@ import RecentPosts from "../components/RecentPosts.astro";
   <div class="hello">
     <h1>
       <span>Hi!👋<br /> I'm</span>
-      <span class="name" data-name="Thilina"><em>Thilina</em></span>.
+      <span class="name-wrapper">
+        <span class="name" data-name="Thilina"><em>Thilina</em></span>
+        <button type="button" class="pronounce" title="pronounce name"
+          ><Icon name="mdi:volume-high" size="18" /></button
+        >
+      </span>
     </h1>
   </div>
   <p>
@@ -23,6 +30,13 @@ import RecentPosts from "../components/RecentPosts.astro";
   </p>
   <RecentPosts />
 </Layout>
+<script is:inline>
+  document.querySelector(".pronounce").addEventListener("click", (e) => {
+    const audio = new Audio("/thilinag.mp3");
+    audio.currentTime = 0.5;
+    audio.play();
+  });
+</script>
 <style>
   h1 {
     font-size: 2.5rem;
@@ -41,6 +55,10 @@ import RecentPosts from "../components/RecentPosts.astro";
   p a {
     text-decoration: none;
     opacity: 0.7;
+  }
+
+  .name-wrapper {
+    display: inline-flex;
   }
 
   .name {
@@ -80,6 +98,19 @@ import RecentPosts from "../components/RecentPosts.astro";
     --clip-bottom: calc(var(--stack-height) * var(--inverse-index));
     clip-path: inset(var(--clip-top) 0 var(--clip-bottom) 0);
     animation: glitch 3s ease infinite 2s alternate-reverse;
+  }
+
+  .pronounce {
+    border: 0;
+    background: none;
+    height: 2.5rem;
+    width: 2.5rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-secondary);
+    cursor: pointer;
   }
 
   @keyframes glitch {
