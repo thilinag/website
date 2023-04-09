@@ -32,7 +32,10 @@ import RecentPosts from "../components/RecentPosts.astro";
 </Layout>
 <script is:inline>
   document.querySelector(".pronounce").addEventListener("click", (e) => {
-    const audio = new Audio("/thilinag.mp3");
+    const audio = document.querySelector("#audio");
+
+    if (!audio) return;
+
     audio.currentTime = 0.5;
     audio.play();
   });

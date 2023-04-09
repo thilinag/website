@@ -2,6 +2,21 @@
   <span><i></i></span>
 </button>
 <script is:inline>
+  const playSoundEffect = () => {
+    const audio = document.querySelector("#audio");
+
+    if (!audio) {
+      return;
+    }
+
+    audio.currentTime = 0;
+    audio.play();
+
+    const audioTimer = setTimeout(() => {
+      audio.pause();
+    }, 500);
+  };
+
   const toggleButton = document.getElementById("theme");
   const getTheme = () => {
     if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
@@ -38,11 +53,7 @@
   }
 
   toggleButton.addEventListener("click", (e) => {
-    const audio = new Audio("/thilinag.mp3");
-    audio.play();
-    const audioTimer = setTimeout(() => {
-      audio.pause();
-    }, 500);
+    playSoundEffect();
 
     const theme = getTheme();
     if (theme === "light") {
@@ -91,7 +102,7 @@
     padding: 0;
     background: none;
     width: var(--size);
-    display: flex;button
+    display: flex;
     justify-content: center;
     align-items: center;
     margin-left: 1rem;
