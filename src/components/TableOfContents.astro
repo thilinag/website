@@ -61,7 +61,6 @@ headings.forEach((heading) => {
   const elHeight = $el.getBoundingClientRect().height;
   const observer = new IntersectionObserver(
     ([e]) => {
-      console.log(e.intersectionRatio);
       e.target.classList.toggle("is-sticky", e.intersectionRatio === 0);
       if (e.intersectionRatio === 0) {
         $el.style.height = e.intersectionRatio === 0 ? `${elHeight}px` : "auto";
