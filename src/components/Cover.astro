@@ -1,68 +1,19 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { getRandomRange, getShuffledArray } from "../utils";
-import { Buffer } from "buffer";
+import { getCoverImage } from "../utils";
 
 export interface Props {
   coverChars: CollectionEntry<"writing">["data"]["coverChars"];
   seed: string;
 }
 
-const REPEAT_COUNT = 20;
-
 const { coverChars = [], seed } = Astro.props;
-const chars = coverChars.flatMap((char) => {
-  const str = char.repeat(REPEAT_COUNT);
-  const segmenter = new Intl.Segmenter("en", { granularity: "grapheme" });
-  return [...segmenter.segment(str)].map(({ segment }) => segment);
-});
-const shuffledChars = getShuffledArray(chars, seed);
+const coverImg = await getCoverImage(coverChars, seed);
 ---
 
-<svg
-  xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 1600 450"
-  width="1600"
-  height="450"
-  class="cover"
-  preserveAspectRatio="xMidYMid slice"
-  role="presentation"
->
-  {
-    shuffledChars.map((char, index) => {
-      const depth = Math.ceil(index / (shuffledChars.length / 5)) * 2;
-      return (
-        <text
-          style={{
-            transform: `translate(${getRandomRange(
-              0,
-              1600,
-              Buffer.from(seed, "utf8")
-                .toString("base64")
-                .at(index * 0.9) || ""
-            )}px, ${getRandomRange(
-              0,
-              450,
-              Buffer.from(seed, "utf8")
-                .toString("base64")
-                .at(index * -0.9) || ""
-            )}px) rotate(${getRandomRange(
-              -120,
-              120,
-              Buffer.from(seed, "utf8").toString("base64")[index]
-            )}deg)`,
-            fontSize: `${depth + 1}rem`,
-            filter: `blur(${depth % 10}px)`,
-          }}
-        >
-          {char}
-        </text>
-      );
-    })
-  }
-</svg>
-<style>
-  .cover {
+<div class="cover" set:html={coverImg} />
+<style is:global>
+  .cover svg {
     display: block;
     width: 100%;
     height: auto;
@@ -73,12 +24,12 @@ const shuffledChars = getShuffledArray(chars, seed);
     background-color: rgba(0, 0, 0, 0.1);
   }
 
-  :global(.theme-dark) .cover {
+  :global(.theme-dark) .cover svg {
     background-color: rgba(0, 0, 0, 0.2);
   }
 
   @media (min-width: 768px) {
-    .cover {
+    .cover svg {
       aspect-ratio: 16/5;
     }
   }
