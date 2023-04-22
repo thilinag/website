@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { getOgImage } from "../utils";
+import { getCoverImage } from "../utils";
 
 export interface Props {
   coverChars: CollectionEntry<"writing">["data"]["coverChars"];
@@ -8,7 +8,7 @@ export interface Props {
 }
 
 const { coverChars = [], seed } = Astro.props;
-const coverImg = await getOgImage(coverChars, seed);
+const coverImg = await getCoverImage(coverChars, seed);
 ---
 
 <div class="cover" set:html={coverImg} />

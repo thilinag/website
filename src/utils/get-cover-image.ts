@@ -40,7 +40,7 @@ function getEmojis(coverChars: string[], seed: string) {
   return text;
 }
 
-export async function getOgImage(coverChars: string[], seed: string) {
+export async function getCoverImage(coverChars: string[], seed: string) {
   console.log({ seed });
   return `<svg
   xmlns="http://www.w3.org/2000/svg"
