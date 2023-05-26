@@ -13,9 +13,11 @@ const allHiking = await getCollection("hiking", (entry) =>
 ).then((collection) =>
   collection.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
 );
-const lastHeysenPoint = allHiking
-  .filter((hike) => hike.data.tags.includes("heysentrail"))[0]
-  .data.geoJson?.features[0].geometry.coordinates.at(-1);
+const lastHeysenPost = allHiking.filter((hike) =>
+  hike.data.tags.includes("heysentrail")
+)[0];
+const lastHeysenPoint =
+  lastHeysenPost.data.geoJson?.features[0].geometry.coordinates.at(-1);
 const lastHeysenPointFeatures = [
   {
     type: "Feature",
@@ -63,7 +65,10 @@ const title = "Hiking";
   <h4>Currently Hiking</h4>
   <div class="current-hikes">
     <Trail
-      completed={6}
+      completed={Number(
+        lastHeysenPost.data.title.match(/\[(?<lastHike>\d+)\//)?.groups
+          ?.lastHike
+      ) || 0}
       total={65}
       name="Heysen Trail"
       geoJson={{
