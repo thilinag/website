@@ -21,3 +21,11 @@ export function getRelativeTime(timestamp: number) {
 
   return rtf.format(daysDifference, "day");
 }
+
+export function getRelativeDays(timestamp: number) {
+  const daysDifference = Math.round(
+    (new Date().getTime() - timestamp) / DAY_IN_MILLISECONDS
+  );
+
+  return `${daysDifference} days`;
+}

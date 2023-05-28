@@ -1,0 +1,152 @@
+---
+import { getRelativeDays } from "../utils";
+
+interface Props {
+  name: string;
+  boughtOn?: string;
+  description?: string;
+  pros?: string[];
+  cons?: string[];
+  url?: string;
+  isOpen?: boolean;
+}
+
+const {
+  boughtOn,
+  cons,
+  description,
+  isOpen = false,
+  name,
+  pros,
+  url,
+} = Astro.props;
+---
+
+<details class="gear" {...{ open: isOpen }}>
+  <summary>
+    {name}
+    {
+      boughtOn && (
+        <time>Using for {getRelativeDays(new Date(boughtOn).getTime())}</time>
+      )
+    }
+  </summary>
+  <p>{description}</p>
+  <section>
+    {
+      pros && (
+        <dl class="pros">
+          <dt>Pros</dt>
+          {pros.map((pro) => (
+            <dd>{pro}</dd>
+          ))}
+        </dl>
+      )
+    }
+    {
+      cons && (
+        <dl class="cons">
+          <dt>Cons</dt>
+          {cons.map((con) => (
+            <dd>{con}</dd>
+          ))}
+        </dl>
+      )
+    }
+  </section>
+</details>
+
+<style>
+  details {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: var(--separator);
+  }
+
+  summary {
+    cursor: pointer;
+    display: grid;
+    font-weight: 200;
+    grid-template-columns: 1.5rem 1fr;
+    grid-template-rows: 1fr min-content;
+    font-weight: bold;
+  }
+
+  @media (min-width: 768px) {
+    summary {
+      grid-template-columns: 1.5rem auto 1fr;
+      grid-template-rows: 1fr;
+    }
+  }
+
+  summary::before {
+    content: "▶";
+    grid-column: 1;
+    grid-row: 1/3;
+  }
+
+  @media (min-width: 768px) {
+    summary::before {
+      margin-top: -0.1rem;
+    }
+  }
+
+  [open] summary::before {
+    content: "▼";
+  }
+
+  time {
+    display: block;
+    font-size: 1rem;
+    color: var(--color-secondary);
+    font-weight: normal;
+  }
+
+  @media (min-width: 768px) {
+    time {
+      margin-top: 0;
+      margin-left: auto;
+    }
+  }
+
+  p:empty {
+    display: none;
+  }
+
+  section {
+    margin-top: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    section {
+      display: grid;
+      gap: 3rem;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  dl {
+    margin-top: 0;
+  }
+
+  dt {
+    text-transform: uppercase;
+    font-size: 1rem;
+  }
+
+  dd {
+    margin-left: 0;
+  }
+
+  dd:before {
+    margin-right: 1rem;
+  }
+
+  .pros dd:before {
+    content: "✓";
+  }
+
+  .cons dd:before {
+    content: "✗";
+  }
+</style>
