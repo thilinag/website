@@ -13,7 +13,12 @@ interface Props {
 const { data } = Astro.props;
 ---
 
-<Layout title={""} backLabel="All Projects" backURL="/projects/">
+<Layout
+  title={data.title}
+  backLabel="All Projects"
+  backURL="/projects/"
+  description={data.description}
+>
   <StructuredData data={data} />
   <article>
     <h1>{data.title}</h1>

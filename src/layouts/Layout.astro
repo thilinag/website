@@ -11,11 +11,18 @@ export interface Props {
   title: string;
   backLabel?: string;
   backURL?: string;
+  description?: string;
 }
 
 const name = "Thilina Gunasekara";
-const { title, backURL = "/", backLabel = "Home" } = Astro.props;
+const {
+  title,
+  backURL = "/",
+  backLabel = "Home",
+  description = "Personal website of Thilina Gunasekara, Adelaide based Software Engineer",
+} = Astro.props;
 const pathname = new URL(Astro.request.url).pathname;
+const pageTitle = title ? `${title} | ${name}` : name;
 ---
 
 <!DOCTYPE html>
@@ -26,11 +33,9 @@ const pathname = new URL(Astro.request.url).pathname;
     <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="manifest" href="/manifest.json" />
     <meta name="generator" content={Astro.generator} />
-    <meta
-      name="description"
-      content="Personal website of Thilina Gunasekara, Adelaide based Software Engineer"
-    />
-    <title>{title ? `${title} | ${name}` : name}</title>
+    <meta name="title" content={pageTitle} />
+    <meta name="description" content={description} />
+    <title>{pageTitle}</title>
   </head>
 
   <body>
