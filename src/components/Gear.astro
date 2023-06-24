@@ -1,5 +1,5 @@
 ---
-import { getRelativeDays } from "../utils";
+import { getRelativePassedTime } from "../utils";
 
 interface Props {
   name: string;
@@ -27,7 +27,9 @@ const {
     {name}
     {
       boughtOn && (
-        <time>Using for {getRelativeDays(new Date(boughtOn).getTime())}</time>
+        <time>
+          Using for {getRelativePassedTime(new Date(boughtOn).getTime())}
+        </time>
       )
     }
   </summary>
