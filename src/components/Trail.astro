@@ -2,14 +2,26 @@
 import SvgMap from "./SvgMap.astro";
 
 interface Props {
+  completed: number;
+  distance?: number;
+  elevation?: number;
   geoJson: object;
   name: string;
-  completed: number;
+  steps?: number;
   total: number;
   url: string;
 }
 
-const { geoJson, name, completed, total, url } = Astro.props;
+const {
+  completed,
+  distance = 0,
+  elevation = 0,
+  geoJson,
+  name,
+  steps = 0,
+  total,
+  url,
+} = Astro.props;
 ---
 
 <div class="hike-card">
@@ -17,6 +29,32 @@ const { geoJson, name, completed, total, url } = Astro.props;
     <h2>{name}</h2>
     <p>{completed}/{total} complete</p>
     <a href={url}>View hikes</a>
+    <dl class="stats">
+      {
+        steps > 0 && (
+          <>
+            <dt>Steps</dt>
+            <dd>{steps}</dd>
+          </>
+        )
+      }
+      {
+        distance > 0 && (
+          <>
+            <dt>distance</dt>
+            <dd>{distance}km</dd>
+          </>
+        )
+      }
+      {
+        elevation > 0 && (
+          <>
+            <dt>elevation</dt>
+            <dd>{elevation}m</dd>
+          </>
+        )
+      }
+    </dl>
   </div>
   <div class="map">
     {geoJson && <SvgMap geoJson={geoJson} />}
@@ -39,6 +77,8 @@ const { geoJson, name, completed, total, url } = Astro.props;
   .info {
     position: relative;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   h2 {
@@ -51,5 +91,23 @@ const { geoJson, name, completed, total, url } = Astro.props;
     position: absolute;
     inset: 2rem;
     opacity: 0.7;
+  }
+
+  .map :global(> div) {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  .stats dt {
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--color-secondary);
+  }
+
+  .stats dd {
+    margin-left: 0;
+    margin-bottom: 1rem;
   }
 </style>

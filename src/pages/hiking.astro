@@ -1,21 +1,39 @@
 ---
 export const prerender = true;
 
-import { getCollection } from "astro:content";
+import { CollectionEntry, getCollection } from "astro:content";
 
 import Layout from "../layouts/Layout.astro";
 import Post from "../components/Post.astro";
 import Trail from "../components/Trail.astro";
 import { HEYSEN_GEOJSON, ADELAIDE100_GEOJSON } from "../utils";
 
+const getHikeStats = (posts: CollectionEntry<"hiking">[]) => {
+  return posts.reduce(
+    (acc, post) => {
+      return {
+        distance: acc.distance + (post.data?.distance || 0),
+        elevation: acc.elevation + (post.data?.elevation || 0),
+        steps: acc.steps + (post.data?.steps || 0),
+      };
+    },
+    {
+      elevation: 0,
+      distance: 0,
+      steps: 0,
+    }
+  );
+};
+
 const allHiking = await getCollection("hiking", (entry) =>
   import.meta.env.PROD ? entry.data.draft !== true : true
 ).then((collection) =>
   collection.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
 );
-const lastHeysenPost = allHiking.filter((hike) =>
+const heysenPosts = allHiking.filter((hike) =>
   hike.data.tags.includes("heysentrail")
-)[0];
+);
+const lastHeysenPost = heysenPosts[0];
 const lastHeysenPoint =
   lastHeysenPost.data.geoJson?.features[0].geometry.coordinates.at(-1);
 const lastHeysenPointFeatures = [
@@ -36,7 +54,11 @@ const lastHeysenPointFeatures = [
     geometry: { type: "Point", coordinates: lastHeysenPoint },
   },
 ];
+const heysenStats = getHikeStats(heysenPosts);
 
+const adelaide100Posts = allHiking.filter((hike) =>
+  hike.data.tags.includes("adelaide100")
+);
 const lastAdelaide100Point = [138.72485, -34.91856];
 const lastAdealide100Features = [
   {
@@ -56,6 +78,7 @@ const lastAdealide100Features = [
     geometry: { type: "Point", coordinates: lastAdelaide100Point },
   },
 ];
+const adeliade100Stats = getHikeStats(adelaide100Posts);
 
 const title = "Hiking";
 ---
@@ -69,22 +92,28 @@ const title = "Hiking";
         lastHeysenPost.data.title.match(/\[(?<lastHike>\d+)\//)?.groups
           ?.lastHike
       ) || 0}
-      total={65}
-      name="Heysen Trail"
+      distance={heysenStats.distance}
+      elevation={heysenStats.elevation}
       geoJson={{
         ...HEYSEN_GEOJSON,
         features: [...HEYSEN_GEOJSON.features, ...lastHeysenPointFeatures],
       }}
+      name="Heysen Trail"
+      steps={heysenStats.steps}
+      total={65}
       url="/tags/heysentrail"
     />
     <Trail
-      completed={1}
-      total={4}
-      name="Adelaide 100"
+      completed={adelaide100Posts.length}
+      distance={adeliade100Stats.distance}
+      elevation={adeliade100Stats.elevation}
       geoJson={{
         ...ADELAIDE100_GEOJSON,
         features: [...ADELAIDE100_GEOJSON.features, ...lastAdealide100Features],
       }}
+      name="Adelaide 100"
+      steps={adeliade100Stats.steps}
+      total={4}
       url="/tags/adelaide100"
     />
   </div>
