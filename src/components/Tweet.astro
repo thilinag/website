@@ -1,0 +1,42 @@
+---
+export interface Props {
+  tweet: {
+    link: string;
+    text: string;
+    images: {
+      googleDriveId: string;
+    }[];
+  };
+}
+
+const {
+  tweet: { images = [], link, text = "" },
+} = Astro.props;
+---
+
+<blockquote class="tweet">
+  {text && <p>{text}</p>}
+  {
+    images.length > 0 && (
+      <div class="images">
+        {images.map((image) => (
+          <img
+            src={`https://lh3.googleusercontent.com/d/${image.googleDriveId}`}
+            alt=""
+            loading="lazy"
+          />
+        ))}
+      </div>
+    )
+  }
+  <cite><small><a href={link} target="_blank">via twitter</a></small></cite>
+</blockquote>
+<style>
+  cite {
+    display: block;
+  }
+
+  .tweet + .tweet {
+    border-top: var(--separator);
+  }
+</style>

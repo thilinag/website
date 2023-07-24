@@ -3,7 +3,7 @@ import type { CollectionEntry } from "astro:content";
 
 import Layout from "./Layout.astro";
 import Tags from "../components/Tags.astro";
-import Tweets from "../components/Tweets.astro";
+import Tweet from "../components/Tweet.astro";
 import StructuredData from "../components/StructuredData.astro";
 
 interface Props {
@@ -22,7 +22,7 @@ const { data } = Astro.props;
   <StructuredData data={data} />
   <article>
     <h1>{data.title}</h1>
-    {data.tweets?.length && <Tweets tweets={data.tweets} />}
+    {data.tweets?.length && data.tweets.map((tweet) => <Tweet tweet={tweet} />)}
     <slot />
     <footer>
       {data.tags?.length && <Tags tags={data.tags} />}
