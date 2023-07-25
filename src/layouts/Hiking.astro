@@ -91,7 +91,7 @@ const { data } = Astro.props;
 
   @container stats (max-width: 540px) {
     .hikeStats {
-      grid-template-columns: 1fr 2fr;
+      grid-template-columns: 1fr minmax(0, 2fr);
       grid-template-areas: "distance map" "elevation map" "steps map";
     }
   }
