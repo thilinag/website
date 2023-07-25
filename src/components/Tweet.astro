@@ -34,7 +34,32 @@ const {
     display: block;
   }
 
+  cite a {
+    color: var(--color-secondary);
+  }
+
   .tweet + .tweet {
     border-top: var(--separator);
+  }
+
+  .images {
+    display: grid;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .images {
+      gap: 2rem;
+    }
+  }
+
+  img {
+    border-radius: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    img {
+      max-height: 80vh;
+    }
   }
 </style>
