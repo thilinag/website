@@ -8,23 +8,22 @@ export const PostSchema = z.object({
   tags: z.array(z.string()),
   tweets: z
     .array(
-      z
-        .object({
-          link: z.string(),
-          text: z.string().optional(),
-          video: z.boolean().optional(),
-          images: z
-            .array(
-              z.object({
-                googleDriveId: z.string(),
-                label: z.string().optional(),
-              })
-            )
-            .optional(),
-        })
-        .optional()
+      z.object({
+        link: z.string(),
+        text: z.string().optional(),
+        video: z.boolean().optional(),
+        images: z
+          .array(
+            z.object({
+              googleDriveId: z.string(),
+              label: z.string().optional(),
+            })
+          )
+          .optional(),
+      })
     )
-    .optional(),
+    .optional()
+    .default([]),
   featured: z.boolean().optional().default(false),
   draft: z.boolean().optional().default(false),
   coverChars: z.array(z.string()).optional(),

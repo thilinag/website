@@ -1,16 +1,14 @@
 ---
+import type { CollectionEntry } from "astro:content";
+
+type Tweets = CollectionEntry<"writing">["data"]["tweets"];
+
 export interface Props {
-  tweet: {
-    link: string;
-    text: string;
-    images: {
-      googleDriveId: string;
-    }[];
-  };
+  tweet: Tweets[0];
 }
 
 const {
-  tweet: { images = [], link, text = "" },
+  tweet: { images = [], link, text },
 } = Astro.props;
 ---
 
