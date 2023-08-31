@@ -14,5 +14,7 @@ export default defineConfig({
   site: "https://www.thilinag.com",
   integrations: [mdx(), sitemap()],
   output: "server",
-  adapter: netlify(),
+  adapter: netlify({
+    functionPerRoute: true
+ }),
 });
