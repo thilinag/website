@@ -49,7 +49,7 @@ const { data, headings } = Astro.props;
     }
     <section class={!data.toc ? "full-width" : ""}>
       {
-        data.tweets?.length &&
+        data.tweets?.length > 0 &&
           data.tweets.map((tweet) => <Tweet tweet={tweet} />)
       }
       <slot />
