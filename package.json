@@ -1,7 +1,7 @@
 {
   "name": "thilinag.com",
   "type": "module",
-  "version": "0.0.1",
+  "version": "3.0.1",
   "private": true,
   "scripts": {
     "dev": "astro dev",
@@ -11,17 +11,15 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/check": "^0.2.0",
     "@astrojs/mdx": "^1.0.0",
-    "@astrojs/netlify": "^3.0.0",
     "@astrojs/sitemap": "^3.0.0",
+    "@astrojs/vercel": "^4.0.2",
     "@types/seedrandom": "^3.0.5",
     "astro": "^3.0.3",
     "astro-icon": "^0.8.1",
-    "buffer": "^6.0.3",
     "geojson-to-svg": "^1.0.3",
-    "satori": "^0.4.4",
-    "seedrandom": "^3.0.5",
-    "sharp": "^0.32.5"
+    "seedrandom": "^3.0.5"
   },
   "devDependencies": {
     "prettier": "^2.8.4",

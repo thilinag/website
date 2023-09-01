@@ -1,7 +1,6 @@
 # build output
 dist/
 .output/
-.netlify/
 
 # dependencies
 node_modules/
