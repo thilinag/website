@@ -34,13 +34,11 @@ export function getRelativeDays(timestamp: number) {
 
 export function getRelativePassedTime(timestamp: number) {
   let years,
-    months,
-    days = 0;
+    months;
   const daysDifference = Math.round(
     (new Date().getTime() - timestamp) / DAY_IN_MILLISECONDS
   );
 
-  days = daysDifference % MONTH_IN_DAYS;
   years = Math.floor(daysDifference / YEAR_IN_DAYS);
   months = Math.floor((daysDifference % YEAR_IN_DAYS) / MONTH_IN_DAYS);
 

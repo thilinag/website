@@ -31,7 +31,7 @@ import RecentPosts from "../components/RecentPosts.astro";
   <RecentPosts />
 </Layout>
 <script is:inline>
-  document.querySelector(".pronounce").addEventListener("click", (e) => {
+  document.querySelector(".pronounce").addEventListener("click", () => {
     const audio = document.querySelector("#audio");
 
     if (!audio) return;

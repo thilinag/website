@@ -9,14 +9,14 @@ export interface Props {
 const { geoJson } = Astro.props;
 const svgData = geojson2svg(
   geoJson,
-  (a: any) => {
+  (a) => {
     return {
       weight: 0.002,
       color: a.properties.color || "#666",
     };
   },
   null,
-  function (coord: number[]) {
+  function (coord) {
     // flip vertically
     return [coord[0], -coord[1]];
   }

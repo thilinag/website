@@ -15,7 +15,7 @@
         audio.currentTime = 0;
         audio.play();
 
-        const audioTimer = setTimeout(() => {
+        setTimeout(() => {
           audio.pause();
         }, 500);
       };
@@ -60,7 +60,7 @@
         }
       }
 
-      toggleButton.addEventListener("click", (e) => {
+      toggleButton.addEventListener("click", () => {
         playSoundEffect();
 
         const theme = getTheme();

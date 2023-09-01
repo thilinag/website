@@ -1,7 +1,7 @@
 ---
 export const prerender = true;
 
-import { CollectionEntry, getCollection } from "astro:content";
+import { type CollectionEntry, getCollection } from "astro:content";
 import Layout from "../../layouts/Writing.astro";
 export async function getStaticPaths() {
   const writingEntries = await getCollection("writing");

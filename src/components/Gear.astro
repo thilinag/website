@@ -18,7 +18,6 @@ const {
   isOpen = false,
   name,
   pros,
-  url,
 } = Astro.props;
 ---
 
@@ -28,7 +27,7 @@ const {
     {
       boughtOn && (
         <time>
-          Using for {getRelativePassedTime(new Date(boughtOn).getTime())}
+          Using for g{getRelativePassedTime(new Date(boughtOn).getTime())}
         </time>
       )
     }

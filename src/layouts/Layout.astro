@@ -22,7 +22,6 @@ const {
   backLabel = "Home",
   description = "Personal website of Thilina Gunasekara, Adelaide based Software Engineer",
 } = Astro.props;
-const pathname = new URL(Astro.request.url).pathname;
 const pageTitle = title ? `${title} | ${name}` : name;
 ---
 
