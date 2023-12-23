@@ -2,80 +2,80 @@
   <span><i></i></span>
 </button>
 <script is:inline>
-  document.addEventListener(
-    "astro:page-load",
-    () => {
-      const playSoundEffect = () => {
-        const audio = document.querySelector("#audio");
+document.addEventListener(
+  "astro:page-load",
+  () => {
+    const playSoundEffect = () => {
+      const audio = document.querySelector("#audio");
 
-        if (!audio) {
-          return;
-        }
-
-        audio.currentTime = 0;
-        audio.play();
-
-        setTimeout(() => {
-          audio.pause();
-        }, 500);
-      };
-
-      const toggleButton = document.getElementById("theme");
-      const getTheme = () => {
-        if (
-          typeof localStorage !== "undefined" &&
-          localStorage.getItem("theme")
-        ) {
-          return localStorage.getItem("theme");
-        }
-
-        if (window.matchMedia("(prefers-color-scheme: light)").matches) {
-          return "light";
-        }
-
-        return "dark";
-      };
-
-      const setTheme = (theme) => {
-        document.documentElement.classList.add(`theme-${theme}`);
-        document.documentElement.classList.remove(
-          `theme-${theme === "light" ? "dark" : "light"}`
-        );
-        toggleButton.setAttribute(
-          "aria-label",
-          `Switch to ${theme === "light" ? "Dark" : "Light"} Theme`
-        );
-        toggleButton.setAttribute(
-          "title",
-          `Switch to ${theme === "light" ? "Dark" : "Light"} Theme`
-        );
-      };
-
-      function setMode() {
-        const theme = getTheme();
-        if (theme === "light") {
-          setTheme("light");
-        } else {
-          setTheme("dark");
-        }
+      if (!audio) {
+        return;
       }
 
-      toggleButton.addEventListener("click", () => {
-        playSoundEffect();
+      audio.currentTime = 0;
+      audio.play();
 
-        const theme = getTheme();
-        if (theme === "light") {
-          localStorage.setItem("theme", "dark");
-          setTheme("dark");
-        } else {
-          localStorage.setItem("theme", "light");
-          setTheme("light");
-        }
-      });
-      document.addEventListener("astro:after-swap", setMode);
-    },
-    { once: true }
-  );
+      setTimeout(() => {
+        audio.pause();
+      }, 500);
+    };
+
+    const toggleButton = document.getElementById("theme");
+    const getTheme = () => {
+      if (
+        typeof localStorage !== "undefined" &&
+        localStorage.getItem("theme")
+      ) {
+        return localStorage.getItem("theme");
+      }
+
+      if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+        return "light";
+      }
+
+      return "dark";
+    };
+
+    const setTheme = (theme) => {
+      document.documentElement.classList.add(`theme-${theme}`);
+      document.documentElement.classList.remove(
+        `theme-${theme === "light" ? "dark" : "light"}`
+      );
+      toggleButton.setAttribute(
+        "aria-label",
+        `Switch to ${theme === "light" ? "Dark" : "Light"} Theme`
+      );
+      toggleButton.setAttribute(
+        "title",
+        `Switch to ${theme === "light" ? "Dark" : "Light"} Theme`
+      );
+    };
+
+    function setMode() {
+      const theme = getTheme();
+      if (theme === "light") {
+        setTheme("light");
+      } else {
+        setTheme("dark");
+      }
+    }
+
+    toggleButton.addEventListener("click", () => {
+      playSoundEffect();
+
+      const theme = getTheme();
+      if (theme === "light") {
+        localStorage.setItem("theme", "dark");
+        setTheme("dark");
+      } else {
+        localStorage.setItem("theme", "light");
+        setTheme("light");
+      }
+    });
+    document.addEventListener("astro:after-swap", setMode);
+  },
+  { once: true }
+);
 </script>
 <style is:global>
   :root {

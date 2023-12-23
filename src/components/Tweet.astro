@@ -8,26 +8,13 @@ export interface Props {
 }
 
 const {
-  tweet: { images = [], link, text },
+  tweet: { link, text },
 } = Astro.props;
 ---
 
 <blockquote class="tweet">
   {text && <p>{text}</p>}
-  {
-    images.length > 0 && (
-      <div class="images">
-        {images.map((image) => (
-          <img
-            src={`https://lh3.googleusercontent.com/d/${image.googleDriveId}`}
-            alt=""
-            loading="lazy"
-          />
-        ))}
-      </div>
-    )
-  }
-  <cite><small><a href={link} target="_blank">via twitter</a></small></cite>
+  <cite><small><a href={link} target="_blank">on twitter</a></small></cite>
 </blockquote>
 <style>
   cite {
@@ -40,26 +27,5 @@ const {
 
   .tweet + .tweet {
     border-top: var(--separator);
-  }
-
-  .images {
-    display: grid;
-    gap: 1rem;
-  }
-
-  @media (min-width: 768px) {
-    .images {
-      gap: 2rem;
-    }
-  }
-
-  img {
-    border-radius: 1rem;
-  }
-
-  @media (min-width: 768px) {
-    img {
-      max-height: 80vh;
-    }
   }
 </style>

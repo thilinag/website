@@ -71,7 +71,14 @@ const { data } = Astro.props;
         </div>
       </div>
     </header>
-    {data.tweets?.length && data.tweets.map((tweet) => <Tweet tweet={tweet} />)}
+    {
+      data.images?.length > 0 &&
+        data.images.map((image) => <ImageAsset image={image} />)
+    }
+    {
+      data.tweets?.length > 0 &&
+        data.tweets.map((tweet) => <Tweet tweet={tweet} />)
+    }
     <slot />
     <footer>
       {data.tags?.length && <Tags tags={data.tags} />}

@@ -1,0 +1,54 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+
+type Images = CollectionEntry<"writing">["data"]["images"];
+
+export interface Props {
+  image: Images[0];
+}
+
+const {
+  image: {
+    file,
+    alt = ''
+  }
+} = Astro.props;
+---
+
+<div class="images">
+  <Image
+  src={file}
+  alt={alt}
+/>
+</div>
+<style>
+  .images {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .images + .images {
+    margin-top: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .images {
+      gap: 2rem;
+    }
+  }
+
+  img {
+    border-radius: 1rem;
+    width: 100%;
+    height: auto;
+  }
+
+  @media (min-width: 768px) {
+    img {
+      max-height: 80vh;
+      width: auto;
+      background: black;
+    }
+  }
+</style>

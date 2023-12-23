@@ -9,6 +9,7 @@ import TableOfContents from "../components/TableOfContents.astro";
 import StructuredData from "../components/StructuredData.astro";
 import Cover from "../components/Cover.astro";
 import { getRelativeTime } from "../utils";
+import ImageAsset from "../components/ImageAsset.astro";
 
 interface Props {
   data: CollectionEntry<"writing">["data"];
@@ -48,6 +49,10 @@ const { data, headings } = Astro.props;
       )
     }
     <section class={!data.toc ? "full-width" : ""}>
+      {
+        data.images?.length > 0 &&
+          data.images.map((image) => <ImageAsset image={image} />)
+      }
       {
         data.tweets?.length > 0 &&
           data.tweets.map((tweet) => <Tweet tweet={tweet} />)

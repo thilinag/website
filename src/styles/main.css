@@ -149,3 +149,54 @@ article h2:first-child,
 article h3:first-child {
   margin-top: 0;
 }
+
+
+article blockquote {
+  padding: 2rem;
+  background: rgba(0,0,0,.1);
+  border-radius: 1rem;
+}
+
+article blockquote a[href^="https://twitter.com/"] {
+  font-size: 90%;
+  text-decoration: none;
+  opacity: .5;
+}
+
+
+article blockquote a[href^="https://twitter.com/"]:hover {
+  opacity: 1;
+}
+
+article blockquote a[href^="https://twitter.com/"]:before {
+  content: "🐦 ";
+  filter: grayscale(1);
+}
+
+article blockquote img {
+  margin-top: 2rem;
+  display: block;
+}
+
+article blockquote p:first-child {
+  margin-top: 0;
+}
+
+article blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+
+p img {
+    border-radius: 1rem;
+    width: 100%;
+    height: auto;
+  }
+
+  @media (min-width: 768px) {
+    p img {
+      max-height: 80vh;
+      width: auto;
+      background: black;
+    }
+  }
