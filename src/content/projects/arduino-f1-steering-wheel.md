@@ -12,11 +12,13 @@ featured: true
     
 > First task was to design the rough idea on a cad software. Autodesk fusion 360 has a free hobbyist license and excellent for the task.
 [via twitter](https://twitter.com/thilinag/status/1170643789708283905)
+
 ![initial modal in fusion 360](./assets/f1.jpeg)
 ![cut the template using a jigsaw](./assets/f2.jpeg)
 ![try out the rough prototype for size](./assets/f3.jpeg)
 
 > Started adding more detail to the design based on Mercedes F1 wheel and laser cut the design in a 3mm MDF for test fit", [via twitter](https://twitter.com/thilinag/status/1170645025895546883)
+
 ![laser cutting the initial shape](./assets/ED73cGOVUAAooNt.jpeg)
 ![Using a cheap android phone as the screen](./assets/ED73cGQVUAAf3ja.jpeg)
 

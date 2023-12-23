@@ -16,9 +16,9 @@ images:
 
 Vesak lantern is a [Cuboctahedron](https://en.wikipedia.org/wiki/Cuboctahedron). It has 8 triangular faces and 6 square faces.
 
-![vesak lantern is a Cuboctahedron](./assets/Ez9b8BpVkAM1jKS.jpeg)
 ![3d printed joint](./assets/Ez9b8uSUYAAqwsZ.jpeg)
 ![Using bamboo flower stakes from Bunnings as the sticks](./assets/Ez9b9UEVkAAzszS.jpeg)
+![vesak lantern is a Cuboctahedron](./assets/Ez9b8BpVkAM1jKS.jpeg)
 
 [Get the modal from onshape](https://cad.onshape.com/documents/e71314a5e23d9ffd9a0e6810/w/278484667430c3fa7fd0d500/e/91ace6defc242ad01ec9f4b1?renderMode=0&uiState=644c81659929db0e600a7037)
 

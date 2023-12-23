@@ -14,6 +14,7 @@ This is my journey of trying out [OpenRC F1 project](https://danielnoree.com/ope
 [via twitter](https://twitter.com/thilinag/status/1353214387541032960)
 
 > But soon found out that it rips off after 30 mins of running on concrete floor 😅 also running without the front wing since I broke it twice already! [via twitter](https://twitter.com/thilinag/status/1359075388241051655)
+
 ![Trying bicycle tube over PLA rim](./assets/Etxn2vvVIAkiI3F.jpeg)
 ![Trying bicycle tube over PLA rim](./assets/Etxn2X5VoAEzR43.jpeg)
 ![also running without the front wing since I broke it twice already](./assets/Etxn3HfU0AIEsrD.jpeg)

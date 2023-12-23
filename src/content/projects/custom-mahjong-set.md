@@ -7,6 +7,7 @@ tags: ["lasercutting"]
 ---
 
 > Had fun making a custom mahjong set for a gift at @MakerspaceAdl [via twitter](https://twitter.com/thilinag/status/1206139257577803776)
+
 ![Trying out MDF vs Acrylic](./assets/m1.jpeg)
 ![Laser cutting the tiles from a 6mm MDF sheet](./assets/m2.jpeg)
 ![Colouring details](./assets/m3.jpeg)
