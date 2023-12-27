@@ -72,7 +72,7 @@ document.addEventListener(
         setTheme("light");
       }
     });
-    document.addEventListener("astro:after-swap", setMode);
+    setMode();
   },
   { once: true }
 );
