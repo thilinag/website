@@ -4,64 +4,64 @@ export const prerender = true;
 import Gear from "../components/Gear.astro";
 import Layout from "../layouts/Layout.astro";
 const gearList = [
-  {
-    name: "6th Generation Thinkpad Carbon X1 💻",
-    pros: ["Great display and specs", "Good battery lifed", "Lightweight"],
-    cons: ["Some features don't work in Ubuntu"],
-    isOpen: true,
-  },
-  {
-    name: "OS / Window Manager 🐧",
-    description: "Ubuntu / GNOME with minimal tweaks",
-    isOpen: true,
-  },
-  {
-    name: "Terminal $",
-    description: "Terminator with zsh / ohmyzsh",
-    isOpen: true,
-  },
-  {
-    name: "Editor 🗊",
-    description: "VS Code",
-    isOpen: true,
-  },
-  {
-    name: "Google Pixel 5 📱",
-    boughtOn: "2020-10-25",
-    pros: ["5g", "Boring lightweight phone which just works"],
-    cons: ["Not the best value for money"],
-  },
-  {
-    name: "Triban RC120 Disc road bike 🚲",
-    boughtOn: "2022-05-15",
-    pros: ["Great value for money", "Well-thought-out kit"],
-    cons: ["Not light since only the fork is carbon"],
-  },
-  {
-    name: "Garmin Fenix 6 Pro watch ⌚",
-    boughtOn: "2023-01-08",
-    pros: [
-      "Great battery life (approx 10 days for my usage)",
-      "Premium build quality",
-      "Accurate GPS and other sensors like heart rate and sleep monitoring",
-    ],
-    cons: ["Developer API is not that great"],
-  },
-  {
-    name: "Lems Waterproof Boulder Boot Summit 🥾",
-    boughtOn: "2023-05-05",
-    pros: [
-      "Very comfy",
-      "Barefoot style zero drop and wider toe box for natuarl feel",
-      "Works for both hiking and the city",
-    ],
-    cons: ["Slightly less grippier than my northface boots"],
-  },
+    {
+        name: "6th Generation Thinkpad Carbon X1 💻",
+        pros: ["Great display and specs", "Good battery lifed", "Lightweight"],
+        cons: ["Some features don't work in Ubuntu"],
+        isOpen: true,
+    },
+    {
+        name: "OS / Window Manager 🐧",
+        description: "Ubuntu / GNOME with minimal tweaks",
+        isOpen: true,
+    },
+    {
+        name: "Terminal $",
+        description: "Terminator with zsh / ohmyzsh",
+        isOpen: true,
+    },
+    {
+        name: "Editor 🗊",
+        description: "VS Code",
+        isOpen: true,
+    },
+    {
+        name: "Google Pixel 9 📱",
+        boughtOn: "2024-08-21",
+        pros: ["Boring phone which just works", "Android"],
+        cons: ["Heavier than my previous phone (Google Pixel 5)"],
+    },
+    {
+        name: "Triban RC120 Disc road bike 🚲",
+        boughtOn: "2022-05-15",
+        pros: ["Great value for money", "Well-thought-out kit"],
+        cons: ["Not light since only the fork is carbon"],
+    },
+    {
+        name: "Garmin Fenix 6 Pro watch ⌚",
+        boughtOn: "2023-01-08",
+        pros: [
+            "Great battery life (approx 10 days for my usage)",
+            "Premium build quality",
+            "Accurate GPS and other sensors like heart rate and sleep monitoring",
+        ],
+        cons: ["Developer API is not that great"],
+    },
+    {
+        name: "Lems Waterproof Boulder Boot Summit 🥾",
+        boughtOn: "2023-05-05",
+        pros: [
+            "Very comfy",
+            "Barefoot style zero drop and wider toe box for natuarl feel",
+            "Works for both hiking and the city",
+        ],
+        cons: ["Slightly less grippier than my northface boots"],
+    },
 ];
 const title = "Uses";
 ---
 
 <Layout title={title}>
-  <h1>{title}</h1>
-  {gearList.map((gear) => <Gear {...gear} />)}
+    <h1>{title}</h1>
+    {gearList.map((gear) => <Gear {...gear} />)}
 </Layout>
