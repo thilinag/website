@@ -8,24 +8,36 @@ import StructuredData from "../components/StructuredData.astro";
 import ImageAsset from "../components/ImageAsset.astro";
 
 interface Props {
-  data: CollectionEntry<"projects">["data"];
+    data: CollectionEntry<"projects">["data"];
 }
 
 const { data } = Astro.props;
 ---
 
 <Layout
-  title={data.title}
-  backLabel="All Projects"
-  backURL="/projects/"
-  description={data.description}
+    title={data.title}
+    backLabel="All Projects"
+    backURL="/projects/"
+    description={data.description}
 >
-  <StructuredData data={data} />
-  <article>
-    <h1>{data.title}</h1>
-    <slot />
-    <footer>
-      {data.tags?.length && <Tags tags={data.tags} />}
-    </footer>
-  </article>
+    <StructuredData data={data} />
+    <article>
+        <h1>{data.title}</h1>
+        <slot />
+        <footer>
+            {data.tags?.length && <Tags tags={data.tags} />}
+        </footer>
+    </article>
 </Layout>
+<script>
+    import "@google/model-viewer";
+</script>
+<style>
+    :global(model-viewer) {
+        width: 100%;
+        min-height: 300px;
+        background: rgba(0, 0, 0, 0.1);
+        margin: 2rem 0;
+        border-radius: 1rem;
+    }
+</style>
