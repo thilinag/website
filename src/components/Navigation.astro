@@ -7,186 +7,189 @@ const currentPath = pathname.slice(1);
 ---
 
 <div class="headerContainer">
-  <div class="backLinkContainer">
-    <slot />
-  </div>
-  <nav>
-    <button type="button" class="menuToggle">
-      <Icon class="menuOpen" name="mdi:menu-open" size="18" />
-      <span>Menu</span>
-    </button>
-    <ul>
-      <li>
-        <a class={currentPath === "projects/" ? "active" : ""} href="/projects/"
-          >Projects</a
-        >
-      </li>
-      <li>
-        <a class={currentPath === "writing/" ? "active" : ""} href="/writing/"
-          >Writing</a
-        >
-      </li>
-      <li>
-        <a class={currentPath === "hiking/" ? "active" : ""} href="/hiking/"
-          >Hiking</a
-        >
-      </li>
-    </ul>
-  </nav>
-  <div class="colorSchemeSwitcher">
-    <ColorScheme />
-  </div>
+    <div class="backLinkContainer">
+        <slot />
+    </div>
+    <nav>
+        <button type="button" class="menuToggle">
+            <Icon class="menuOpen" name="mdi:menu-open" size="18" />
+            <span>Menu</span>
+        </button>
+        <ul>
+            <li>
+                <a
+                    class={currentPath === "projects/" ? "active" : ""}
+                    href="/projects/">Projects</a
+                >
+            </li>
+            <li>
+                <a
+                    class={currentPath === "writing/" ? "active" : ""}
+                    href="/writing/">Writing</a
+                >
+            </li>
+            <li>
+                <a
+                    class={currentPath === "hiking/" ? "active" : ""}
+                    href="/hiking/">Hiking</a
+                >
+            </li>
+        </ul>
+    </nav>
+    <div class="colorSchemeSwitcher">
+        <ColorScheme />
+    </div>
 </div>
 <style>
-  .headerContainer {
-    margin-left: auto;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    padding: 1rem;
-  }
-
-  @media (min-width: 768px) {
     .headerContainer {
-      padding: 2rem;
+        margin-left: auto;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        padding: 1rem;
     }
-  }
 
-  @media (min-width: calc(1000px + 5rem)) {
-    .headerContainer {
-      display: grid;
-      grid-template-columns: 1fr var(--width) 1fr;
-      grid-template-areas: "_ nav right-gutter";
+    @media (min-width: 768px) {
+        .headerContainer {
+            padding: 2rem;
+        }
     }
-  }
 
-  @media (min-width: 768px) {
-    nav {
-      position: relative;
+    @media (min-width: calc(1000px + 5rem)) {
+        .headerContainer {
+            display: grid;
+            grid-template-columns: 1fr var(--width) 1fr;
+            grid-template-areas: "_ nav right-gutter";
+        }
     }
-  }
 
-  @media (min-width: calc(1000px + 5rem)) {
-    nav {
-      grid-area: nav;
-      justify-self: end;
-      margin-right: 2rem;
+    @media (min-width: 768px) {
+        nav {
+            position: relative;
+        }
     }
-  }
 
-  .menuToggle {
-    list-style: none;
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-    font-size: 1rem;
-    cursor: pointer;
-    height: 100%;
-    background: none;
-    border: none;
-    text-transform: uppercase;
-  }
+    @media (min-width: calc(1000px + 5rem)) {
+        nav {
+            grid-area: nav;
+            justify-self: end;
+            margin-right: 2rem;
+        }
+    }
 
-  @media (min-width: 768px) {
     .menuToggle {
-      display: none;
+        list-style: none;
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        font-size: 1rem;
+        cursor: pointer;
+        height: 100%;
+        background: none;
+        border: none;
+        text-transform: uppercase;
     }
-  }
 
-  .menuOpen {
-    display: block;
-  }
+    @media (min-width: 768px) {
+        .menuToggle {
+            display: none;
+        }
+    }
 
-  nav:focus-within .menuOpen {
-    display: none;
-  }
+    .menuOpen {
+        display: block;
+    }
 
-  ul {
-    list-style: none;
-    display: none;
-    flex-direction: column;
-    margin: 0;
-    padding: 0;
-    background: var(--bg);
-    align-items: flex-end;
-    z-index: 3;
-  }
+    nav:focus-within .menuOpen {
+        display: none;
+    }
 
-  @media (min-width: 768px) {
     ul {
-      display: flex;
-      flex-direction: row;
-      left: auto;
-      align-items: center;
+        list-style: none;
+        display: none;
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        align-items: flex-end;
+        z-index: 3;
     }
-  }
 
-  @media (max-width: 767px) {
-    ul {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      gap: 0.5rem;
-      padding: 1rem;
-      background-color: var(--bg);
+    @media (min-width: 768px) {
+        ul {
+            display: flex;
+            flex-direction: row;
+            left: auto;
+            align-items: center;
+        }
     }
-  }
 
-  nav:focus-within ul {
-    display: flex;
-  }
+    @media (max-width: 767px) {
+        ul {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            gap: 0.5rem;
+            padding: 1rem;
+            background-color: var(--bg);
+        }
+    }
 
-  li {
-    display: flex;
-    flex: 1;
-  }
+    nav:focus-within ul {
+        display: flex;
+    }
 
-  a {
-    font-size: 1rem;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 1rem;
-  }
+    li {
+        display: flex;
+        flex: 1;
+    }
 
-  .active {
-    background: var(--color);
-    border-radius: 2rem;
-    color: var(--bg);
-  }
+    a {
+        font-size: 1rem;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+    }
 
-  .contact {
-    display: flex;
-    align-items: center;
-    padding: 0 1rem;
-  }
+    .active {
+        background: var(--color);
+        border-radius: 2rem;
+        color: var(--bg);
+    }
 
-  .contact svg {
-    height: 20px;
-    width: 20px;
-  }
+    .contact {
+        display: flex;
+        align-items: center;
+        padding: 0 1rem;
+    }
 
-  .colorSchemeSwitcher {
-    display: flex;
-    align-items: center;
-  }
+    .contact svg {
+        height: 20px;
+        width: 20px;
+    }
 
-  @media (min-width: calc(1000px + 5rem)) {
     .colorSchemeSwitcher {
-      grid-area: right-gutter;
-      justify-self: end;
+        display: flex;
+        align-items: center;
     }
-  }
 
-  .backLinkContainer {
-    margin-right: auto;
-  }
+    @media (min-width: calc(1000px + 5rem)) {
+        .colorSchemeSwitcher {
+            grid-area: right-gutter;
+            justify-self: end;
+        }
+    }
 
-  @media (min-width: calc(1000px + 5rem)) {
     .backLinkContainer {
-      grid-area: nav;
-      margin-left: 2rem;
+        margin-right: auto;
     }
-  }
+
+    @media (min-width: calc(1000px + 5rem)) {
+        .backLinkContainer {
+            grid-area: nav;
+            margin-left: 2rem;
+        }
+    }
 </style>
