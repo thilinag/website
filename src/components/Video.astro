@@ -1,0 +1,31 @@
+---
+export interface Props {
+    src: string;
+    vertical: boolean;
+}
+
+const { src, vertical = false } = Astro.props;
+---
+
+<video controls data-vertical={vertical}>
+    <source src={src} type="video/mp4" />
+</video>
+<style>
+    video {
+        margin: 2rem 0;
+        width: 100%;
+        border-radius: 1rem;
+        display: block;
+        aspect-ratio: 16 / 9;
+    }
+
+    video[data-vertical="true"] {
+        aspect-ratio: 9 / 16;
+    }
+
+    @media (min-width: 768px) {
+        video[data-vertical="true"] {
+            width: 50%;
+        }
+    }
+</style>
