@@ -47,15 +47,9 @@ const writing = defineCollection({
       )
       .optional()
       .default([]),
-    images: z
-    .array(
-      z.object({
-        file: image(),
-        alt: z.string().optional(),
-      })
-    )
-    .optional()
-    .default([]),
+      hero: 
+      image()
+    .optional(),
     featured: z.boolean().optional().default(false),
     draft: z.boolean().optional().default(false),
     coverChars: z.array(z.string()).optional(),
@@ -81,14 +75,9 @@ const projects = defineCollection({
       )
       .optional()
       .default([]),
-    images: z
-    .array(
-      z.object({
-        file: image(),
-        alt: z.string().optional(),
-      })
-    )
-    .optional().default([]),  
+      hero: 
+      image()
+    .optional(),
     featured: z.boolean().optional().default(false),
     draft: z.boolean().optional().default(false),
     coverChars: z.array(z.string()).optional(),
@@ -122,15 +111,9 @@ const hiking = defineCollection({
       )
       .optional()
       .default([]),
-    images: z
-    .array(
-      z.object({
-        file: image(),
-        alt: z.string().optional(),
-      })
-    )
-    .optional()
-    .default([]),
+      hero: 
+      image()
+    .optional(),
     featured: z.boolean().optional().default(false),
     draft: z.boolean().optional().default(false),
     coverChars: z.array(z.string()).optional(),

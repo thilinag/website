@@ -1,7 +1,8 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import { type CollectionEntry } from "astro:content";
 import { getRelativeTime } from "../utils";
 import SvgMap from "./SvgMap.astro";
+import { Image } from "astro:assets";
 interface Props {
     post:
         | CollectionEntry<"projects">
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const { post, showDate = true } = Astro.props;
+const firstImagePath = post.data.hero;
 ---
 
 <li class="post">
@@ -40,7 +42,13 @@ const { post, showDate = true } = Astro.props;
                 </div>
             )
         }
-        {firstImage && <div set:html={firstImage} />}
+        {
+            firstImagePath && (
+                <figure class="hero">
+                    <Image src={firstImagePath} alt="" />
+                </figure>
+            )
+        }
     </a>
     <style>
         .post {
@@ -58,8 +66,8 @@ const { post, showDate = true } = Astro.props;
             padding: 2rem;
             position: relative;
             z-index: 1;
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: 1fr;
             background-color: light-dark(#00000005, #ffffff05);
             border-radius: 1rem;
             gap: 2rem;
@@ -67,6 +75,12 @@ const { post, showDate = true } = Astro.props;
             transform-style: preserve-3d;
             will-change: transform;
             border: 1px solid light-dark(#00000005, #ffffff05);
+        }
+
+        @container post (min-width: 541px) {
+            .postLink {
+                grid-template-columns: auto 1fr;
+            }
         }
 
         .postLink:hover {
@@ -109,15 +123,13 @@ const { post, showDate = true } = Astro.props;
             color: var(--color-secondary);
         }
 
-        .map {
-            width: 20rem;
+        .hero {
+            margin: 0;
         }
 
-        @container post (max-width: 540px) {
-            .map {
-                width: 100%;
-                max-height: 12rem;
-            }
+        .hero img {
+            height: 100%;
+            border-radius: 0.5rem;
         }
     </style>
 </li>

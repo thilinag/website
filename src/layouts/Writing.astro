@@ -50,10 +50,6 @@ const { data, headings } = Astro.props;
         }
         <section class={!data.toc ? "full-width" : ""}>
             {
-                data.images?.length > 0 &&
-                    data.images.map((image) => <ImageAsset image={image} />)
-            }
-            {
                 data.tweets?.length > 0 &&
                     data.tweets.map((tweet) => <Tweet tweet={tweet} />)
             }

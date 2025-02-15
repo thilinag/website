@@ -4,6 +4,7 @@ pubDate: 2025-01-12
 description: "Web BLE + ESP32 powered Bike computer which shows speed, heart rate, time and weather"
 author: "Thilina Gunasekara"
 tags: ["electronics", "making", "BLE", "javascript"]
+hero: './assets/GhovOEtb0AE-lsH.jpeg'
 ---
 
 I've been tinkering with an ESP32 that comes with a built-in 1.47-inch display, and I thought—why not turn it into a bike computer? The idea is simple: use the ESP32 as a BLE device that pairs with my phone via Web BLE and also communicates with my Garmin watch. With a bit of work, I managed to display my current speed, heart rate, time, and live weather updates. Here’s what I did;
