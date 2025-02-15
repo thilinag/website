@@ -18,5 +18,11 @@ export default defineConfig({
     ssr: {
       noExternal: ['path-to-regexp']
     }
+  },
+  experimental: {
+    responsiveImages: true
+  },
+  image: {
+    experimentalLayout: 'responsive'
   }
 });
