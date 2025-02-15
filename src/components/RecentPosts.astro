@@ -40,7 +40,7 @@ const hiking = await getCollection("hiking", (entry) =>
                     (a, b) =>
                         b.data.pubDate.getTime() - a.data.pubDate.getTime()
                 )
-                .map((post) => <Post post={post} />)
+                .map((post) => <Post post={post} lazyLoading={false} />)
         }
     </ul>
 </section>

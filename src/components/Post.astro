@@ -9,9 +9,10 @@ interface Props {
         | CollectionEntry<"hiking">
         | CollectionEntry<"writing">;
     showDate?: boolean;
+    lazyLoading?: boolean;
 }
 
-const { post, showDate = true } = Astro.props;
+const { post, showDate = true, lazyLoading = true } = Astro.props;
 const firstImagePath = post.data.hero;
 ---
 
@@ -45,7 +46,11 @@ const firstImagePath = post.data.hero;
         {
             firstImagePath && (
                 <figure class="hero">
-                    <Image src={firstImagePath} alt="" />
+                    <Image
+                        src={firstImagePath}
+                        alt=""
+                        loading={lazyLoading ? "lazy" : "eager"}
+                    />
                 </figure>
             )
         }

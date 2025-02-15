@@ -9,74 +9,76 @@ import Trail from "../components/Trail.astro";
 import { HEYSEN_GEOJSON, ADELAIDE100_GEOJSON } from "../utils";
 
 const getHikeStats = (posts: CollectionEntry<"hiking">[]) => {
-  return posts.reduce(
-    (acc, post) => {
-      return {
-        distance: acc.distance + (post.data?.distance || 0),
-        elevation: acc.elevation + (post.data?.elevation || 0),
-        steps: acc.steps + (post.data?.steps || 0),
-      };
-    },
-    {
-      elevation: 0,
-      distance: 0,
-      steps: 0,
-    }
-  );
+    return posts.reduce(
+        (acc, post) => {
+            return {
+                distance: acc.distance + (post.data?.distance || 0),
+                elevation: acc.elevation + (post.data?.elevation || 0),
+                steps: acc.steps + (post.data?.steps || 0),
+            };
+        },
+        {
+            elevation: 0,
+            distance: 0,
+            steps: 0,
+        }
+    );
 };
 
 const allHiking = await getCollection("hiking", (entry) =>
-  import.meta.env.PROD ? entry.data.draft !== true : true
+    import.meta.env.PROD ? entry.data.draft !== true : true
 ).then((collection) =>
-  collection.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+    collection.sort(
+        (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+    )
 );
 const heysenPosts = allHiking.filter((hike) =>
-  hike.data.tags.includes("heysentrail")
+    hike.data.tags.includes("heysentrail")
 );
 const lastHeysenPost = heysenPosts[0];
 const lastHeysenPoint =
-  lastHeysenPost.data.geoJson?.features[0].geometry.coordinates.at(-1);
+    lastHeysenPost.data.geoJson?.features[0].geometry.coordinates.at(-1);
 const lastHeysenPointFeatures = [
-  {
-    type: "Feature",
-    properties: {
-      radius: 0.06,
-      className: "mylocation",
+    {
+        type: "Feature",
+        properties: {
+            radius: 0.06,
+            className: "mylocation",
+        },
+        geometry: { type: "Point", coordinates: lastHeysenPoint },
     },
-    geometry: { type: "Point", coordinates: lastHeysenPoint },
-  },
-  {
-    type: "Feature",
-    properties: {
-      radius: 0.06,
-      className: "mylocationRadar",
+    {
+        type: "Feature",
+        properties: {
+            radius: 0.06,
+            className: "mylocationRadar",
+        },
+        geometry: { type: "Point", coordinates: lastHeysenPoint },
     },
-    geometry: { type: "Point", coordinates: lastHeysenPoint },
-  },
 ];
 const heysenStats = getHikeStats(heysenPosts);
 
 const adelaide100Posts = allHiking.filter((hike) =>
-  hike.data.tags.includes("adelaide100")
+    hike.data.tags.includes("adelaide100")
 );
 const lastAdelaide100Point = [138.72485, -34.91856];
 const lastAdealide100Features = [
-  {
-    type: "Feature",
-    properties: {
-      radius: 0.004,
-      className: "mylocation",
+    {
+        type: "Feature",
+        properties: {
+            radius: 0.004,
+            className: "mylocation",
+        },
+        geometry: { type: "Point", coordinates: lastAdelaide100Point },
     },
-    geometry: { type: "Point", coordinates: lastAdelaide100Point },
-  },
-  {
-    type: "Feature",
-    properties: {
-      radius: 0.004,
-      className: "mylocationRadar",
+    {
+        type: "Feature",
+        properties: {
+            radius: 0.004,
+            className: "mylocationRadar",
+        },
+        geometry: { type: "Point", coordinates: lastAdelaide100Point },
     },
-    geometry: { type: "Point", coordinates: lastAdelaide100Point },
-  },
 ];
 const adeliade100Stats = getHikeStats(adelaide100Posts);
 
@@ -84,61 +86,71 @@ const title = "Hiking";
 ---
 
 <Layout title={title}>
-  <h1>{title}</h1>
-  <h4>Currently Hiking</h4>
-  <div class="current-hikes">
-    <Trail
-      completed={Number(
-        lastHeysenPost.data.title.match(/\[(?<lastHike>\d+)\//)?.groups
-          ?.lastHike
-      ) || 0}
-      distance={heysenStats.distance}
-      elevation={heysenStats.elevation}
-      geoJson={{
-        ...HEYSEN_GEOJSON,
-        features: [...HEYSEN_GEOJSON.features, ...lastHeysenPointFeatures],
-      }}
-      name="Heysen Trail"
-      steps={heysenStats.steps}
-      total={65}
-      url="/tags/heysentrail"
-    />
-    <Trail
-      completed={adelaide100Posts.length}
-      distance={adeliade100Stats.distance}
-      elevation={adeliade100Stats.elevation}
-      geoJson={{
-        ...ADELAIDE100_GEOJSON,
-        features: [...ADELAIDE100_GEOJSON.features, ...lastAdealide100Features],
-      }}
-      name="Adelaide 100"
-      steps={adeliade100Stats.steps}
-      total={4}
-      url="/tags/adelaide100"
-    />
-  </div>
-  <h4>Recent Hikes</h4>
-  <ol class="hiking">
-    {allHiking.map((post) => <Post post={post} />)}
-  </ol>
+    <h1>{title}</h1>
+    <h4>Currently Hiking</h4>
+    <div class="current-hikes">
+        <Trail
+            completed={Number(
+                lastHeysenPost.data.title.match(/\[(?<lastHike>\d+)\//)?.groups
+                    ?.lastHike
+            ) || 0}
+            distance={heysenStats.distance}
+            elevation={heysenStats.elevation}
+            geoJson={{
+                ...HEYSEN_GEOJSON,
+                features: [
+                    ...HEYSEN_GEOJSON.features,
+                    ...lastHeysenPointFeatures,
+                ],
+            }}
+            name="Heysen Trail"
+            steps={heysenStats.steps}
+            total={65}
+            url="/tags/heysentrail"
+        />
+        <Trail
+            completed={adelaide100Posts.length}
+            distance={adeliade100Stats.distance}
+            elevation={adeliade100Stats.elevation}
+            geoJson={{
+                ...ADELAIDE100_GEOJSON,
+                features: [
+                    ...ADELAIDE100_GEOJSON.features,
+                    ...lastAdealide100Features,
+                ],
+            }}
+            name="Adelaide 100"
+            steps={adeliade100Stats.steps}
+            total={4}
+            url="/tags/adelaide100"
+        />
+    </div>
+    <h4>Recent Hikes</h4>
+    <ol class="hiking">
+        {
+            allHiking.map((post, idx) => (
+                <Post post={post} lazyLoading={idx > 5} />
+            ))
+        }
+    </ol>
 </Layout>
 <style>
-  .hiking {
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .current-hikes {
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  @media (min-width: 768px) {
-    .current-hikes {
-      grid-template-columns: repeat(2, 1fr);
+    .hiking {
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
     }
-  }
+
+    .current-hikes {
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    @media (min-width: 768px) {
+        .current-hikes {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
 </style>

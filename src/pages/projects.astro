@@ -7,24 +7,30 @@ import Post from "../components/Post.astro";
 import Layout from "../layouts/Layout.astro";
 
 const allProjects = await getCollection("projects", (entry) =>
-  import.meta.env.PROD ? entry.data.draft !== true : true
+    import.meta.env.PROD ? entry.data.draft !== true : true
 ).then((collection) =>
-  collection.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+    collection.sort(
+        (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+    )
 );
 const title = "Projects";
 ---
 
 <Layout title={title}>
-  <h1>{title}</h1>
-  <ol class="projects">
-    {allProjects.map((project) => <Post post={project} />)}
-  </ol>
+    <h1>{title}</h1>
+    <ol class="projects">
+        {
+            allProjects.map((project, idx) => (
+                <Post post={project} lazyLoading={idx > 5} />
+            ))
+        }
+    </ol>
 </Layout>
 <style>
-  .projects {
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-  }
+    .projects {
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+    }
 </style>
