@@ -8,121 +8,148 @@ import RecentPosts from "../components/RecentPosts.astro";
 ---
 
 <Layout title={""}>
-  <div class="hello">
-    <h1>
-      <span>Hi!👋<br /> I'm</span>
-      <span class="name-wrapper">
-        <span class="name" data-name="Thilina"><em>Thilina</em></span>
-        <button type="button" class="pronounce" title="pronounce name"
-          ><Icon name="mdi:volume-high" size="18" /></button
-        >
-      </span>
-    </h1>
-  </div>
-  <p>
-    🧑🏾‍💻 Software Engineer. 🧰 Maker. 🎙️ Podcaster. 🥾🏞️ Hiker.
-  </p>
-  <RecentPosts />
+    <div class="hello">
+        <h1>
+            <small>Hi!👋<br /></small>
+            <strong>
+                I'm
+                <span class="name-wrapper">
+                    <span class="name" data-name="Thilina"
+                        ><em>Thilina</em></span
+                    >
+                    <button
+                        type="button"
+                        class="pronounce"
+                        title="pronounce name"
+                        ><Icon name="mdi:volume-high" size="18" /></button
+                    >
+                </span>
+            </strong>
+        </h1>
+    </div>
+    <p>🧑🏾‍💻 Software Engineer. 🧰 Maker. 🎙️ Podcaster. 🥾🏞️ Hiker.</p>
+    <RecentPosts />
 </Layout>
 <script is:inline>
-  document.querySelector(".pronounce").addEventListener("click", () => {
-    const audio = document.querySelector("#audio");
+    document.querySelector(".pronounce").addEventListener("click", () => {
+        const audio = document.querySelector("#audio");
 
-    if (!audio) return;
+        if (!audio) return;
 
-    audio.currentTime = 0.5;
-    audio.play();
-  });
+        audio.currentTime = 0.5;
+        audio.play();
+    });
 </script>
 <style>
-  h1 {
-    font-size: 2.5rem;
-  }
+    h1 {
+        font-size: 2.5rem;
+        margin: 0;
+    }
 
-  p {
-    font-size: 1.5rem;
-  }
+    h1 small {
+        font-size: 2.5rem;
+    }
 
-  @media (min-width: 768px) {
+    h1 strong {
+        font-size: 3.5rem;
+        display: block;
+        margin-top: 0.5rem;
+    }
+
     p {
-      line-height: 2;
+        font-size: 1.5rem;
     }
-  }
 
-  p a {
-    text-decoration: none;
-    opacity: 0.7;
-  }
-
-  .name-wrapper {
-    display: inline-flex;
-    margin-left: 1.5rem;
-  }
-
-  .name {
-    display: inline-grid;
-    grid-template-columns: 1fr;
-    --stacks: 3;
-  }
-
-  .name::before {
-    --index: 0;
-  }
-
-  .name em {
-    --index: 1;
-    --glitch-translate: -8px;
-    font-style: normal;
-  }
-
-  .name::after {
-    --index: 2;
-  }
-
-  .name::before,
-  .name::after {
-    content: attr(data-name);
-    --glitch-translate: 8px;
-  }
-
-  .name::before,
-  .name::after,
-  .name em {
-    grid-row-start: 1;
-    grid-column-start: 1;
-    --stack-height: calc(100% / var(--stacks) - 1px);
-    --inverse-index: calc(calc(var(--stacks) - 1) - var(--index));
-    --clip-top: calc(var(--stack-height) * var(--index));
-    --clip-bottom: calc(var(--stack-height) * var(--inverse-index));
-    clip-path: inset(var(--clip-top) 0 var(--clip-bottom) 0);
-    animation: glitch 3s ease infinite 2s alternate-reverse;
-  }
-
-  .pronounce {
-    border: 0;
-    background: none;
-    height: 2.5rem;
-    width: 2.5rem;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-secondary);
-    cursor: pointer;
-  }
-
-  @keyframes glitch {
-    0% {
-      text-shadow: -2px 3px 0 #cc0f39, 2px -3px 0 #0ffbf9;
-      transform: translate(var(--glitch-translate));
+    @media (min-width: 768px) {
+        p {
+            line-height: 2;
+        }
     }
-    2% {
-      text-shadow: 2px -3px 0 #cc0f39, -2px 3px 0 #0ffbf9;
+
+    p a {
+        text-decoration: none;
+        opacity: 0.7;
     }
-    4%,
-    100% {
-      text-shadow: none;
-      transform: none;
+
+    .name-wrapper {
+        display: inline-flex;
+        margin-left: 0.5ch;
     }
-  }
+
+    .name {
+        display: inline-grid;
+        grid-template-columns: 1fr;
+        --stacks: 3;
+    }
+
+    .name::before {
+        --index: 0;
+    }
+
+    .name em {
+        --index: 1;
+        --glitch-translate: -8px;
+        font-style: normal;
+    }
+
+    .name::after {
+        --index: 2;
+    }
+
+    .name::before,
+    .name::after {
+        content: attr(data-name);
+        --glitch-translate: 8px;
+    }
+
+    .name::before,
+    .name::after,
+    .name em {
+        grid-row-start: 1;
+        grid-column-start: 1;
+        --stack-height: calc(100% / var(--stacks) - 1px);
+        --inverse-index: calc(calc(var(--stacks) - 1) - var(--index));
+        --clip-top: calc(var(--stack-height) * var(--index));
+        --clip-bottom: calc(var(--stack-height) * var(--inverse-index));
+        clip-path: inset(var(--clip-top) 0 var(--clip-bottom) 0);
+        animation: glitch 3s ease infinite 2s alternate-reverse;
+    }
+
+    .pronounce {
+        border: 0;
+        background: none;
+        height: 2.5rem;
+        width: 2.5rem;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-secondary);
+        cursor: pointer;
+    }
+
+    .background {
+        position: absolute;
+        pointer-events: none;
+        inset: 0;
+    }
+
+    @keyframes glitch {
+        0% {
+            text-shadow:
+                -2px 3px 0 #cc0f39,
+                2px -3px 0 #0ffbf9;
+            transform: translate(var(--glitch-translate));
+        }
+        2% {
+            text-shadow:
+                2px -3px 0 #cc0f39,
+                -2px 3px 0 #0ffbf9;
+        }
+        4%,
+        100% {
+            text-shadow: none;
+            transform: none;
+        }
+    }
 </style>

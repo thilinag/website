@@ -4,60 +4,56 @@ import { getCollection } from "astro:content";
 import Post from "./Post.astro";
 
 const writing = await getCollection("writing", (entry) =>
-  import.meta.env.PROD ? entry.data.draft !== true : true
+    import.meta.env.PROD ? entry.data.draft !== true : true
 )
-  .then((collection) =>
-    collection.sort(
-      (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+    .then((collection) =>
+        collection.sort(
+            (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+        )
     )
-  )
-  .then((collection) => collection.slice(0, 1));
+    .then((collection) => collection.slice(0, 1));
 const projects = await getCollection("projects", (entry) =>
-  import.meta.env.PROD ? entry.data.draft !== true : true
+    import.meta.env.PROD ? entry.data.draft !== true : true
 )
-  .then((collection) =>
-    collection.sort(
-      (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+    .then((collection) =>
+        collection.sort(
+            (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+        )
     )
-  )
-  .then((collection) => collection.slice(0, 1));
+    .then((collection) => collection.slice(0, 1));
 const hiking = await getCollection("hiking", (entry) =>
-  import.meta.env.PROD ? entry.data.draft !== true : true
+    import.meta.env.PROD ? entry.data.draft !== true : true
 )
-  .then((collection) =>
-    collection.sort(
-      (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+    .then((collection) =>
+        collection.sort(
+            (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+        )
     )
-  )
-  .then((collection) => collection.slice(0, 1));
+    .then((collection) => collection.slice(0, 1));
 ---
 
 <section>
-  <h2>Recent</h2>
-  <ul class="recent">
-    {
-      [...writing, ...projects, ...hiking]
-        .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
-        .map((project) => <Post post={project} />)
-    }
-  </ul>
+    <ul class="recent">
+        {
+            [...writing, ...projects, ...hiking]
+                .sort(
+                    (a, b) =>
+                        b.data.pubDate.getTime() - a.data.pubDate.getTime()
+                )
+                .map((post) => <Post post={post} />)
+        }
+    </ul>
 </section>
 <style>
-  h2 {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    text-transform: uppercase;
-  }
+    section {
+        margin: 5rem 0 0;
+    }
 
-  section {
-    margin: 5rem 0 0;
-  }
-
-  .recent {
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
+    .recent {
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
 </style>
