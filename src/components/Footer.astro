@@ -3,79 +3,74 @@ import Social from "./Social.astro";
 ---
 
 <footer>
-  <hr />
-  <Social />
-  <ul>
-    <li>
-      <a href="/">Home</a>
-    </li>
-    <li>
-      <a href="/projects/">Projects</a>
-    </li>
-    <li>
-      <a href="/writing/">Writing</a>
-    </li>
-    <li>
-      <a href="/hiking/">Hiking</a>
-    </li>
-    <li>
-      <a href="/games/">Games</a>
-    </li>
-    <li>
-      <a href="/uses/">Uses</a>
-    </li>
-    <li>
-      <a href="mailto:hi@thilinag.com" title="Send an email to contact me">
-        Contact
-      </a>
-    </li>
-  </ul>
-  <div>Thilina Gunasekara &copy; {new Date().getFullYear()} ෴</div>
+    <Social />
+    <ul>
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li>
+            <a href="/projects/">Projects</a>
+        </li>
+        <li>
+            <a href="/writing/">Writing</a>
+        </li>
+        <li>
+            <a href="/hiking/">Hiking</a>
+        </li>
+        <li>
+            <a href="/games/">Games</a>
+        </li>
+        <li>
+            <a href="/uses/">Uses</a>
+        </li>
+        <li>
+            <a
+                href="mailto:hi@thilinag.com"
+                title="Send an email to contact me"
+            >
+                Contact
+            </a>
+        </li>
+    </ul>
+    <div>Thilina Gunasekara &copy; {new Date().getFullYear()} ෴</div>
 </footer>
 <style>
-  footer {
-    margin: 0 auto;
-    padding: 2rem 1rem;
-    width: 100%;
-    max-width: var(--width);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 1rem;
-    font-size: 1rem;
-    color: var(--color-secondary);
-  }
-
-  hr {
-    border-top: var(--separator);
-    display: block;
-    width: 100%;
-    border-width: 1px 0 0;
-  }
-
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 2rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  ul a {
-    color: var(--color-secondary);
-    text-decoration: none;
-    padding: 0.5rem 0;
-    display: inline-block;
-  }
-
-  ul a:hover {
-    text-decoration: underline;
-  }
-
-  @media (min-width: 768px) {
     footer {
-      padding: 2rem;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+        width: 100%;
+        max-width: var(--width);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1rem;
+        font-size: 1rem;
+        color: var(--color-secondary);
     }
-  }
+
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 2rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul a {
+        color: var(--color-secondary);
+        text-decoration: none;
+        padding: 0.5rem 0;
+        display: inline-block;
+    }
+
+    ul a:hover {
+        text-decoration: underline;
+    }
+
+    @media (min-width: 768px) {
+        footer {
+            padding: 2rem;
+        }
+    }
 </style>
