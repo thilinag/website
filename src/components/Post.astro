@@ -3,113 +3,121 @@ import type { CollectionEntry } from "astro:content";
 import { getRelativeTime } from "../utils";
 import SvgMap from "./SvgMap.astro";
 interface Props {
-  post:
-    | CollectionEntry<"projects">
-    | CollectionEntry<"hiking">
-    | CollectionEntry<"writing">;
-  showDate?: boolean;
+    post:
+        | CollectionEntry<"projects">
+        | CollectionEntry<"hiking">
+        | CollectionEntry<"writing">;
+    showDate?: boolean;
 }
 
 const { post, showDate = true } = Astro.props;
 ---
 
 <li class="post">
-  <a class="postLink" href={`/${post.collection}/${post.slug}`}>
-    <article>
-      <header class="postHeader">
-        <h3>
-          {post.data.title}
-        </h3>
+    <a class="postLink" href={`/${post.collection}/${post.id}`}>
+        <article>
+            <header class="postHeader">
+                <h3>
+                    {post.data.title}
+                </h3>
+                {
+                    showDate && (
+                        <time datetime={post.data.pubDate.toISOString()}>
+                            {getRelativeTime(post.data.pubDate.getTime())}
+                        </time>
+                    )
+                }
+            </header>
+            {post.data.description && <span>{post.data.description}</span>}
+            <ul class="tags">
+                {post.data.tags.map((tag) => <li>#{tag}</li>)}
+            </ul>
+        </article>
         {
-          showDate && (
-            <time datetime={post.data.pubDate.toISOString()}>
-              {getRelativeTime(post.data.pubDate.getTime())}
-            </time>
-          )
+            "geoJson" in post.data && post.data.geoJson && (
+                <div class="map">
+                    <SvgMap geoJson={post.data.geoJson} />
+                </div>
+            )
         }
-      </header>
-      {post.data.description && <span>{post.data.description}</span>}
-      <ul class="tags">
-        {post.data.tags.map((tag) => <li>#{tag}</li>)}
-      </ul>
-    </article>
-    {
-      "geoJson" in post.data && post.data.geoJson && (
-        <div class="map">
-          <SvgMap geoJson={post.data.geoJson} />
-        </div>
-      )
-    }
-  </a>
+        {firstImage && <div set:html={firstImage} />}
+    </a>
+    <style>
+        .post {
+            margin-bottom: 2rem;
+            container: post / inline-size;
+            position: relative;
+        }
+
+        .postHeader {
+            margin: 0 0 1rem;
+        }
+
+        .postLink {
+            text-decoration: none;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-wrap: wrap;
+            background-color: light-dark(#00000005, #ffffff05);
+            border-radius: 1rem;
+            gap: 2rem;
+            transition: transform 0.1s ease;
+            transform-style: preserve-3d;
+            will-change: transform;
+            border: 1px solid light-dark(#00000005, #ffffff05);
+        }
+
+        .postLink:hover {
+            transform: perspective(500px) rotateX(2deg) rotateY(2deg)
+                scale3d(1, 1, 1);
+            border-color: light-dark(#00000010, #ffffff10);
+            box-shadow: 0 1rem 3rem light-dark(#ffffff30, #00000030);
+        }
+
+        article {
+            flex: 1;
+        }
+
+        h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            line-height: 1.25;
+            text-transform: uppercase;
+        }
+
+        @container post (min-width: 540px) {
+            h3 {
+                font-size: 2rem;
+            }
+        }
+
+        time {
+            display: block;
+            font-size: 1rem;
+            color: var(--color-secondary);
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            gap: 0.5rem 1rem;
+            padding: 0;
+            font-size: 1rem;
+            color: var(--color-secondary);
+        }
+
+        .map {
+            width: 20rem;
+        }
+
+        @container post (max-width: 540px) {
+            .map {
+                width: 100%;
+                max-height: 12rem;
+            }
+        }
+    </style>
 </li>
-<style>
-  .post {
-    margin-bottom: 2rem;
-    padding-top: 2rem;
-    container: post / inline-size;
-    position: relative;
-    border-top: var(--separator);
-  }
-
-  .postHeader {
-    margin: 0 0 1rem;
-  }
-
-  .postLink {
-    text-decoration: none;
-    /* padding: 1rem; */
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-  }
-
-  .postLink:hover h3 {
-    text-decoration: underline;
-  }
-
-  article {
-    flex: 1;
-  }
-
-  h3 {
-    margin: 0 0 1rem;
-    font-size: 1.5rem;
-    text-transform: uppercase;
-  }
-
-  @container post (min-width: 540px) {
-    h3 {
-      font-size: 2rem;
-    }
-  }
-
-  time {
-    display: block;
-    font-size: 1rem;
-    color: var(--color-secondary);
-  }
-
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-    gap: 0.5rem 1rem;
-    padding: 0;
-    margin-top: 1rem;
-    font-size: 1rem;
-    color: var(--color-secondary);
-  }
-
-  .map {
-    width: 20rem;
-  }
-
-  @container post (max-width: 540px) {
-    .map {
-      width: 100%;
-      max-height: 12rem;
-    }
-  }
-</style>

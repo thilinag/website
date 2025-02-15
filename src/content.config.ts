@@ -1,4 +1,5 @@
 import { defineCollection, z } from "astro:content";
+import { glob } from 'astro/loaders';
 
 export const PostSchema = z.object({
   title: z.string(),
@@ -29,6 +30,7 @@ export const PostSchema = z.object({
 });
 
 const writing = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/writing" }),
   schema: ({ image }) => z.object({
     title: z.string(),
     pubDate: z.date().transform((date) => new Date(date)),
@@ -62,6 +64,7 @@ const writing = defineCollection({
 });
 
 const projects = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/projects" }),
   schema: ({ image }) => z.object({
     title: z.string(),
     pubDate: z.date().transform((date) => new Date(date)),
@@ -93,6 +96,7 @@ const projects = defineCollection({
 });
 
 const hiking = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/hiking" }),
   schema: ({ image }) => z.object({
     description: z.string().optional(),
     geoJson: z

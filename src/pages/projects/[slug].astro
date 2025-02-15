@@ -1,24 +1,24 @@
 ---
 export const prerender = true;
 
-import { type CollectionEntry, getCollection } from "astro:content";
+import { type CollectionEntry, getCollection, render } from "astro:content";
 import Layout from "../../layouts/Project.astro";
 export async function getStaticPaths() {
-  const projectsEntries = await getCollection("projects");
-  return projectsEntries.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }));
+    const projectsEntries = await getCollection("projects");
+    return projectsEntries.map((entry) => ({
+        params: { slug: entry.id },
+        props: { entry },
+    }));
 }
 
 interface Props {
-  entry: CollectionEntry<"projects">;
+    entry: CollectionEntry<"projects">;
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 ---
 
 <Layout data={entry.data}>
-  <Content />
+    <Content />
 </Layout>
