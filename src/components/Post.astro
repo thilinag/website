@@ -19,9 +19,9 @@ const firstImagePath = post.data.hero;
     <a class="postLink" href={`/${post.collection}/${post.id}`}>
         <article>
             <header class="postHeader">
-                <h3>
+                <h2>
                     {post.data.title}
-                </h3>
+                </h2>
                 {
                     showDate && (
                         <time datetime={post.data.pubDate.toISOString()}>
@@ -94,7 +94,7 @@ const firstImagePath = post.data.hero;
             flex: 1;
         }
 
-        h3 {
+        h2 {
             margin: 0;
             font-size: 1.5rem;
             line-height: 1.25;
@@ -102,7 +102,7 @@ const firstImagePath = post.data.hero;
         }
 
         @container post (min-width: 540px) {
-            h3 {
+            h2 {
                 font-size: 2rem;
             }
         }
@@ -130,6 +130,7 @@ const firstImagePath = post.data.hero;
         .hero img {
             height: 100%;
             border-radius: 0.5rem;
+            display: block;
         }
     </style>
 </li>
