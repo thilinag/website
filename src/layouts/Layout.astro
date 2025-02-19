@@ -78,6 +78,44 @@ const pageTitle = title ? `${title} | ${name}` : name;
                 background: var(--bg);
             }
         </style>
+        <script is:inline>
+            window.addEventListener("deviceorientation", (evt) => {
+                let rotateX, rotateY;
+                if (evt.gamma < 0 && evt.beta < 0) {
+                    rotateX = "-2deg";
+                    rotateY = "2deg";
+                }
+
+                if (evt.gamma > 0 && evt.beta > 0) {
+                    rotateX = "2deg";
+                    rotateY = "-2deg";
+                }
+
+                if (evt.gamma > 0 && evt.beta < 0) {
+                    rotateX = "-2deg";
+                    rotateY = "-2deg";
+                }
+
+                if (evt.gamma < 0 && evt.beta > 0) {
+                    rotateX = "2deg";
+                    rotateY = "2deg";
+                }
+
+                if (Math.abs(evt.gamma) < 3 && Math.abs(evt.beta) < 3) {
+                    rotateX = "0deg";
+                    rotateY = "0deg";
+                }
+
+                document.documentElement.style.setProperty(
+                    "--rotateX",
+                    rotateX
+                );
+                document.documentElement.style.setProperty(
+                    "--rotateY",
+                    rotateY
+                );
+            });
+        </script>
         <!--
  ________   _ ___             _____                       __                
 /_  __/ /  (_) (_)__  ___ _  / ___/_ _____  ___ ____ ___ / /_____ ________ _

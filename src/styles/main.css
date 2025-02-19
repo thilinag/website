@@ -13,6 +13,8 @@
   --bg: #202124;
   --separator: 1px solid #48494b;
   --color-secondary: #8b949e;
+  --rotateX: 0deg;
+  --rotateY: 0deg;
 }
 
 @media (prefers-color-scheme: dark) {
