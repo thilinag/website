@@ -2,28 +2,28 @@
 import type { CollectionEntry } from "astro:content";
 
 export interface Props {
-  data:
-    | CollectionEntry<"projects">["data"]
-    | CollectionEntry<"hiking">["data"]
-    | CollectionEntry<"writing">["data"];
+    data:
+        | CollectionEntry<"projects">["data"]
+        | CollectionEntry<"hiking">["data"]
+        | CollectionEntry<"writing">["data"];
 }
 
 const { data } = Astro.props;
 ---
 
 <script
-  type="application/ld+json"
-  set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: data.title,
-    datePublished: data.publshedDate,
-    author: [
-      {
-        "@type": "Person",
-        name: "Thilina Gunasekara",
-        url: "https://www.thilinag.com",
-      },
-    ],
-  })}
-></script>
+    type="application/ld+json"
+    set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: data.title,
+        // datePublished: data.publshedDate,
+        author: [
+            {
+                "@type": "Person",
+                name: "Thilina Gunasekara",
+                url: "https://www.thilinag.com",
+            },
+        ],
+    })}
+/>

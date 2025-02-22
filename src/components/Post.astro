@@ -58,7 +58,6 @@ const firstImagePath = post.data.hero;
     <style>
         .post {
             margin-bottom: 2rem;
-            container: post / inline-size;
             position: relative;
         }
 
@@ -84,17 +83,17 @@ const firstImagePath = post.data.hero;
                 rotateY(var(--rotateY)) scaleZ(1) scale3d(1, 1, 1);
         }
 
-        @container post (min-width: 541px) {
-            .postLink {
-                grid-template-columns: auto 1fr;
-            }
-        }
-
         .postLink:hover {
             transform: perspective(500px) rotateX(2deg) rotateY(2deg)
                 scale3d(1, 1, 1);
             border-color: light-dark(#00000010, #ffffff10);
             box-shadow: 0 1rem 3rem light-dark(#ffffff30, #00000030);
+        }
+
+        @media (min-width: 768px) {
+            .postLink {
+                grid-template-columns: 5fr 1fr;
+            }
         }
 
         article {
@@ -106,12 +105,6 @@ const firstImagePath = post.data.hero;
             font-size: 1.5rem;
             line-height: 1.25;
             text-transform: uppercase;
-        }
-
-        @container post (min-width: 540px) {
-            h2 {
-                font-size: 2rem;
-            }
         }
 
         time {
@@ -138,6 +131,10 @@ const firstImagePath = post.data.hero;
             height: 100%;
             border-radius: 0.5rem;
             display: block;
+        }
+
+        .map {
+            max-height: 10rem;
         }
     </style>
 </li>
